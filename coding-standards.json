@@ -1,0 +1,146 @@
+{
+  "workspace": {
+    "workspaceConfig": "angular.json",
+    "workspaceTsConfig": "tsconfig.json",
+    "libsFolder":"libs"
+  },
+  "entityRelations": {
+    "component": {
+      "model": [
+        "PROPERTY"
+      ],
+      "service": [
+        "CONSTRUCTOR"
+      ],
+      "router": [
+        "CONSTRUCTOR"
+      ],
+      "activatedRoute": [
+        "CONSTRUCTOR"
+      ]
+    },
+    "service": {
+      "httpClient": [
+        "CONSTRUCTOR"
+      ],
+      "model": [
+        "PARAMETER",
+        "RETURN"
+      ]
+    }
+  },
+  "external": {
+    "httpClient": {
+      "type": "HttpClient",
+      "module": "@angular/common/http"
+    },
+    "router": {
+      "type": "Router",
+      "module": "@angular/router"
+    },
+    "activatedRoute": {
+      "type": "ActivatedRoute",
+      "module": "@angular/router"
+    }
+  },
+  "entities": {
+    "component": {
+      "id": "component",
+      "type": "ANGULAR_COMPONENT",
+      "suffix": "Component",
+      "folder": "components/$name$",
+      "insideOf": "App",
+      "config": {
+        "stylesExtension": "none",
+        "viewEncapsulation": "None",
+        "selector": "generated",
+        "changeDetectionStrategy": "OnPush"
+      }
+    },
+    "model": {
+      "id": "model",
+      "type": "DATA_STRUCTURE",
+      "suffix": "Model",
+      "folder": "models",
+      "insideOf": "App"
+    },
+    "service": {
+      "id": "service",
+      "type": "SERVICE",
+      "suffix": "Service",
+      "folder": "services",
+      "insideOf": "App"
+    },
+    "smartComponent": {
+      "id": "smartComponent",
+      "type": "ANGULAR",
+      "suffix": "Component",
+      "folder": "adapters/primary/components/$name$",
+      "insideOf": "Lib"
+    },
+    "directive": {
+      "id": "directive",
+      "type": "ANGULAR",
+      "suffix": "Directive",
+      "folder": "adapters/primary/directives/$name$",
+      "insideOf": "Lib"
+    },
+    "resolver": {
+      "id": "resolver",
+      "type": "ANGULAR",
+      "suffix": "Resolver",
+      "folder": "adapters/primary/resolvers/$name$",
+      "insideOf": "Lib"
+    },
+    "guard": {
+      "id": "guard",
+      "type": "ANGULAR",
+      "suffix": "Guard",
+      "folder": "adapters/primary/guards/$name$",
+      "insideOf": "Lib"
+    },
+    "dto": {
+      "id": "dto",
+      "type": "DATA_STRUCTURE",
+      "suffix": "DTO",
+      "folder": "application/ports/secondary/dto",
+      "insideOf": "Lib"
+    },
+    "repository": {
+      "id": "repository",
+      "type": "ABSTRACTION",
+      "suffix": "Repository",
+      "folder": "application/ports/secondary/dto",
+      "insideOf": "Lib"
+    },
+    "dataService": {
+      "id": "dataService",
+      "type": "SERVICE",
+      "suffix": "Service",
+      "folder": "adapters/secondary/services",
+      "insideOf": "Lib"
+    },
+    "responseObject": {
+      "id": "responseObject",
+      "type": "DATA_STRUCTURE",
+      "suffix": "Response",
+      "folder": "adapters/secondary/services",
+      "insideOf": "Lib"
+    },
+    "client": {
+      "id": "client",
+      "type": "SERVICE",
+      "suffix": "Client",
+      "folder": "clients",
+      "insideOf": "Lib"
+    },
+    "page": {
+      "id": "page",
+      "type": "ANGULAR",
+      "suffix": "Page",
+      "folder": "pages",
+      "insideOf": "App"
+    }
+  }
+
+}
