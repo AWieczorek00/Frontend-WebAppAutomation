@@ -117,14 +117,14 @@
       "id": "dataService",
       "type": "SERVICE",
       "suffix": "Service",
-      "folder": "adapters/secondary/services",
+      "folder": "adapters/secondary/services/$name$",
       "insideOf": "Lib"
     },
     "responseObject": {
       "id": "responseObject",
       "type": "DATA_STRUCTURE",
       "suffix": "Response",
-      "folder": "adapters/secondary/services",
+      "folder": "adapters/secondary/services/response",
       "insideOf": "Lib"
     },
     "client": {
@@ -141,6 +141,7 @@
       "folder": "pages",
       "insideOf": "App"
     }
+
   }
 
 }
