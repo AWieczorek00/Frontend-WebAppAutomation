@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpUserService } from '../../../secondary/services/user/http-user.service';
-import {LoginResponse} from "../../../secondary/services/response/login.response";
+import { LoginResponse } from '../../../secondary/services/response/login.response';
+import { ADDS_USER_DTO, AddsUserDtoPort } from '../../../../application/ports/secondary/dto/adds-user.dto-port';
+import { HttpUserService } from '../../../secondary/services/service/user/http-user.service';
 
 @Component({
   selector: 'lib-login', templateUrl: './login.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,7 +13,9 @@ export class LoginComponent {
   readonly loginForm: FormGroup = new FormGroup({ username: new FormControl(), password: new FormControl() });
   private response: LoginResponse | undefined;
 
-  constructor(private _httpUserService: HttpUserService, private _router: Router) {
+  constructor(
+    private _router: Router,
+    private _httpUserService: HttpUserService) {
   }
 
   onSumitedLogined(loginForm: FormGroup) {
@@ -34,4 +37,6 @@ export class LoginComponent {
         }
       });
   }
+
+
 }

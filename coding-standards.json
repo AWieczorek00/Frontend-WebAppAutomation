@@ -64,20 +64,40 @@
       "folder": "models",
       "insideOf": "App"
     },
-    "service": {
-      "id": "service",
+    "dataService": {
+      "id": "dataService",
       "type": "SERVICE",
       "suffix": "Service",
       "folder": "services",
       "insideOf": "App"
     },
+    "page": {
+      "id": "page",
+      "type": "ANGULAR_COMPONENT",
+      "suffix": "Page",
+      "folder": "pages/$name$",
+      "insideOf": "App",
+      "config": {
+        "stylesExtension": "none",
+        "viewEncapsulation": "None",
+        "selector": "generated",
+        "changeDetectionStrategy": "OnPush"
+      }
+    },
+
     "smartComponent": {
       "id": "smartComponent",
-      "type": "ANGULAR",
+      "type": "ANGULAR_COMPONENT",
       "suffix": "Component",
       "folder": "adapters/primary/components/$name$",
-      "insideOf": "Lib"
+      "insideOf": "Lib",
+      "config": {
+        "viewEncapsulation": "None",
+        "selector": "generated",
+        "changeDetectionStrategy": "OnPush"
+      }
     },
+
     "directive": {
       "id": "directive",
       "type": "ANGULAR",
@@ -110,14 +130,7 @@
       "id": "repository",
       "type": "ABSTRACTION",
       "suffix": "Repository",
-      "folder": "application/ports/secondary/dto",
-      "insideOf": "Lib"
-    },
-    "dataService": {
-      "id": "dataService",
-      "type": "SERVICE",
-      "suffix": "Service",
-      "folder": "adapters/secondary/services/$name$",
+      "folder": "application/ports/secondary/dto/$name$",
       "insideOf": "Lib"
     },
     "responseObject": {
@@ -127,21 +140,12 @@
       "folder": "adapters/secondary/services/response",
       "insideOf": "Lib"
     },
-    "client": {
-      "id": "client",
-      "type": "SERVICE",
-      "suffix": "Client",
-      "folder": "clients",
+    "service": {
+      "id": "service",
+      "type": "ANGULAR_SERVICE",
+      "suffix": "Service",
+      "folder": "adapters/secondary/services/service/$name$",
       "insideOf": "Lib"
-    },
-    "page": {
-      "id": "page",
-      "type": "ANGULAR",
-      "suffix": "Page",
-      "folder": "pages",
-      "insideOf": "App"
     }
-
   }
-
 }

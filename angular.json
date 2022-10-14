@@ -31,7 +31,8 @@
 							"src/assets"
 						],
 						"styles": [
-							"src/styles.scss"
+							"src/styles.scss",
+							"./node_modules/bootstrap/dist/css/bootstrap.min.css"
 						],
 						"scripts": []
 					},
@@ -128,6 +129,33 @@
 						"lintFilePatterns": [
 							"/libs/login/**/*.ts",
 							"/libs/login/**/*.html"
+						]
+					}
+				}
+			}
+		},
+		"navigation": {
+			"projectType": "library",
+			"root": "libs/navigation",
+			"sourceRoot": "libs/navigation/src",
+			"prefix": "lib",
+			"architect": {
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": [
+						"coverage/navigation"
+					],
+					"options": {
+						"jestConfig": "libs/navigation/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"executor": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"/libs/navigation/**/*.ts",
+							"/libs/navigation/**/*.html"
 						]
 					}
 				}

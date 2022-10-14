@@ -4,7 +4,7 @@ form {
 }
 
 input[type="password"],
-[type="email"] {
+[type="text"] {
   margin-bottom: 15px !important;
   height: 40px !important;
   width: 300px !important;
@@ -14,7 +14,7 @@ input[type="password"],
   margin-left: 38px;
 }
 input[type="password"]:focus,
-[type="email"]:focus {
+[type="text"]:focus {
   border-bottom: 1px solid $thirdColor !important;
   box-shadow: none;
 }

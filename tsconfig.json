@@ -24,6 +24,9 @@
 		"paths": {
 			"@login": [
 				"libs/login/src/index.ts"
+			],
+			"@navigation": [
+				"libs/navigation/src/index.ts"
 			]
 		}
 	},

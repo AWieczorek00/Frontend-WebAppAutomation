@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AddsUserDtoPort } from '../../../../application/ports/secondary/dto/adds-user.dto-port';
-import { UserDTO } from '../../../../application/ports/secondary/dto/user.dto';
-import {LoginResponse} from "../response/login.response";
+import { AddsUserDtoPort } from '../../../../../application/ports/secondary/dto/adds-user.dto-port';
+import { UserDTO } from '../../../../../application/ports/secondary/dto/user.dto';
 
 @Injectable()
 export class HttpUserService implements AddsUserDtoPort {
@@ -16,6 +15,5 @@ export class HttpUserService implements AddsUserDtoPort {
       return res
     }));
   }
-
 
 }

@@ -5,7 +5,9 @@ import { HttpUserServiceModule, LoginComponentModule } from '@login';
 import { LoginPage } from './login.page';
 
 @NgModule({
-  imports: [CommonModule,HttpUserServiceModule, LoginComponentModule,
+  imports: [CommonModule,
+    HttpUserServiceModule,
+    LoginComponentModule,
     RouterModule.forChild([
       {
         path: '',
