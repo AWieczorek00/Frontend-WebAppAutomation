@@ -5,18 +5,19 @@ import { HttpUserServiceModule, LoginComponentModule } from '@login';
 import { LoginPage } from './login.page';
 
 @NgModule({
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     HttpUserServiceModule,
     LoginComponentModule,
     RouterModule.forChild([
       {
         path: '',
         component: LoginPage,
-      }
-    ]), ],
+      },
+    ]),
+  ],
   declarations: [LoginPage],
   providers: [],
-  exports: []
+  exports: [],
 })
-export class LoginPageModule {
-}
+export class LoginPageModule {}

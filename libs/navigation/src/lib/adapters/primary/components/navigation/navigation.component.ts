@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'lib-navigation',
@@ -9,4 +10,11 @@ import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/co
 
 })
 export class NavigationComponent {
+  roles: string | null;
+  constructor() {
+    this.roles = localStorage.getItem("roles")
+    console.log(this.roles)
+  }
+
+
 }

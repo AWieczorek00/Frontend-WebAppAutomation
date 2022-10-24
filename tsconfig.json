@@ -27,6 +27,9 @@
 			],
 			"@navigation": [
 				"libs/navigation/src/index.ts"
+			],
+			"@order": [
+				"libs/order/src/index.ts"
 			]
 		}
 	},
