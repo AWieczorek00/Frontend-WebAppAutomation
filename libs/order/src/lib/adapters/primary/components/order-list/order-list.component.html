@@ -1,0 +1,16 @@
+<h1>Test</h1>
+<table>
+  <tr *ngFor="let item of data$ | async">
+    <td>{{ item | json }}</td>
+  </tr>
+</table>
+
+<ul *ngIf="test$|async as test">
+  <li *ngFor="let tes2 of test.orders">
+    {{tes2|json}}
+<!--    <div *ngFor="let emploee of tes2.employee">-->
+<!--      {{emploee.firstName}}-->
+<!--    </div>-->
+
+  </li>
+</ul>

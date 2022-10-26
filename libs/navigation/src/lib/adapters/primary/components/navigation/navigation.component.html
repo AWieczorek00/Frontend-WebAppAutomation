@@ -34,7 +34,7 @@
       </li>
     </ul>
   </div>
-  <div class="col" style="position: absolute; /*or fixed*/ right: 20px">
+  <div class="col" style="position: absolute; right: 20px">
     <div
       ngbDropdown
       class="d-inline-block"
@@ -57,6 +57,9 @@
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <button ngbDropdownItem>
           <a class="nav-link" href="/profil">Profil</a>
+        </button>
+        <button (click)="logout()" ngbDropdownItem>
+          Wygloguj
         </button>
       </div>
     </div>

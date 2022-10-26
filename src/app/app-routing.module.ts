@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TestComponent } from './components/test/test.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
-import { TestComponentModule } from './components/test/test.component-module';
 import { AdminPanelComponentModule } from './components/admin-panel/admin-panel.component-module';
 import { LoginPageModule } from './pages/login.page-module';
 import { AuthenticationGuard } from './authentication.guard';
-import * as path from 'path';
+import {OrderListPageModule} from "./pages/order-list/order-list.page-module";
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [AuthenticationGuard],
-    data:{
-      role:'ADMIN'
+    data: {
+      role: 'ADMIN',
     },
     children: [
       { path: 'login', loadChildren: () => LoginPageModule },
@@ -22,6 +20,8 @@ const routes: Routes = [
         path: '',
         component: AdminPanelComponent,
       },
+      {path:'order',
+      loadChildren: ()=>OrderListPageModule},
       { path: '**', redirectTo: '' },
     ],
   },
@@ -32,7 +32,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     CommonModule,
-    TestComponentModule,
     AdminPanelComponentModule,
   ],
   exports: [RouterModule],

@@ -96,9 +96,9 @@
       "type": "ANGULAR_COMPONENT",
       "folder": "pages/$name$"
     },
-    "componentT": {
+    "component": {
       "type": "ANGULAR_COMPONENT",
-      "folder": "adapters/primary/components",
+      "folder": "adapters/primary/components/$name$",
       "insideOf": "Lib"
     },
     "dto": {
