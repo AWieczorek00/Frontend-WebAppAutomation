@@ -1,0 +1,34 @@
+.field-order{
+  max-width: 450px;
+  width: 100%;
+  font-size: 20px;
+
+}
+.container{
+  padding-top: 30px;
+}
+
+.field-option{
+  font-size: 20px;
+  max-width: 200px;
+  width: 100%;
+
+}
+
+.option{
+  font-size: 15px
+}
+
+.myPanelClass{
+  margin-top: 30px !important;
+}
+
+.mat-select-panel-wrap{
+  position: relative;
+  top: 26px;
+}
+
+.mat-select-panel-wrap .mat-select-panel{
+  min-width: calc(100% + 12px) !important;
+  transform: translateX(4px) !important
+}

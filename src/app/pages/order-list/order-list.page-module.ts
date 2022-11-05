@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { OrderListPage } from './order-list.page';
 import {
+  HttpClientServiceModule,
+  InMemoryClientStorageModule,
   LoadOrdersResolver,
   LoadOrdersResolverModule,
   OrderListComponentModule,
@@ -10,6 +12,9 @@ import {
 } from '@order';
 import { RouterModule } from '@angular/router';
 import { NavigationComponentModule } from '@navigation';
+import {HttpClientService} from "../../../../libs/order/src/lib/adapters/secondary/services/http-client.service";
+import {RequestInterceptor} from "../../request.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -19,6 +24,8 @@ import { NavigationComponentModule } from '@navigation';
     LoadOrdersResolverModule,
     OrderStorageModule,
     OrderStateModule,
+    InMemoryClientStorageModule,
+    HttpClientServiceModule,
     RouterModule.forChild([
       {
         path: '',
@@ -28,7 +35,7 @@ import { NavigationComponentModule } from '@navigation';
     ]),
   ],
   declarations: [OrderListPage],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true}],
   exports: [OrderListPage],
 })
 export class OrderListPageModule {}

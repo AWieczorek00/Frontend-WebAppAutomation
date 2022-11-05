@@ -5,7 +5,8 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { AdminPanelComponentModule } from './components/admin-panel/admin-panel.component-module';
 import { LoginPageModule } from './pages/login.page-module';
 import { AuthenticationGuard } from './authentication.guard';
-import {OrderListPageModule} from "./pages/order-list/order-list.page-module";
+import { OrderListPageModule } from './pages/order-list/order-list.page-module';
+import { NewOrderPageModule } from './pages/new-order/new-order.page-module';
 
 const routes: Routes = [
   {
@@ -20,8 +21,9 @@ const routes: Routes = [
         path: '',
         component: AdminPanelComponent,
       },
-      {path:'order',
-      loadChildren: ()=>OrderListPageModule},
+      { path: 'orders', loadChildren: () => OrderListPageModule },
+      { path: 'new-order', loadChildren: () => NewOrderPageModule },
+
       { path: '**', redirectTo: '' },
     ],
   },

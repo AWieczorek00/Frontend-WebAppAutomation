@@ -123,12 +123,12 @@
     },
     "context": {
       "type": "DATA_STRUCTURE",
-      "folder": "application/ports/secondary/context",
+      "folder": "application/ports/secondary/context/$name$",
       "insideOf": "Lib"
     },
     "contextPort": {
       "type": "ABSTRACTION",
-      "folder": "application/ports/secondary/context",
+      "folder": "application/ports/secondary/context/$name$",
       "insideOf": "Lib"
     },
     "storage": {

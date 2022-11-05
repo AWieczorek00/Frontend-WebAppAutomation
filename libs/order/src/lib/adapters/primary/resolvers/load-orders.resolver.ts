@@ -5,11 +5,11 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoadOrdersCommand } from '../../../application/ports/primary/command/load-orders.command';
+import { LoadOrdersCommand } from '../../../application/ports/primary/command/order/load-orders.command';
 import {
   LOAD_ORDER_COMMAND_PORT,
   LoadOrdersCommandPort,
-} from '../../../application/ports/primary/command/load-orders.command-port';
+} from '../../../application/ports/primary/command/order/load-orders.command-port';
 
 @Injectable()
 export class LoadOrdersResolver implements Resolve<void> {

@@ -1,0 +1,119 @@
+<mat-tab-group>
+  <mat-tab label="Zlecenie">
+    <form class="example-form">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div fxLayout="column">
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Nazwa</mat-label>
+                <input
+                  type="text"
+                  aria-label="Nazwa"
+                  matInput
+                  [formControl]="myControl"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete
+                  #auto="matAutocomplete"
+                  (optionSelected)="getPosts($event.option.value)"
+                  [displayWith]="getOptionText"
+                >
+                  <mat-option
+                    *ngFor="let client of filteredClient | async"
+                    [value]="client"
+                  >
+                    {{ client.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <br/>
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Nip</mat-label>
+                <input autocomplete="off" matInput/>
+              </mat-form-field>
+              <br/>
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Numer telefonu</mat-label>
+                <input autocomplete="off" matInput/>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <mat-form-field
+                class="field-option"
+                appearance="legacy"
+                style="margin-right: 50px"
+              >
+                <mat-label>Status zlecenia</mat-label>
+                <mat-select panelClass="myPanelClass" disableOptionCentering>
+                  <mat-option style="font-size: 15px" value="W realizacji">W realizacji</mat-option>
+                  <mat-option style="font-size: 15px" value="Wykonane">Wykonane</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="field-option" appearance="legacy">
+                <mat-label>Priorytet zlecenia</mat-label>
+                <mat-select panelClass="myPanelClass" disableOptionCentering>
+                  <mat-option style="font-size: 15px" value="Niski">Niski</mat-option>
+                  <mat-option style="font-size: 15px" value="Normlany">Normlany</mat-option>
+                  <mat-option style="font-size: 15px" value="Wysoki">Wysoki</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field
+                class="field-option"
+                appearance="legacy"
+                style="margin-right: 50px"
+              >
+                <mat-label>Data przyjecia</mat-label>
+                <input matInput [matDatepicker]="dateOfAdmission"/>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dateOfAdmission"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dateOfAdmission></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field class="field-option" appearance="legacy">
+                <mat-label>Data wykonania</mat-label>
+                <input matInput [matDatepicker]="dateOfExecution"/>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dateOfExecution"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dateOfExecution></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <div class="col">
+                <mat-form-field class="field-order" appearance="legacy">
+                  <mat-label>Okresowość</mat-label>
+                  <mat-select panelClass="myPanelClass" disableOptionCentering >
+                    <mat-option style="font-size: 15px" value="Niski">Niski</mat-option>
+                    <mat-option style="font-size: 15px" value="Normlany">Normlany</mat-option>
+                    <mat-option style="font-size: 15px" value="Wysoki">Wysoki</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-tab>
+  <mat-tab label="Czyności">
+    <ng-container *ngIf="client$ | async as item">
+      <div *ngFor="let test of item.clientList">{{ test.name }}</div>
+    </ng-container>
+  </mat-tab>
+
+  <mat-tab label="Uwagi"> Content 3</mat-tab>
+  <mat-tab label="Serwisanci"> Content 3</mat-tab>
+</mat-tab-group>

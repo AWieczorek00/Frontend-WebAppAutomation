@@ -1,5 +1,5 @@
 import {EmployeeDto} from "./employee.dto";
-import {ClientDto} from "./client.dto";
+import {ClientDto} from "./client/client.dto";
 import {ActivitiesDto} from "./activities.dto";
 
 export interface OrderDto {

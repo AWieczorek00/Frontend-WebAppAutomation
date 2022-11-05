@@ -1,8 +1,7 @@
-import { OrderContext } from './ports/secondary/context/order.context';
-import { OrderListQuery } from './ports/primary/query/order-list.query';
-import { OrderQuery } from './ports/primary/query/order.query';
-import { EmployeeQuery } from './ports/primary/query/employee.query';
-import { EmployeeDto } from './ports/secondary/dto/employee.dto';
+import { OrderContext } from '../ports/secondary/context/order/order.context';
+import { OrderListQuery } from '../ports/primary/query/order-list.query';
+import { OrderQuery } from '../ports/primary/query/order.query';
+import { EmployeeQuery } from '../ports/primary/query/employee.query';
 
 export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
   new OrderListQuery(
