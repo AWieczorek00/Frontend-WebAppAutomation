@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { GetAllDtoPort } from '../../../application/ports/secondary/dto/get-all.dto-port';
 import { OrderDto } from '../../../application/ports/secondary/dto/order.dto';
-import { EmployeeDto } from '../../../application/ports/secondary/dto/employee.dto';
+import { EmployeeDto } from '../../../application/ports/secondary/dto/employee/employee.dto';
 
 @Injectable()
 export class OrderService implements GetAllDtoPort {

@@ -5,6 +5,8 @@ import { LoadOrdersCommandPort } from './ports/primary/command/order/load-orders
 import { GetsCurrentOrderListQueryPort } from './ports/primary/query/gets-current-order-list.query-port';
 import { GetsCurrentClientListQueryPort } from './ports/primary/query/gets-current-client-list.query-port';
 import { LoadClientsCommandPort } from './ports/primary/command/client/load-clients.command-port';
+import { LoadEmployeesCommandPort } from './ports/primary/command/employee/load-employees.command-port';
+import { GetsNewOrderCurrencyElementsQueryPort } from './ports/primary/query/gets-new-order-currency-elements.query-port';
 import {
   GET_ALL_DTO_PORT,
   GetAllDtoPort,
@@ -25,11 +27,25 @@ import {
   CLIENT_CONTEXT_PORT,
   ClientContextPort,
 } from './ports/secondary/context/client/client.context-port';
+import {
+  GET_ALL_EMPLOYEE_DTO_PORT,
+  GetAllEmployeeDtoPort,
+} from './ports/secondary/dto/employee/get-all-employee.dto-port';
+import {
+  NEW_ORDER_CONTEXT_PORT,
+  NewOrderContextPort,
+} from './ports/secondary/context/new-order/new-order.context-port';
+import {
+  EMPLOYEE_CONTEXT_PORT,
+  EmployeeContextPort,
+} from './ports/secondary/context/employee/employee.context-port';
 import { LoadOrdersCommand } from './ports/primary/command/order/load-orders.command';
 import { OrderListQuery } from './ports/primary/query/order-list.query';
 import { ClientListQuery } from './ports/primary/query/client-list.query';
+import { NewOrderQuery } from './ports/primary/query/new-order.query';
 import { mapFromOrderContext } from './mappers/order.mapper';
 import { mapFormClientContext } from './mappers/client.mapper';
+import {mapFromNewOrderContext} from "./mappers/newOrderElements.mapper";
 
 @Injectable()
 export class OrderState
@@ -37,7 +53,9 @@ export class OrderState
     LoadOrdersCommandPort,
     GetsCurrentOrderListQueryPort,
     GetsCurrentClientListQueryPort,
-    LoadClientsCommandPort
+    LoadClientsCommandPort,
+    LoadEmployeesCommandPort,
+    GetsNewOrderCurrencyElementsQueryPort
 {
   constructor(
     @Inject(GET_ALL_DTO_PORT) private _getAllDtoPort: GetAllDtoPort,
@@ -47,7 +65,11 @@ export class OrderState
     private _selectOrderContextPort: SelectOrderContextPort,
     @Inject(GET_ALL_CLIENT_DTO_PORT)
     private _getAllClientDtoPort: GetAllClientDtoPort,
-    @Inject(CLIENT_CONTEXT_PORT) private _clientContextPort: ClientContextPort
+    @Inject(CLIENT_CONTEXT_PORT) private _clientContextPort: ClientContextPort,
+    @Inject(GET_ALL_EMPLOYEE_DTO_PORT)
+    private _getAllEmployeeDtoPort: GetAllEmployeeDtoPort,
+    @Inject(NEW_ORDER_CONTEXT_PORT)
+    private _newOrderContextPort: NewOrderContextPort,
   ) {}
 
   loadOrder(command: LoadOrdersCommand): Observable<void> {
@@ -71,7 +93,7 @@ export class OrderState
       .getAll()
       .pipe(
         switchMap((client) =>
-          this._clientContextPort.setState({ clientList: client })
+          this._newOrderContextPort.patch({ clientList: client })
         )
       );
   }
@@ -81,4 +103,19 @@ export class OrderState
       .select()
       .pipe(map((client) => mapFormClientContext(client)));
   }
+
+  loadEmployees(): Observable<void> {
+    return this._getAllEmployeeDtoPort
+      .getAll()
+      .pipe(
+        switchMap((employees) =>
+          this._newOrderContextPort.patch({ employeeList: employees })
+        )
+      );
+  }
+
+  getNewOrderCurrencyElements(): Observable<NewOrderQuery> {
+    return this._newOrderContextPort.select().pipe(map((elements)=> mapFromNewOrderContext(elements)))
+  }
+
 }

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { NewOrderPage } from './new-order.page';
 import { RouterModule } from '@angular/router';
 import {
-  HttpClientServiceModule,
-  InMemoryClientStorageModule,
+  HttpClientServiceModule, HttpEmployeeServiceModule,
+  InMemoryClientStorageModule, InMemoryNewOrderStorageModule,
   LoadAllClientsResolver,
-  LoadAllClientsResolverModule,
+  LoadAllClientsResolverModule, LoadAllEmployeesResolver, LoadAllEmployeesResolverModule,
   NewOrderComponentModule,
   OrderServiceModule,
   OrderStateModule,
@@ -21,7 +21,7 @@ import {NavigationComponentModule} from "@navigation";
       {
         path: '',
         component: NewOrderPage,
-        resolve: [LoadAllClientsResolver],
+        resolve: [LoadAllClientsResolver,LoadAllEmployeesResolver],
       },
     ]),
     NavigationComponentModule,
@@ -32,6 +32,9 @@ import {NavigationComponentModule} from "@navigation";
     OrderStateModule,
     OrderServiceModule,
     OrderStorageModule,
+    LoadAllEmployeesResolverModule,
+    HttpEmployeeServiceModule,
+    InMemoryNewOrderStorageModule
   ],
   declarations: [NewOrderPage],
   providers: [

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { OrderListPage } from './order-list.page';
 import {
-  HttpClientServiceModule,
-  InMemoryClientStorageModule,
+  HttpClientServiceModule, HttpEmployeeServiceModule,
+  InMemoryClientStorageModule, InMemoryNewOrderStorageModule, LoadAllEmployeesResolverModule,
   LoadOrdersResolver,
   LoadOrdersResolverModule,
   OrderListComponentModule,
@@ -25,6 +25,9 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     OrderStorageModule,
     OrderStateModule,
     InMemoryClientStorageModule,
+    LoadAllEmployeesResolverModule,
+    HttpEmployeeServiceModule,
+    InMemoryNewOrderStorageModule,
     HttpClientServiceModule,
     RouterModule.forChild([
       {

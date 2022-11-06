@@ -1,4 +1,4 @@
-import {EmployeeDto} from "./employee.dto";
+import {EmployeeDto} from "./employee/employee.dto";
 import {ClientDto} from "./client/client.dto";
 import {ActivitiesDto} from "./activities.dto";
 
