@@ -44,7 +44,6 @@ import { OrderListQuery } from './ports/primary/query/order-list.query';
 import { ClientListQuery } from './ports/primary/query/client-list.query';
 import { NewOrderQuery } from './ports/primary/query/new-order.query';
 import { mapFromOrderContext } from './mappers/order.mapper';
-import { mapFormClientContext } from './mappers/client.mapper';
 import {mapFromNewOrderContext} from "./mappers/newOrderElements.mapper";
 
 @Injectable()
@@ -52,7 +51,7 @@ export class OrderState
   implements
     LoadOrdersCommandPort,
     GetsCurrentOrderListQueryPort,
-    GetsCurrentClientListQueryPort,
+
     LoadClientsCommandPort,
     LoadEmployeesCommandPort,
     GetsNewOrderCurrencyElementsQueryPort
@@ -97,12 +96,12 @@ export class OrderState
         )
       );
   }
-
-  getCurrentClientList(): Observable<ClientListQuery> {
-    return this._clientContextPort
-      .select()
-      .pipe(map((client) => mapFormClientContext(client)));
-  }
+  //
+  // getCurrentClientList(): Observable<ClientListQuery> {
+  //   return this._clientContextPort
+  //     .select()
+  //     .pipe(map((client) => mapFormClientContext(client)));
+  // }
 
   loadEmployees(): Observable<void> {
     return this._getAllEmployeeDtoPort

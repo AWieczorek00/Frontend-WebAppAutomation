@@ -4,7 +4,7 @@ export interface ClientDto {
   readonly nip:string
   readonly address:string
   readonly city:string
-  readonly numberPhone:string
+  readonly phoneNumber:string
   readonly email:string
   readonly type:string
 

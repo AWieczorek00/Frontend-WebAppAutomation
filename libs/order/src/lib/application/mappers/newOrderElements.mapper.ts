@@ -16,7 +16,7 @@ export const mapFromNewOrderContext = (
             client.nip,
             client.address,
             client.city,
-            client.numberPhone,
+            client.phoneNumber,
             client.email,
             client.type
           )
