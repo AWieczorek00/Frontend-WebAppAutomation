@@ -1,7 +1,6 @@
-import { ActivitiesDto } from '../../secondary/dto/activities.dto';
+import { ActivitiesDto } from '../../secondary/dto/activities/activities.dto';
 import { EmployeeQuery } from './employee.query';
 import { ClientQuery } from './client.query';
-import {ActivitiesQuery} from "./activities.query";
 
 export class OrderQuery {
   constructor(

@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { NewOrderPage } from './new-order.page';
 import { RouterModule } from '@angular/router';
 import {
-  HttpClientServiceModule, HttpEmployeeServiceModule,
-  InMemoryClientStorageModule, InMemoryNewOrderStorageModule,
+  HttpActivitiesTemplateServiceModule,
+  HttpClientServiceModule,
+  HttpEmployeeServiceModule,
+  InMemoryClientStorageModule,
+  InMemoryNewOrderStorageModule,
+  LoadAllActivitiesTemplateResolver,
+  LoadAllActivitiesTemplateResolverModule,
   LoadAllClientsResolver,
-  LoadAllClientsResolverModule, LoadAllEmployeesResolver, LoadAllEmployeesResolverModule,
+  LoadAllClientsResolverModule,
+  LoadAllEmployeesResolver,
+  LoadAllEmployeesResolverModule,
   NewOrderComponentModule,
   OrderServiceModule,
   OrderStateModule,
@@ -21,7 +28,7 @@ import {NavigationComponentModule} from "@navigation";
       {
         path: '',
         component: NewOrderPage,
-        resolve: [LoadAllClientsResolver,LoadAllEmployeesResolver],
+        resolve: [LoadAllClientsResolver,LoadAllEmployeesResolver,LoadAllActivitiesTemplateResolver],
       },
     ]),
     NavigationComponentModule,
@@ -34,7 +41,9 @@ import {NavigationComponentModule} from "@navigation";
     OrderStorageModule,
     LoadAllEmployeesResolverModule,
     HttpEmployeeServiceModule,
-    InMemoryNewOrderStorageModule
+    InMemoryNewOrderStorageModule,
+    LoadAllActivitiesTemplateResolverModule,
+    HttpActivitiesTemplateServiceModule
   ],
   declarations: [NewOrderPage],
   providers: [

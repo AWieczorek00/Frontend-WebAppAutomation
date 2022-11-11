@@ -28,6 +28,7 @@ export class OrderListComponent {
     private _router: Router
   ) {
     this.orders$.subscribe((data) => (this.dataSource.data = data.orders));
+    this.orders$.subscribe((data) => console.log(data.orders));
   }
 
   readonly orders$: Observable<OrderListQuery> =
@@ -37,7 +38,7 @@ export class OrderListComponent {
 
   name: string[] = [
     'name',
-    'employee',
+    'firstName',
     'dateOfAdmission',
     'dateOfExecution',
     'priority',

@@ -103,7 +103,7 @@
     },
     "dto": {
       "type": "DATA_STRUCTURE",
-      "folder": "application/ports/secondary/dto",
+      "folder": "application/ports/secondary/dto/$name$",
       "insideOf": "Lib"
     },
     "dtoPort": {
@@ -158,7 +158,7 @@
     },
     "query": {
       "type": "DATA_STRUCTURE",
-      "folder": "application/ports/primary/query",
+      "folder": "application/ports/primary/query/$name$",
       "insideOf": "Lib"
     },
     "queryPort": {

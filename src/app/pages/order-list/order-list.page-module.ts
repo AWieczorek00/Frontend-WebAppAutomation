@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { OrderListPage } from './order-list.page';
 import {
-  HttpClientServiceModule, HttpEmployeeServiceModule,
-  InMemoryClientStorageModule, InMemoryNewOrderStorageModule, LoadAllEmployeesResolverModule,
+  HttpActivitiesTemplateServiceModule,
+  HttpClientServiceModule,
+  HttpEmployeeServiceModule,
+  InMemoryClientStorageModule,
+  InMemoryNewOrderStorageModule,
+  LoadAllEmployeesResolverModule,
   LoadOrdersResolver,
   LoadOrdersResolverModule,
   OrderListComponentModule,
@@ -12,9 +16,8 @@ import {
 } from '@order';
 import { RouterModule } from '@angular/router';
 import { NavigationComponentModule } from '@navigation';
-import {HttpClientService} from "../../../../libs/order/src/lib/adapters/secondary/services/http-client.service";
-import {RequestInterceptor} from "../../request.interceptor";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import { RequestInterceptor } from '../../request.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -29,6 +32,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     HttpEmployeeServiceModule,
     InMemoryNewOrderStorageModule,
     HttpClientServiceModule,
+    HttpActivitiesTemplateServiceModule,
     RouterModule.forChild([
       {
         path: '',
@@ -38,7 +42,9 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     ]),
   ],
   declarations: [OrderListPage],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+  ],
   exports: [OrderListPage],
 })
 export class OrderListPageModule {}
