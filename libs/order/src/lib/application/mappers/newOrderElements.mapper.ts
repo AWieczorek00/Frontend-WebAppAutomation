@@ -3,6 +3,7 @@ import { NewOrderQuery } from '../ports/primary/query/new-order.query';
 import { ClientQuery } from '../ports/primary/query/client.query';
 import { EmployeeQuery } from '../ports/primary/query/employee.query';
 import { ActivitiesTemplateQuery } from '../ports/primary/query/activities-template/activities-template.query';
+import {PartsTemplateQuery} from "../ports/primary/query/parts-template/parts-template.query";
 
 export const mapFromNewOrderContext = (
   context: NewOrderContext
@@ -42,6 +43,11 @@ export const mapFromNewOrderContext = (
           activitiesTemplate.id,
           activitiesTemplate.name
         )
-    )
+    ),
+    context.partsTemplate.map((partsTemplate)=>
+    new PartsTemplateQuery(
+      partsTemplate.name,
+      partsTemplate.price
+    ))
   );
 };

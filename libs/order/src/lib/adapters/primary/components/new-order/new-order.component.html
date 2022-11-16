@@ -32,12 +32,13 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
-              <br/>
+
+              <br />
               <mat-form-field class="field-order" appearance="legacy">
                 <mat-label>Nip</mat-label>
-                <input formControlName="nip" autocomplete="off" matInput/>
+                <input formControlName="nip" autocomplete="off" matInput />
               </mat-form-field>
-              <br/>
+              <br />
               <mat-form-field class="field-order" appearance="legacy">
                 <mat-label>Numer telefonu</mat-label>
                 <input
@@ -48,11 +49,7 @@
               </mat-form-field>
               <mat-form-field class="field-order" appearance="legacy">
                 <mat-label>Email</mat-label>
-                <input
-                  formControlName="email"
-                  autocomplete="off"
-                  matInput
-                />
+                <input formControlName="email" autocomplete="off" matInput />
               </mat-form-field>
             </div>
           </div>
@@ -68,28 +65,33 @@
                   formControlName="status"
                   panelClass="myPanelClass"
                   disableOptionCentering
-
+                  (selectionChange)="setSelect($event.value, 'status')"
                 >
                   <mat-option style="font-size: 15px" value="W realizacji"
-                  >W realizacji
+                    >W realizacji
                   </mat-option>
                   <mat-option style="font-size: 15px" value="Wykonane"
-                  >Wykonane
+                    >Wykonane
                   </mat-option>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field class="field-option" appearance="legacy">
                 <mat-label>Priorytet zlecenia</mat-label>
-                <mat-select formControlName="priority" panelClass="myPanelClass" disableOptionCentering>
+                <mat-select
+                  formControlName="priority"
+                  panelClass="myPanelClass"
+                  disableOptionCentering
+                  (selectionChange)="setSelect($event.value, 'priority')"
+                >
                   <mat-option style="font-size: 15px" value="Niski"
-                  >Niski
+                    >Niski
                   </mat-option>
                   <mat-option style="font-size: 15px" value="Normlany"
-                  >Normlany
+                    >Normlany
                   </mat-option>
                   <mat-option style="font-size: 15px" value="Wysoki"
-                  >Wysoki
+                    >Wysoki
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -102,7 +104,12 @@
                 style="margin-right: 50px"
               >
                 <mat-label>Data przyjecia</mat-label>
-                <input formControlName="dateOfAdmission" matInput [matDatepicker]="dateOfAdmission"/>
+                <input
+                  formControlName="dateOfAdmission"
+                  matInput
+                  [matDatepicker]="dateOfAdmission"
+                  (dateChange)="setSelect($event.value,'dateOfAdmission')"
+                />
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle
                   matSuffix
@@ -113,7 +120,12 @@
 
               <mat-form-field class="field-option" appearance="legacy">
                 <mat-label>Data wykonania</mat-label>
-                <input formControlName="dateOfExecution" matInput [matDatepicker]="dateOfExecution"/>
+                <input
+                  formControlName="dateOfExecution"
+                  matInput
+                  [matDatepicker]="dateOfExecution"
+                  (dateChange)="setSelect($event.value,'dateOfExecution')"
+                />
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle
                   matSuffix
@@ -127,15 +139,20 @@
               <div class="col">
                 <mat-form-field class="field-order" appearance="legacy">
                   <mat-label>Okresowość</mat-label>
-                  <mat-select formControlName="period" panelClass="myPanelClass" disableOptionCentering>
+                  <mat-select
+                    formControlName="period"
+                    panelClass="myPanelClass"
+                    disableOptionCentering
+                    (selectionChange)="setSelect($event.value, 'period')"
+                  >
                     <mat-option style="font-size: 15px" value="Niski"
-                    >Niski
+                      >Niski
                     </mat-option>
                     <mat-option style="font-size: 15px" value="Normlany"
-                    >Normlany
+                      >Normlany
                     </mat-option>
                     <mat-option style="font-size: 15px" value="Wysoki"
-                    >Wysoki
+                      >Wysoki
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -152,7 +169,12 @@
           <div class="col-sm">
             <mat-form-field class="field-order" appearance="legacy">
               <mat-label>ulica</mat-label>
-              <input formControlName="street" autocomplete="off" matInput/>
+              <input
+                [readonly]="true"
+                formControlName="street"
+                autocomplete="off"
+                matInput
+              />
             </mat-form-field>
             <mat-form-field
               class="field-option"
@@ -161,6 +183,7 @@
             >
               <mat-label>Numer ulicy</mat-label>
               <input
+                [readonly]="true"
                 formControlName="streetNumber"
                 autocomplete="off"
                 matInput
@@ -178,24 +201,36 @@
           <div class="col-sm">
             <mat-form-field class="field-order" appearance="legacy">
               <mat-label>Miasto</mat-label>
-              <input formControlName="city" autocomplete="off" matInput/>
+              <input formControlName="city" autocomplete="off" matInput />
             </mat-form-field>
 
             <mat-form-field class="field-order" appearance="legacy">
               <mat-label>Kod pocztowy</mat-label>
-              <input formControlName="zipcode" autocomplete="off" matInput/>
+              <input formControlName="zipcode" autocomplete="off" matInput />
             </mat-form-field>
           </div>
         </div>
+
+        <div class="main-div">
+          <form [formGroup]="order" (ngSubmit)="onOrderSubmitted(order)">
+            <mat-form-field appearance="legacy" class="textarea">
+              <mat-label>Textarea</mat-label>
+              <textarea
+                formControlName="note"
+                cdkTextareaAutosize
+                matInput
+              ></textarea>
+            </mat-form-field>
+          </form>
+        </div>
       </div>
 
-      <input type="submit" value="Submit"/>
+      <input type="submit" value="Submit" />
     </form>
   </mat-tab>
   <mat-tab label="Czyności">
     <div class="main-div">
       <div>
-
         <mat-form-field appearance="legacy" class="option-table">
           <mat-label>Czyności</mat-label>
           <input
@@ -221,7 +256,9 @@
           </mat-autocomplete>
         </mat-form-field>
 
-        <button class="btn btn-outline-primary" (click)="addActivities()">Dodaj</button>
+        <button class="btn btn-outline-primary" (click)="addActivities()">
+          Dodaj
+        </button>
       </div>
 
       <table
@@ -237,15 +274,18 @@
         <ng-container matColumnDef="attention">
           <th mat-header-cell *matHeaderCellDef>Uwagi</th>
           <td mat-cell *matCellDef="let element">
-            <fom [formGroup]="attention">
-
-
+            <form [formGroup]="attention">
               <mat-form-field appearance="legacy">
-                <input type="text" [ngModel]="mymodel" (ngModelChange)="valuechange($event,element.id)" formControlName="attention" autocomplete="off" matInput/>
+                <input
+                  type="text"
+                  [ngModel]="this.activitiesList[element.id - 1].attention"
+                  (ngModelChange)="valuechange($event, element.id)"
+                  formControlName="attention"
+                  autocomplete="off"
+                  matInput
+                />
               </mat-form-field>
-              {{ element.attention }}
-
-            </fom>
+            </form>
           </td>
         </ng-container>
 
@@ -262,16 +302,6 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="Uwagi">
-    <div class="main-div">
-      <form [formGroup]="order" (ngSubmit)="onOrderSubmitted(order)">
-        <mat-form-field appearance="legacy" class="textarea">
-          <mat-label>Textarea</mat-label>
-          <textarea formControlName="note" cdkTextareaAutosize matInput></textarea>
-        </mat-form-field>
-      </form>
-    </div>
-  </mat-tab>
   <mat-tab label="Serwisanci">
     <div class="main-div">
       <div>
@@ -331,5 +361,302 @@
         <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
       </table>
     </div>
+  </mat-tab>
+  <mat-tab label="Części">
+    <div class="main-div">
+      <div>
+        <mat-form-field appearance="legacy" class="option-table">
+          <mat-label>Części</mat-label>
+          <input
+            type="text"
+            aria-label="Części"
+            matInput
+            [formControl]="employeeControl"
+            [matAutocomplete]="employee"
+          />
+          <mat-autocomplete
+            #employee="matAutocomplete"
+            [displayWith]="getOptionEmployee"
+            (optionSelected)="getEmployee($event.option.value)"
+          >
+            <mat-option
+              *ngFor="let employee of filteredEmployee | async"
+              [value]="employee"
+            >
+              {{ employee.firstName }} {{ employee.lastName }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <button class="btn btn-outline-primary" (click)="addEmployee()">
+          Dodaj
+        </button>
+      </div>
+
+      <table
+        mat-table
+        [dataSource]="dataSourceEmployee"
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef>Imię</th>
+          <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="secondName">
+          <th mat-header-cell *matHeaderCellDef>Drugie imię</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.secondName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Nazwisko</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.lastName }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="nameRowEmployee"></tr>
+        <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
+      </table>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Podsumowanie">
+    <form
+      class="example-form"
+      [formGroup]="order"
+      (ngSubmit)="onOrderSubmitted(order)"
+    >
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div>
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Nazwa</mat-label>
+                <input
+                  [readonly]="true"
+                  type="text"
+                  aria-label="Nazwa"
+                  matInput
+                  formControlName="name"
+                />
+              </mat-form-field>
+              <br />
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Nip</mat-label>
+                <input
+                  [readonly]="true"
+                  formControlName="nip"
+                  autocomplete="off"
+                  matInput
+                />
+              </mat-form-field>
+              <br />
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Numer telefonu</mat-label>
+                <input
+                  [readonly]="true"
+                  formControlName="phoneNumber"
+                  autocomplete="off"
+                  matInput
+                />
+              </mat-form-field>
+              <mat-form-field class="field-order" appearance="legacy">
+                <mat-label>Email</mat-label>
+                <input
+                  [readonly]="true"
+                  formControlName="email"
+                  autocomplete="off"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <mat-form-field
+                class="field-option"
+                appearance="legacy"
+                style="margin-right: 50px"
+              >
+                <mat-label>Status zlecenia</mat-label>
+                <input formControlName="status" [readonly]="true" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="field-option" appearance="legacy">
+                <mat-label>Priorytet zlecenia</mat-label>
+                <input [readonly]="true" matInput formControlName="priority" />
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field
+                class="field-option"
+                appearance="legacy"
+                style="margin-right: 50px"
+              >
+                <mat-label>Data przyjecia</mat-label>
+                <input
+                  [readonly]="true"
+                  formControlName="dateOfAdmission"
+                  matInput
+                  [matDatepicker]="dateOfAdmission"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="field-option" appearance="legacy">
+                <mat-label>Data wykonania</mat-label>
+                <input
+                  [readonly]="true"
+                  formControlName="dateOfExecution"
+                  matInput
+                  [matDatepicker]="dateOfExecution"
+                />
+              </mat-form-field>
+            </div>
+
+            <div>
+              <div class="col">
+                <mat-form-field class="field-order" appearance="legacy">
+                  <mat-label>Okresowość</mat-label>
+                  <input [readonly]="true" matInput formControlName="period" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center"><p>Dane adresowe</p></div>
+
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field class="field-order" appearance="legacy">
+              <mat-label>ulica</mat-label>
+              <input formControlName="street" autocomplete="off" matInput />
+            </mat-form-field>
+            <mat-form-field
+              class="field-option"
+              style="margin-right: 50px"
+              appearance="legacy"
+            >
+              <mat-label>Numer ulicy</mat-label>
+              <input
+                formControlName="streetNumber"
+                autocomplete="off"
+                matInput
+                [readonly]="true"
+              />
+            </mat-form-field>
+            <mat-form-field class="field-option" appearance="legacy">
+              <mat-label>Numer lokalu</mat-label>
+              <input
+                formControlName="apartmentNumber"
+                autocomplete="off"
+                matInput
+                [readonly]="true"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="field-order" appearance="legacy">
+              <mat-label>Miasto</mat-label>
+              <input
+                [readonly]="true"
+                formControlName="city"
+                autocomplete="off"
+                matInput
+              />
+            </mat-form-field>
+
+            <mat-form-field class="field-order" appearance="legacy">
+              <mat-label>Kod pocztowy</mat-label>
+              <input
+                [readonly]="true"
+                formControlName="zipcode"
+                autocomplete="off"
+                matInput
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="main-div">
+          <form [formGroup]="order" (ngSubmit)="onOrderSubmitted(order)">
+            <mat-form-field appearance="legacy" class="textarea">
+              <mat-label>Textarea</mat-label>
+              <textarea
+                [readonly]="true"
+                formControlName="note"
+                cdkTextareaAutosize
+                matInput
+              ></textarea>
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+
+      <table
+        mat-table
+        [dataSource]="dataSourceEmployee"
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef>Imię</th>
+          <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="secondName">
+          <th mat-header-cell *matHeaderCellDef>Drugie imię</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.secondName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Nazwisko</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.lastName }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="nameRowEmployee"></tr>
+        <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
+      </table>
+
+      <table
+        mat-table
+        [dataSource]="dataSourceActivities"
+        class="mat-elevation-z8"
+        style="margin-top: 100px"
+      >
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nazwa czyności</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="attention">
+          <th mat-header-cell *matHeaderCellDef>Uwagi</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.attention }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="done">
+          <th mat-header-cell *matHeaderCellDef>Wykonano</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.done }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="nameRowActivities"></tr>
+        <tr mat-row *matRowDef="let row; columns: nameRowActivities"></tr>
+      </table>
+
+      <input type="submit" value="Submit" />
+    </form>
   </mat-tab>
 </mat-tab-group>

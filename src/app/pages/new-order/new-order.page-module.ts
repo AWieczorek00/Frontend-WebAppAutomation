@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import {
   HttpActivitiesTemplateServiceModule,
   HttpClientServiceModule,
-  HttpEmployeeServiceModule,
+  HttpEmployeeServiceModule, HttpPartsTemplateServiceModule,
   InMemoryClientStorageModule,
   InMemoryNewOrderStorageModule,
   LoadAllActivitiesTemplateResolver,
@@ -12,7 +12,7 @@ import {
   LoadAllClientsResolver,
   LoadAllClientsResolverModule,
   LoadAllEmployeesResolver,
-  LoadAllEmployeesResolverModule,
+  LoadAllEmployeesResolverModule, LoadAllPartsTemplateResolver, LoadAllPartsTemplateResolverModule,
   NewOrderComponentModule,
   OrderServiceModule,
   OrderStateModule,
@@ -28,7 +28,7 @@ import {NavigationComponentModule} from "@navigation";
       {
         path: '',
         component: NewOrderPage,
-        resolve: [LoadAllClientsResolver,LoadAllEmployeesResolver,LoadAllActivitiesTemplateResolver],
+        resolve: [LoadAllClientsResolver,LoadAllEmployeesResolver,LoadAllActivitiesTemplateResolver,LoadAllPartsTemplateResolver],
       },
     ]),
     NavigationComponentModule,
@@ -43,7 +43,9 @@ import {NavigationComponentModule} from "@navigation";
     HttpEmployeeServiceModule,
     InMemoryNewOrderStorageModule,
     LoadAllActivitiesTemplateResolverModule,
-    HttpActivitiesTemplateServiceModule
+    HttpActivitiesTemplateServiceModule,
+    HttpPartsTemplateServiceModule,
+    LoadAllPartsTemplateResolverModule
   ],
   declarations: [NewOrderPage],
   providers: [

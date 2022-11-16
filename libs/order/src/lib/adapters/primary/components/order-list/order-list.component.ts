@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListComponent {
+  roles: string | null;
   constructor(
     @Inject(GETS_CURRENT_ORDER_LIST_QUERY_PORT)
     private _getsCurrentOrderListQueryPort: GetsCurrentOrderListQueryPort,
@@ -29,12 +30,14 @@ export class OrderListComponent {
   ) {
     this.orders$.subscribe((data) => (this.dataSource.data = data.orders));
     this.orders$.subscribe((data) => console.log(data.orders));
+    this.roles = localStorage.getItem("roles")
   }
 
   readonly orders$: Observable<OrderListQuery> =
     this._getsCurrentOrderListQueryPort.getCurrentOrderList();
 
   dataSource = new MatTableDataSource<OrderQuery>();
+
 
   name: string[] = [
     'name',
@@ -46,7 +49,7 @@ export class OrderListComponent {
     'options',
   ];
 
-  newOrder(){
-    this._router.navigate(['/new-order'])
+  newOrder() {
+    this._router.navigate(['/new-order']);
   }
 }

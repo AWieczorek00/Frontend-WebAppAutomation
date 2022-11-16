@@ -16,3 +16,7 @@ export * from './lib/adapters/primary/resolvers/load-all-employees.resolver-modu
 export * from './lib/adapters/secondary/services/http-activities-template.service-module';
 export * from './lib/adapters/primary/resolvers/activitiesTemplate/load-all-activities-template.resolver';
 export * from './lib/adapters/primary/resolvers/activitiesTemplate/load-all-activities-template.resolver-module';
+export * from './lib/adapters/primary/resolvers/load-all-parts-template.resolver';
+export * from './lib/adapters/primary/resolvers/load-all-parts-template.resolver-module';
+export * from './lib/adapters/secondary/services/http-parts-template.service-module';
+export * from './lib/adapters/primary/directives/delete-order.directive-module';

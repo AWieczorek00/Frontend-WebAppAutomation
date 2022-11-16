@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GetAllDtoPort } from '../../../application/ports/secondary/dto/get-all.dto-port';
 import { AddOrderDtoPort } from '../../../application/ports/secondary/dto/add-order.dto-port';
+import { DeleteOrderDtoPort } from '../../../application/ports/secondary/dto/delete-order.dto-port';
 import { OrderDto } from '../../../application/ports/secondary/dto/order.dto';
 
 @Injectable()
-export class OrderService implements GetAllDtoPort, AddOrderDtoPort {
+export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrderDtoPort {
   constructor(private _httpClient: HttpClient) { }
 
   getAll(): Observable<OrderDto[]> {
@@ -42,7 +43,11 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort {
   }
 
   add(orderDto: Partial<OrderDto>): Observable<void> {
-    return this._httpClient.post<void>("http://localhost:8080/order/add",orderDto)
+    return this._httpClient.post<void>("http://localhost:8080/order/add", orderDto)
+  }
+
+  delete(id: number): Observable<void> {
+    return this._httpClient.delete<void>("http://localhost:8080/order/delete/"+id );
   }
 }
 

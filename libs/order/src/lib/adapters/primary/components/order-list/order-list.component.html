@@ -82,7 +82,7 @@
               <a class="nav-link" href="/profil">Powiel</a>
             </button>
 
-            <button  ngbDropdownItem>
+            <button *ngIf="roles === 'ADMIN'"  ngbDropdownItem [libDeleteOrder]="element.id">
               <a class="nav-link" >Usuń</a>
             </button>
           </div>
@@ -94,3 +94,5 @@
     <tr mat-row *matRowDef="let row; columns: name"></tr>
   </table>
 </div>
+
+

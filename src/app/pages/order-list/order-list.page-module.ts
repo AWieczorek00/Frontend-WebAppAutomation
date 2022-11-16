@@ -3,7 +3,7 @@ import { OrderListPage } from './order-list.page';
 import {
   HttpActivitiesTemplateServiceModule,
   HttpClientServiceModule,
-  HttpEmployeeServiceModule,
+  HttpEmployeeServiceModule, HttpPartsTemplateServiceModule,
   InMemoryClientStorageModule,
   InMemoryNewOrderStorageModule,
   LoadAllEmployeesResolverModule,
@@ -18,6 +18,9 @@ import { RouterModule } from '@angular/router';
 import { NavigationComponentModule } from '@navigation';
 import { RequestInterceptor } from '../../request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpPartsTemplateService
+} from "../../../../libs/order/src/lib/adapters/secondary/services/http-parts-template.service";
 
 @NgModule({
   imports: [
@@ -33,6 +36,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     InMemoryNewOrderStorageModule,
     HttpClientServiceModule,
     HttpActivitiesTemplateServiceModule,
+    HttpPartsTemplateServiceModule,
+
     RouterModule.forChild([
       {
         path: '',
