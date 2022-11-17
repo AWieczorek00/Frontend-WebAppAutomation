@@ -20,9 +20,15 @@
     <ng-container matColumnDef="firstName">
       <td mat-cell *matCellDef="let element">
 
-        <div *ngIf="element.employees[0] as employee ">
+        <div *ngIf="element.employee">
+
+          <div *ngIf="element.employees[0] as employee ">
             {{employee.firstName}} {{employee.lastName}}
+          </div>
         </div>
+
+
+
 
 
       </td>
@@ -78,8 +84,8 @@
               <a class="nav-link" href="/profil">Modyfikuj</a>
             </button>
 
-            <button ngbDropdownItem>
-              <a class="nav-link" href="/profil">Powiel</a>
+            <button ngbDropdownItem (click)="duplicateOrder(element)">
+              <a class="nav-link">Powiel</a>
             </button>
 
             <button *ngIf="roles === 'ADMIN'"  ngbDropdownItem [libDeleteOrder]="element.id">

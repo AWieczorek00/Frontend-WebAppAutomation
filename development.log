@@ -80997,3 +80997,2142 @@
 	"level": "info",
 	"message": "[API] Response ok: method-signature/create"
 }
+[info] [API] Request for flow/create-entity: {
+	"action": "flow/create-entity",
+	"params": {},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "N3V8TLEEns",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for flow/create-entity"
+}
+[info] [CLI] Calling Query flow/create-entity: {
+	"funcParams": {},
+	"level": "info",
+	"message": "[CLI] Calling Query flow/create-entity"
+}
+[info] [CLI] Called Query flow/create-entity: {
+	"result": {
+		"context": {
+			"project": {
+				"name": "order",
+				"workspaceRoot": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis",
+				"root": "libs/order",
+				"sourceRoot": "libs/order/src",
+				"prefix": "lib",
+				"path": {
+					"publicApi": "index.ts",
+					"alias": "@order"
+				},
+				"codePathFromWorkspaceRoot": "libs/order/src/lib",
+				"absoluteCodePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+				"absoluteRootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order",
+				"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts",
+				"alias": "@order",
+				"type": "Lib"
+			}
+		},
+		"steps": [
+			{
+				"contextId": "entity",
+				"title": "What do you want to create?",
+				"type": "multi-option",
+				"options": {
+					"App": [
+						{
+							"id": "page",
+							"suffix": "Page",
+							"folder": "pages/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "App",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					],
+					"Lib": [
+						{
+							"id": "component",
+							"suffix": "Component",
+							"folder": "adapters/primary/components/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "Lib",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "dto",
+							"suffix": "Dto",
+							"folder": "application/ports/secondary/dto/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "dtoPort",
+							"suffix": "DtoPort",
+							"folder": "application/ports/secondary/dto",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "service",
+							"suffix": "Service",
+							"folder": "adapters/secondary/services",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "response",
+							"suffix": "Response",
+							"folder": "adapters/secondary/services",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "context",
+							"suffix": "Context",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "contextPort",
+							"suffix": "ContextPort",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "storage",
+							"suffix": "Storage",
+							"folder": "adapters/secondary/storages",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "event",
+							"suffix": "Event",
+							"folder": "application/ports/secondary/event",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventPort",
+							"suffix": "EventPort",
+							"folder": "application/ports/secondary/event",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventDispatcher",
+							"suffix": "EventDispatcher",
+							"folder": "adapters/secondary/event-dispatchers",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventListener",
+							"suffix": "EventListener",
+							"folder": "adapters/primary/event-listeners",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "query",
+							"suffix": "Query",
+							"folder": "application/ports/primary/query/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "queryPort",
+							"suffix": "QueryPort",
+							"folder": "application/ports/primary/query",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "command",
+							"suffix": "Command",
+							"folder": "application/ports/primary/command",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "commandPort",
+							"suffix": "CommandPort",
+							"folder": "application/ports/primary/command",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "state",
+							"suffix": "State",
+							"folder": "application",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "directive",
+							"suffix": "Directive",
+							"folder": "adapters/primary/directives",
+							"type": "ANGULAR_DIRECTIVE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "resolver",
+							"suffix": "Resolver",
+							"folder": "adapters/primary/resolvers",
+							"type": "ANGULAR_RESOLVER",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "guard",
+							"suffix": "Guard",
+							"folder": "adapters/primary/guards",
+							"type": "ANGULAR_GUARD",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					]
+				},
+				"param": "project.type",
+				"property": "id"
+			},
+			{
+				"contextId": "name",
+				"title": "What is the $entity.id$ name?",
+				"subtitle": "e.g. user",
+				"type": "text-input"
+			},
+			{
+				"conditions": [
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "DATA_STRUCTURE"
+					},
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "OBJECT"
+					}
+				],
+				"contextId": "properties",
+				"title": "What are the $entity.id$ properties?",
+				"subtitle": "Optional: Can be empty... or use csv format e.g. id:number,text:string",
+				"type": "multi-input"
+			}
+		],
+		"request": {
+			"scope": "entity.type",
+			"config": {
+				"LIBRARY": {
+					"url": "library/create",
+					"payload": {
+						"name": "name.value"
+					}
+				},
+				"OBJECT": {
+					"url": "object/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"DATA_STRUCTURE": {
+					"url": "data-structure/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_COMPONENT": {
+					"url": "angular-component/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_DIRECTIVE": {
+					"url": "angular-directive/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_GUARD": {
+					"url": "angular-guard/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_RESOLVER": {
+					"url": "angular-resolver/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_SERVICE": {
+					"url": "angular-service/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ABSTRACTION": {
+					"url": "abstraction/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				}
+			}
+		}
+	},
+	"level": "info",
+	"message": "[CLI] Called Query flow/create-entity"
+}
+[info] [API] Response ok: flow/create-entity: {
+	"result": {
+		"context": {
+			"project": {
+				"name": "order",
+				"workspaceRoot": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis",
+				"root": "libs/order",
+				"sourceRoot": "libs/order/src",
+				"prefix": "lib",
+				"path": {
+					"publicApi": "index.ts",
+					"alias": "@order"
+				},
+				"codePathFromWorkspaceRoot": "libs/order/src/lib",
+				"absoluteCodePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+				"absoluteRootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order",
+				"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts",
+				"alias": "@order",
+				"type": "Lib"
+			}
+		},
+		"steps": [
+			{
+				"contextId": "entity",
+				"title": "What do you want to create?",
+				"type": "multi-option",
+				"options": {
+					"App": [
+						{
+							"id": "page",
+							"suffix": "Page",
+							"folder": "pages/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "App",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					],
+					"Lib": [
+						{
+							"id": "component",
+							"suffix": "Component",
+							"folder": "adapters/primary/components/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "Lib",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "dto",
+							"suffix": "Dto",
+							"folder": "application/ports/secondary/dto/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "dtoPort",
+							"suffix": "DtoPort",
+							"folder": "application/ports/secondary/dto",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "service",
+							"suffix": "Service",
+							"folder": "adapters/secondary/services",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "response",
+							"suffix": "Response",
+							"folder": "adapters/secondary/services",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "context",
+							"suffix": "Context",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "contextPort",
+							"suffix": "ContextPort",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "storage",
+							"suffix": "Storage",
+							"folder": "adapters/secondary/storages",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "event",
+							"suffix": "Event",
+							"folder": "application/ports/secondary/event",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventPort",
+							"suffix": "EventPort",
+							"folder": "application/ports/secondary/event",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventDispatcher",
+							"suffix": "EventDispatcher",
+							"folder": "adapters/secondary/event-dispatchers",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventListener",
+							"suffix": "EventListener",
+							"folder": "adapters/primary/event-listeners",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "query",
+							"suffix": "Query",
+							"folder": "application/ports/primary/query/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "queryPort",
+							"suffix": "QueryPort",
+							"folder": "application/ports/primary/query",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "command",
+							"suffix": "Command",
+							"folder": "application/ports/primary/command",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "commandPort",
+							"suffix": "CommandPort",
+							"folder": "application/ports/primary/command",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "state",
+							"suffix": "State",
+							"folder": "application",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "directive",
+							"suffix": "Directive",
+							"folder": "adapters/primary/directives",
+							"type": "ANGULAR_DIRECTIVE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "resolver",
+							"suffix": "Resolver",
+							"folder": "adapters/primary/resolvers",
+							"type": "ANGULAR_RESOLVER",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "guard",
+							"suffix": "Guard",
+							"folder": "adapters/primary/guards",
+							"type": "ANGULAR_GUARD",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					]
+				},
+				"param": "project.type",
+				"property": "id"
+			},
+			{
+				"contextId": "name",
+				"title": "What is the $entity.id$ name?",
+				"subtitle": "e.g. user",
+				"type": "text-input"
+			},
+			{
+				"conditions": [
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "DATA_STRUCTURE"
+					},
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "OBJECT"
+					}
+				],
+				"contextId": "properties",
+				"title": "What are the $entity.id$ properties?",
+				"subtitle": "Optional: Can be empty... or use csv format e.g. id:number,text:string",
+				"type": "multi-input"
+			}
+		],
+		"request": {
+			"scope": "entity.type",
+			"config": {
+				"LIBRARY": {
+					"url": "library/create",
+					"payload": {
+						"name": "name.value"
+					}
+				},
+				"OBJECT": {
+					"url": "object/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"DATA_STRUCTURE": {
+					"url": "data-structure/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_COMPONENT": {
+					"url": "angular-component/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_DIRECTIVE": {
+					"url": "angular-directive/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_GUARD": {
+					"url": "angular-guard/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_RESOLVER": {
+					"url": "angular-resolver/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_SERVICE": {
+					"url": "angular-service/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ABSTRACTION": {
+					"url": "abstraction/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				}
+			}
+		}
+	},
+	"level": "info",
+	"message": "[API] Response ok: flow/create-entity"
+}
+[info] [API] Request for flow/create-entity: {
+	"action": "flow/create-entity",
+	"params": {},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "4IMbj7zKAx",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/secondary/storages",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for flow/create-entity"
+}
+[info] [CLI] Calling Query flow/create-entity: {
+	"funcParams": {},
+	"level": "info",
+	"message": "[CLI] Calling Query flow/create-entity"
+}
+[info] [CLI] Called Query flow/create-entity: {
+	"result": {
+		"context": {
+			"project": {
+				"name": "order",
+				"workspaceRoot": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis",
+				"root": "libs/order",
+				"sourceRoot": "libs/order/src",
+				"prefix": "lib",
+				"path": {
+					"publicApi": "index.ts",
+					"alias": "@order"
+				},
+				"codePathFromWorkspaceRoot": "libs/order/src/lib",
+				"absoluteCodePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+				"absoluteRootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order",
+				"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts",
+				"alias": "@order",
+				"type": "Lib"
+			}
+		},
+		"steps": [
+			{
+				"contextId": "entity",
+				"title": "What do you want to create?",
+				"type": "multi-option",
+				"options": {
+					"App": [
+						{
+							"id": "page",
+							"suffix": "Page",
+							"folder": "pages/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "App",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					],
+					"Lib": [
+						{
+							"id": "component",
+							"suffix": "Component",
+							"folder": "adapters/primary/components/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "Lib",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "dto",
+							"suffix": "Dto",
+							"folder": "application/ports/secondary/dto/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "dtoPort",
+							"suffix": "DtoPort",
+							"folder": "application/ports/secondary/dto",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "service",
+							"suffix": "Service",
+							"folder": "adapters/secondary/services",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "response",
+							"suffix": "Response",
+							"folder": "adapters/secondary/services",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "context",
+							"suffix": "Context",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "contextPort",
+							"suffix": "ContextPort",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "storage",
+							"suffix": "Storage",
+							"folder": "adapters/secondary/storages",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "event",
+							"suffix": "Event",
+							"folder": "application/ports/secondary/event",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventPort",
+							"suffix": "EventPort",
+							"folder": "application/ports/secondary/event",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventDispatcher",
+							"suffix": "EventDispatcher",
+							"folder": "adapters/secondary/event-dispatchers",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventListener",
+							"suffix": "EventListener",
+							"folder": "adapters/primary/event-listeners",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "query",
+							"suffix": "Query",
+							"folder": "application/ports/primary/query/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "queryPort",
+							"suffix": "QueryPort",
+							"folder": "application/ports/primary/query",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "command",
+							"suffix": "Command",
+							"folder": "application/ports/primary/command",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "commandPort",
+							"suffix": "CommandPort",
+							"folder": "application/ports/primary/command",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "state",
+							"suffix": "State",
+							"folder": "application",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "directive",
+							"suffix": "Directive",
+							"folder": "adapters/primary/directives",
+							"type": "ANGULAR_DIRECTIVE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "resolver",
+							"suffix": "Resolver",
+							"folder": "adapters/primary/resolvers",
+							"type": "ANGULAR_RESOLVER",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "guard",
+							"suffix": "Guard",
+							"folder": "adapters/primary/guards",
+							"type": "ANGULAR_GUARD",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					]
+				},
+				"param": "project.type",
+				"property": "id"
+			},
+			{
+				"contextId": "name",
+				"title": "What is the $entity.id$ name?",
+				"subtitle": "e.g. user",
+				"type": "text-input"
+			},
+			{
+				"conditions": [
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "DATA_STRUCTURE"
+					},
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "OBJECT"
+					}
+				],
+				"contextId": "properties",
+				"title": "What are the $entity.id$ properties?",
+				"subtitle": "Optional: Can be empty... or use csv format e.g. id:number,text:string",
+				"type": "multi-input"
+			}
+		],
+		"request": {
+			"scope": "entity.type",
+			"config": {
+				"LIBRARY": {
+					"url": "library/create",
+					"payload": {
+						"name": "name.value"
+					}
+				},
+				"OBJECT": {
+					"url": "object/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"DATA_STRUCTURE": {
+					"url": "data-structure/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_COMPONENT": {
+					"url": "angular-component/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_DIRECTIVE": {
+					"url": "angular-directive/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_GUARD": {
+					"url": "angular-guard/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_RESOLVER": {
+					"url": "angular-resolver/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_SERVICE": {
+					"url": "angular-service/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ABSTRACTION": {
+					"url": "abstraction/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				}
+			}
+		}
+	},
+	"level": "info",
+	"message": "[CLI] Called Query flow/create-entity"
+}
+[info] [API] Response ok: flow/create-entity: {
+	"result": {
+		"context": {
+			"project": {
+				"name": "order",
+				"workspaceRoot": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis",
+				"root": "libs/order",
+				"sourceRoot": "libs/order/src",
+				"prefix": "lib",
+				"path": {
+					"publicApi": "index.ts",
+					"alias": "@order"
+				},
+				"codePathFromWorkspaceRoot": "libs/order/src/lib",
+				"absoluteCodePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+				"absoluteRootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order",
+				"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts",
+				"alias": "@order",
+				"type": "Lib"
+			}
+		},
+		"steps": [
+			{
+				"contextId": "entity",
+				"title": "What do you want to create?",
+				"type": "multi-option",
+				"options": {
+					"App": [
+						{
+							"id": "page",
+							"suffix": "Page",
+							"folder": "pages/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "App",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					],
+					"Lib": [
+						{
+							"id": "component",
+							"suffix": "Component",
+							"folder": "adapters/primary/components/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "Lib",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "dto",
+							"suffix": "Dto",
+							"folder": "application/ports/secondary/dto/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "dtoPort",
+							"suffix": "DtoPort",
+							"folder": "application/ports/secondary/dto",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "service",
+							"suffix": "Service",
+							"folder": "adapters/secondary/services",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "response",
+							"suffix": "Response",
+							"folder": "adapters/secondary/services",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "context",
+							"suffix": "Context",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "contextPort",
+							"suffix": "ContextPort",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "storage",
+							"suffix": "Storage",
+							"folder": "adapters/secondary/storages",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "event",
+							"suffix": "Event",
+							"folder": "application/ports/secondary/event",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventPort",
+							"suffix": "EventPort",
+							"folder": "application/ports/secondary/event",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventDispatcher",
+							"suffix": "EventDispatcher",
+							"folder": "adapters/secondary/event-dispatchers",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventListener",
+							"suffix": "EventListener",
+							"folder": "adapters/primary/event-listeners",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "query",
+							"suffix": "Query",
+							"folder": "application/ports/primary/query/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "queryPort",
+							"suffix": "QueryPort",
+							"folder": "application/ports/primary/query",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "command",
+							"suffix": "Command",
+							"folder": "application/ports/primary/command",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "commandPort",
+							"suffix": "CommandPort",
+							"folder": "application/ports/primary/command",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "state",
+							"suffix": "State",
+							"folder": "application",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "directive",
+							"suffix": "Directive",
+							"folder": "adapters/primary/directives",
+							"type": "ANGULAR_DIRECTIVE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "resolver",
+							"suffix": "Resolver",
+							"folder": "adapters/primary/resolvers",
+							"type": "ANGULAR_RESOLVER",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "guard",
+							"suffix": "Guard",
+							"folder": "adapters/primary/guards",
+							"type": "ANGULAR_GUARD",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					]
+				},
+				"param": "project.type",
+				"property": "id"
+			},
+			{
+				"contextId": "name",
+				"title": "What is the $entity.id$ name?",
+				"subtitle": "e.g. user",
+				"type": "text-input"
+			},
+			{
+				"conditions": [
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "DATA_STRUCTURE"
+					},
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "OBJECT"
+					}
+				],
+				"contextId": "properties",
+				"title": "What are the $entity.id$ properties?",
+				"subtitle": "Optional: Can be empty... or use csv format e.g. id:number,text:string",
+				"type": "multi-input"
+			}
+		],
+		"request": {
+			"scope": "entity.type",
+			"config": {
+				"LIBRARY": {
+					"url": "library/create",
+					"payload": {
+						"name": "name.value"
+					}
+				},
+				"OBJECT": {
+					"url": "object/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"DATA_STRUCTURE": {
+					"url": "data-structure/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_COMPONENT": {
+					"url": "angular-component/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_DIRECTIVE": {
+					"url": "angular-directive/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_GUARD": {
+					"url": "angular-guard/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_RESOLVER": {
+					"url": "angular-resolver/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_SERVICE": {
+					"url": "angular-service/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ABSTRACTION": {
+					"url": "abstraction/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				}
+			}
+		}
+	},
+	"level": "info",
+	"message": "[API] Response ok: flow/create-entity"
+}
+[info] [API] Request for angular-directive/create: {
+	"action": "angular-directive/create",
+	"params": {
+		"name": "duplicate-order",
+		"entityId": "directive"
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "4IMbj7zKAx",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/secondary/storages",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for angular-directive/create"
+}
+[info] [CLI] Calling Command angular-directive/create: {
+	"funcParams": {
+		"name": "duplicate-order",
+		"entityId": "directive"
+	},
+	"level": "info",
+	"message": "[CLI] Calling Command angular-directive/create"
+}
+[info] [CommandBus]: Dispatching command DIRECTIVE_CREATE_SMART_DIRECTIVE: {
+	"commandName": "DIRECTIVE_CREATE_SMART_DIRECTIVE",
+	"payload": {
+		"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+		"name": "duplicate-order",
+		"libPrefix": "lib"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Dispatching command DIRECTIVE_CREATE_SMART_DIRECTIVE"
+}
+[info] [EventBus]: Broadcasting event DIRECTIVE_SMART_DIRECTIVE_CREATED: {
+	"type": "DIRECTIVE_SMART_DIRECTIVE_CREATED",
+	"payload": {
+		"createdFile": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts"
+	},
+	"level": "info",
+	"message": "[EventBus]: Broadcasting event DIRECTIVE_SMART_DIRECTIVE_CREATED"
+}
+[info] [EventBus]: Broadcasted DIRECTIVE_SMART_DIRECTIVE_CREATED: {
+	"event": {
+		"createdFile": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts"
+	},
+	"level": "info",
+	"message": "[EventBus]: Broadcasted DIRECTIVE_SMART_DIRECTIVE_CREATED"
+}
+[info] [CommandBus]: Dispatching command MODULE_CREATE_MODULE: {
+	"commandName": "MODULE_CREATE_MODULE",
+	"payload": {
+		"filePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"entityType": "ANGULAR_DIRECTIVE"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Dispatching command MODULE_CREATE_MODULE"
+}
+[info] [EventBus]: Broadcasting event MODULE_MODULE_CREATED: {
+	"type": "MODULE_MODULE_CREATED",
+	"payload": {
+		"moduleFile": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive-module.ts"
+	},
+	"level": "info",
+	"message": "[EventBus]: Broadcasting event MODULE_MODULE_CREATED"
+}
+[info] [EventBus]: Broadcasted MODULE_MODULE_CREATED: {
+	"event": {
+		"moduleFile": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive-module.ts"
+	},
+	"level": "info",
+	"message": "[EventBus]: Broadcasted MODULE_MODULE_CREATED"
+}
+[info] [CommandBus]: Dispatching command MODULE_UPDATE_PUBLIC_API: {
+	"commandName": "MODULE_UPDATE_PUBLIC_API",
+	"payload": {
+		"moduleFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive-module.ts",
+		"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Dispatching command MODULE_UPDATE_PUBLIC_API"
+}
+[info] [CommandBus]: Handled  MODULE_UPDATE_PUBLIC_API: {
+	"commandName": "MODULE_UPDATE_PUBLIC_API",
+	"payload": {
+		"moduleFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive-module.ts",
+		"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Handled  MODULE_UPDATE_PUBLIC_API"
+}
+[info] [CommandBus]: Handled  MODULE_CREATE_MODULE: {
+	"commandName": "MODULE_CREATE_MODULE",
+	"payload": {
+		"filePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"entityType": "ANGULAR_DIRECTIVE"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Handled  MODULE_CREATE_MODULE"
+}
+[info] [CommandBus]: Handled  DIRECTIVE_CREATE_SMART_DIRECTIVE: {
+	"commandName": "DIRECTIVE_CREATE_SMART_DIRECTIVE",
+	"payload": {
+		"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+		"name": "duplicate-order",
+		"libPrefix": "lib"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Handled  DIRECTIVE_CREATE_SMART_DIRECTIVE"
+}
+[info] [CLI] Called Command angular-directive/create: {
+	"message": "[CLI] Called Command angular-directive/create",
+	"level": "info"
+}
+[info] [API] Response ok: angular-directive/create: {
+	"result": {
+		"filePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts"
+	},
+	"level": "info",
+	"message": "[API] Response ok: angular-directive/create"
+}
+[info] [API] Request for entity/actions: {
+	"action": "entity/actions",
+	"params": {
+		"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"position": 402
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "BL4xeoSY3R",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for entity/actions"
+}
+[info] [CLI] Calling Query entity/actions: {
+	"funcParams": {
+		"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"position": 402
+	},
+	"level": "info",
+	"message": "[CLI] Calling Query entity/actions"
+}
+[info] [CLI] Called Query entity/actions: {
+	"result": {
+		"context": {},
+		"children": [
+			{
+				"label": "Properties",
+				"children": [
+					{
+						"actionId": "RXJS_PROPERTY_CREATE",
+						"label": "Create Data Property",
+						"callPath": []
+					},
+					{
+						"actionId": "RXJS_PROPERTY_SUBJECT_CREATE",
+						"label": "Create Subject Property",
+						"callPath": []
+					}
+				]
+			},
+			{
+				"label": "Inject",
+				"actionId": "INJECT",
+				"callPath": []
+			},
+			{
+				"label": "Methods",
+				"children": [
+					{
+						"actionId": "METHOD_CREATE",
+						"label": "Create New Method",
+						"callPath": []
+					}
+				]
+			}
+		]
+	},
+	"level": "info",
+	"message": "[CLI] Called Query entity/actions"
+}
+[info] [API] Response ok: entity/actions: {
+	"result": {
+		"context": {},
+		"children": [
+			{
+				"label": "Properties",
+				"children": [
+					{
+						"actionId": "RXJS_PROPERTY_CREATE",
+						"label": "Create Data Property",
+						"callPath": []
+					},
+					{
+						"actionId": "RXJS_PROPERTY_SUBJECT_CREATE",
+						"label": "Create Subject Property",
+						"callPath": []
+					}
+				]
+			},
+			{
+				"label": "Inject",
+				"actionId": "INJECT",
+				"callPath": []
+			},
+			{
+				"label": "Methods",
+				"children": [
+					{
+						"actionId": "METHOD_CREATE",
+						"label": "Create New Method",
+						"callPath": []
+					}
+				]
+			}
+		]
+	},
+	"level": "info",
+	"message": "[API] Response ok: entity/actions"
+}
+[info] [API] Request for injectable/list: {
+	"action": "injectable/list",
+	"params": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts"
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "BL4xeoSY3R",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for injectable/list"
+}
+[info] [CLI] Calling Query injectable/list: {
+	"funcParams": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts"
+	},
+	"level": "info",
+	"message": "[CLI] Calling Query injectable/list"
+}
+[info] [CLI] Called Query injectable/list: {
+	"result": [
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/duplicate-order.command-port.ts",
+			"name": "DuplicateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-current-client-list.query-port.ts",
+			"name": "GetsCurrentClientListQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-current-order-list.query-port.ts",
+			"name": "GetsCurrentOrderListQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-new-order-currency-elements.query-port.ts",
+			"name": "GetsNewOrderCurrencyElementsQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/activitiesTemplate/load-activities-template.command-port.ts",
+			"name": "LoadActivitiesTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/client/load-clients.command-port.ts",
+			"name": "LoadClientsCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/employee/load-employees.command-port.ts",
+			"name": "LoadEmployeesCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts",
+			"name": "CreateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/delete-order.command-port.ts",
+			"name": "DeleteOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/load-orders.command-port.ts",
+			"name": "LoadOrdersCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/partsTemplate/load-parts-template.command-port.ts",
+			"name": "LoadPartsTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		}
+	],
+	"level": "info",
+	"message": "[CLI] Called Query injectable/list"
+}
+[info] [API] Response ok: injectable/list: {
+	"result": [
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/duplicate-order.command-port.ts",
+			"name": "DuplicateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-current-client-list.query-port.ts",
+			"name": "GetsCurrentClientListQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-current-order-list.query-port.ts",
+			"name": "GetsCurrentOrderListQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-new-order-currency-elements.query-port.ts",
+			"name": "GetsNewOrderCurrencyElementsQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/activitiesTemplate/load-activities-template.command-port.ts",
+			"name": "LoadActivitiesTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/client/load-clients.command-port.ts",
+			"name": "LoadClientsCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/employee/load-employees.command-port.ts",
+			"name": "LoadEmployeesCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts",
+			"name": "CreateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/delete-order.command-port.ts",
+			"name": "DeleteOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/load-orders.command-port.ts",
+			"name": "LoadOrdersCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/partsTemplate/load-parts-template.command-port.ts",
+			"name": "LoadPartsTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		}
+	],
+	"level": "info",
+	"message": "[API] Response ok: injectable/list"
+}
+[info] [API] Request for injectable/inject-abstraction: {
+	"action": "injectable/inject-abstraction",
+	"params": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"injectingPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "BL4xeoSY3R",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for injectable/inject-abstraction"
+}
+[info] [CLI] Calling Command injectable/inject-abstraction: {
+	"funcParams": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"injectingPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"level": "info",
+	"message": "[CLI] Calling Command injectable/inject-abstraction"
+}
+[info] [CommandBus]: Dispatching command INJECT_ABSTRACTION_DEPENDENCY: {
+	"commandName": "INJECT_ABSTRACTION_DEPENDENCY",
+	"payload": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"injectingFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Dispatching command INJECT_ABSTRACTION_DEPENDENCY"
+}
+[info] [CommandBus]: Handled  INJECT_ABSTRACTION_DEPENDENCY: {
+	"commandName": "INJECT_ABSTRACTION_DEPENDENCY",
+	"payload": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts",
+		"injectingFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Handled  INJECT_ABSTRACTION_DEPENDENCY"
+}
+[info] [CLI] Called Command injectable/inject-abstraction: {
+	"message": "[CLI] Called Command injectable/inject-abstraction",
+	"level": "info"
+}
+[info] [API] Response ok: injectable/inject-abstraction: {
+	"result": {
+		"filePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/directives/duplicate-order.directive.ts"
+	},
+	"level": "info",
+	"message": "[API] Response ok: injectable/inject-abstraction"
+}
+[info] [API] Request for entity/actions: {
+	"action": "entity/actions",
+	"params": {
+		"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+		"position": 1670
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "H-G_oWS8r9",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for entity/actions"
+}
+[info] [CLI] Calling Query entity/actions: {
+	"funcParams": {
+		"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+		"position": 1670
+	},
+	"level": "info",
+	"message": "[CLI] Calling Query entity/actions"
+}
+[info] [CLI] Called Query entity/actions: {
+	"result": {
+		"context": {
+			"parentClass": "OrderListComponent",
+			"parentMethod": "newOrder"
+		},
+		"children": [
+			{
+				"label": "Properties",
+				"children": [
+					{
+						"label": "orders$",
+						"children": [
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_MAP",
+								"label": "Map Property",
+								"callPath": [
+									"orders$"
+								]
+							},
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_TAP",
+								"label": "Property Side Effect",
+								"callPath": [
+									"orders$"
+								]
+							}
+						]
+					},
+					{
+						"actionId": "ADD_FORM",
+						"label": "Create Form Property",
+						"callPath": []
+					},
+					{
+						"actionId": "RXJS_PROPERTY_CREATE",
+						"label": "Create Data Property",
+						"callPath": []
+					},
+					{
+						"actionId": "RXJS_PROPERTY_SUBJECT_CREATE",
+						"label": "Create Subject Property",
+						"callPath": []
+					}
+				]
+			},
+			{
+				"label": "Inject",
+				"actionId": "INJECT",
+				"callPath": []
+			},
+			{
+				"label": "Methods",
+				"children": [
+					{
+						"label": "newOrder()",
+						"children": [
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_MAP",
+								"label": "Map Statement",
+								"callPath": [
+									"newOrder"
+								]
+							},
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_MAP_TO",
+								"label": "Map To",
+								"callPath": [
+									"newOrder"
+								]
+							},
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_TAP",
+								"label": "Statement Side Effect",
+								"callPath": [
+									"newOrder"
+								]
+							}
+						]
+					},
+					{
+						"actionId": "METHOD_CREATE",
+						"label": "Create New Method",
+						"callPath": []
+					}
+				]
+			},
+			{
+				"label": "Add Component to Route",
+				"actionId": "ADD_TO_ROUTE",
+				"callPath": []
+			}
+		]
+	},
+	"level": "info",
+	"message": "[CLI] Called Query entity/actions"
+}
+[info] [API] Response ok: entity/actions: {
+	"result": {
+		"context": {
+			"parentClass": "OrderListComponent",
+			"parentMethod": "newOrder"
+		},
+		"children": [
+			{
+				"label": "Properties",
+				"children": [
+					{
+						"label": "orders$",
+						"children": [
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_MAP",
+								"label": "Map Property",
+								"callPath": [
+									"orders$"
+								]
+							},
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_TAP",
+								"label": "Property Side Effect",
+								"callPath": [
+									"orders$"
+								]
+							}
+						]
+					},
+					{
+						"actionId": "ADD_FORM",
+						"label": "Create Form Property",
+						"callPath": []
+					},
+					{
+						"actionId": "RXJS_PROPERTY_CREATE",
+						"label": "Create Data Property",
+						"callPath": []
+					},
+					{
+						"actionId": "RXJS_PROPERTY_SUBJECT_CREATE",
+						"label": "Create Subject Property",
+						"callPath": []
+					}
+				]
+			},
+			{
+				"label": "Inject",
+				"actionId": "INJECT",
+				"callPath": []
+			},
+			{
+				"label": "Methods",
+				"children": [
+					{
+						"label": "newOrder()",
+						"children": [
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_MAP",
+								"label": "Map Statement",
+								"callPath": [
+									"newOrder"
+								]
+							},
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_MAP_TO",
+								"label": "Map To",
+								"callPath": [
+									"newOrder"
+								]
+							},
+							{
+								"actionId": "RXJS_CALL_EXPRESSIONS_TAP",
+								"label": "Statement Side Effect",
+								"callPath": [
+									"newOrder"
+								]
+							}
+						]
+					},
+					{
+						"actionId": "METHOD_CREATE",
+						"label": "Create New Method",
+						"callPath": []
+					}
+				]
+			},
+			{
+				"label": "Add Component to Route",
+				"actionId": "ADD_TO_ROUTE",
+				"callPath": []
+			}
+		]
+	},
+	"level": "info",
+	"message": "[API] Response ok: entity/actions"
+}
+[info] [API] Request for injectable/list: {
+	"action": "injectable/list",
+	"params": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts"
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "H-G_oWS8r9",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for injectable/list"
+}
+[info] [CLI] Calling Query injectable/list: {
+	"funcParams": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts"
+	},
+	"level": "info",
+	"message": "[CLI] Calling Query injectable/list"
+}
+[info] [CLI] Called Query injectable/list: {
+	"result": [
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/duplicate-order.command-port.ts",
+			"name": "DuplicateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-current-client-list.query-port.ts",
+			"name": "GetsCurrentClientListQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-new-order-currency-elements.query-port.ts",
+			"name": "GetsNewOrderCurrencyElementsQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/activitiesTemplate/load-activities-template.command-port.ts",
+			"name": "LoadActivitiesTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/client/load-clients.command-port.ts",
+			"name": "LoadClientsCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/employee/load-employees.command-port.ts",
+			"name": "LoadEmployeesCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts",
+			"name": "CreateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/delete-order.command-port.ts",
+			"name": "DeleteOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/load-orders.command-port.ts",
+			"name": "LoadOrdersCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/partsTemplate/load-parts-template.command-port.ts",
+			"name": "LoadPartsTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		}
+	],
+	"level": "info",
+	"message": "[CLI] Called Query injectable/list"
+}
+[info] [API] Response ok: injectable/list: {
+	"result": [
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/duplicate-order.command-port.ts",
+			"name": "DuplicateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-current-client-list.query-port.ts",
+			"name": "GetsCurrentClientListQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/gets-new-order-currency-elements.query-port.ts",
+			"name": "GetsNewOrderCurrencyElementsQueryPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/activitiesTemplate/load-activities-template.command-port.ts",
+			"name": "LoadActivitiesTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/client/load-clients.command-port.ts",
+			"name": "LoadClientsCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/employee/load-employees.command-port.ts",
+			"name": "LoadEmployeesCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts",
+			"name": "CreateOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/delete-order.command-port.ts",
+			"name": "DeleteOrderCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/load-orders.command-port.ts",
+			"name": "LoadOrdersCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		},
+		{
+			"file": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/partsTemplate/load-parts-template.command-port.ts",
+			"name": "LoadPartsTemplateCommandPort",
+			"type": "ABSTRACTION",
+			"dataType": "Internal"
+		}
+	],
+	"level": "info",
+	"message": "[API] Response ok: injectable/list"
+}
+[info] [API] Request for injectable/inject-abstraction: {
+	"action": "injectable/inject-abstraction",
+	"params": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+		"injectingPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "H-G_oWS8r9",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for injectable/inject-abstraction"
+}
+[info] [CLI] Calling Command injectable/inject-abstraction: {
+	"funcParams": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+		"injectingPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"level": "info",
+	"message": "[CLI] Calling Command injectable/inject-abstraction"
+}
+[info] [CommandBus]: Dispatching command INJECT_ABSTRACTION_DEPENDENCY: {
+	"commandName": "INJECT_ABSTRACTION_DEPENDENCY",
+	"payload": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+		"injectingFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Dispatching command INJECT_ABSTRACTION_DEPENDENCY"
+}
+[info] [CommandBus]: Handled  INJECT_ABSTRACTION_DEPENDENCY: {
+	"commandName": "INJECT_ABSTRACTION_DEPENDENCY",
+	"payload": {
+		"entityFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts",
+		"injectingFilePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/command/order/create-order.command-port.ts"
+	},
+	"level": "info",
+	"message": "[CommandBus]: Handled  INJECT_ABSTRACTION_DEPENDENCY"
+}
+[info] [CLI] Called Command injectable/inject-abstraction: {
+	"message": "[CLI] Called Command injectable/inject-abstraction",
+	"level": "info"
+}
+[info] [API] Response ok: injectable/inject-abstraction: {
+	"result": {
+		"filePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/order-list/order-list.component.ts"
+	},
+	"level": "info",
+	"message": "[API] Response ok: injectable/inject-abstraction"
+}

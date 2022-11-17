@@ -5,8 +5,8 @@ import { ActivitiesDto } from '../../../secondary/dto/activities/activities.dto'
 export class CreateOrderCommand {
   constructor(
     public readonly id: number,
-    public readonly employeeList: EmployeeQuery[],
     public readonly client: ClientQuery,
+    public readonly employeeList: EmployeeQuery[],
     public readonly activitiesList: ActivitiesDto[],
     public readonly dateOfAdmission: Date,
     public readonly dateOfExecution: Date,

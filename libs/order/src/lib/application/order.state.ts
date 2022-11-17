@@ -151,7 +151,6 @@ export class OrderState
   }
 
   createOrder(command: CreateOrderCommand): Observable<void> {
-    console.log(command);
     return this._addOrderDtoPort.add(command);
   }
 

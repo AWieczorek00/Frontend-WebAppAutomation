@@ -5,9 +5,9 @@ import { ClientQuery } from './client.query';
 export class OrderQuery {
   constructor(
     public readonly id: number,
-    public readonly employees: EmployeeQuery[],
+    public readonly employeeList: EmployeeQuery[],
     public readonly client: ClientQuery,
-    public readonly activities: ActivitiesDto[],
+    public readonly activitiesList: ActivitiesDto[],
     public readonly dateOfAdmission: Date,
     public readonly dateOfExecution: Date,
     public readonly priority: string,

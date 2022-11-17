@@ -207,8 +207,8 @@ export class NewOrderComponent {
       .createOrder(
         new CreateOrderCommand(
           NaN,
-          this.employeeList,
           client,
+          this.employeeList,
           this.activitiesList,
           order.get('dateOfAdmission')?.value,
           order.get('dateOfExecution')?.value,

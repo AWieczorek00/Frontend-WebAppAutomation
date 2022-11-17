@@ -6,5 +6,5 @@ export const ADD_ORDER_DTO_PORT = new InjectionToken<AddOrderDtoPort>('ADD_ORDER
 
 export interface AddOrderDtoPort {
 
-  add(orderDto:Partial<OrderDto>):Observable<void>
+  add(orderDto:Omit<Partial<OrderDto>,'id'>):Observable<void>
 }

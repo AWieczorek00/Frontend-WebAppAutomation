@@ -42,6 +42,7 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrder
       );
   }
 
+  //TODO  Sprawdz Emit id w state-traning
   add(orderDto: Partial<OrderDto>): Observable<void> {
     return this._httpClient.post<void>("http://localhost:8080/order/add", orderDto)
   }
