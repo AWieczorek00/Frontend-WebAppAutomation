@@ -33,6 +33,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
 import { take } from 'rxjs/operators';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import {PartsTemplateQuery} from "../../../../application/ports/primary/query/parts-template/parts-template.query";
 
 @Component({
   selector: 'lib-new-order',
@@ -50,11 +51,12 @@ export class NewOrderComponent {
     private _fromBuilder: FormBuilder
   ) {
     this.elements$.subscribe(
-      (employee) => (this.employeeQueries = employee.employeeList)
+      (employee) => (this.employeeListAutocomplete = employee.employeeList)
     );
-    this.elements$.subscribe((data) => (this.clientQueries = data.clientList));
+    this.elements$.subscribe((data) => (this.clientListAutocomplete = data.clientList));
+    this.elements$.subscribe((data) => (this.partsTemplateListAutocomplete=data.partsTemplateList));
     this.elements$.subscribe(
-      (data) => (this.activitiesTemplateQueries = data.activitiesTemplateList)
+      (data) => (this.activitiesTemplateListAutocomplete = data.activitiesTemplateList)
     );
 
     this.filteredClient = this.order.valueChanges.pipe(
@@ -63,7 +65,7 @@ export class NewOrderComponent {
         client && typeof client === 'object' ? client.name : client
       ),
       map((name: string) =>
-        name ? this._filterClient(name) : this.clientQueries.slice()
+        name ? this._filterClient(name) : this.clientListAutocomplete.slice()
       )
     );
 
@@ -75,7 +77,7 @@ export class NewOrderComponent {
       map((firstName: string) =>
         firstName
           ? this._filterEmployee(firstName)
-          : this.employeeQueries.slice()
+          : this.employeeListAutocomplete.slice()
       )
     );
 
@@ -90,7 +92,7 @@ export class NewOrderComponent {
         map((name: string) =>
           name
             ? this._filterActivitiesTemplate(name)
-            : this.activitiesTemplateQueries.slice()
+            : this.activitiesTemplateListAutocomplete.slice()
         )
       );
 
@@ -128,9 +130,10 @@ export class NewOrderComponent {
   clientControl = new FormControl('');
   employeeControl = new FormControl('');
   activitiesTemplateControl = new FormControl('');
-  clientQueries: ClientQuery[] = [];
-  employeeQueries: EmployeeQuery[] = [];
-  activitiesTemplateQueries: ActivitiesTemplateDto[] = [];
+  clientListAutocomplete: ClientQuery[] = [];
+  employeeListAutocomplete: EmployeeQuery[] = [];
+  partsTemplateListAutocomplete!: PartsTemplateQuery[]
+  activitiesTemplateListAutocomplete: ActivitiesTemplateDto[] = [];
   filteredClient: Observable<ClientQuery[]> | undefined;
   filteredEmployee: Observable<EmployeeQuery[]> | undefined;
   filteredActivitiesTemplate: Observable<ActivitiesTemplateDto[]> | undefined;
@@ -139,11 +142,8 @@ export class NewOrderComponent {
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
   nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName'];
   employeeList: EmployeeQuery[] = [];
-  activitiesList: ActivitiesQuery[] = [];
+  // activitiesList: ActivitiesQuery[] = [];
 
-  dataSourceActivities = new MatTableDataSource<ActivitiesQuery>();
-  orderO: OrderQuery | undefined;
-  mymodel: any;
 
   getOptionClient(clientQueries: ClientQuery) {
     return clientQueries.name;
@@ -163,20 +163,20 @@ export class NewOrderComponent {
   }
 
   _filterClient(name: string): ClientQuery[] {
-    return this.clientQueries.filter(
+    return this.clientListAutocomplete.filter(
       (option) => option.name.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
 
   _filterEmployee(firstName: string): EmployeeQuery[] {
-    return this.employeeQueries.filter(
+    return this.employeeListAutocomplete.filter(
       (option) =>
         option.firstName.toLowerCase().indexOf(firstName.toLowerCase()) === 0
     );
   }
 
   _filterActivitiesTemplate(name: string): ActivitiesTemplateQuery[] {
-    return this.activitiesTemplateQueries.filter(
+    return this.activitiesTemplateListAutocomplete.filter(
       (option) => option.name.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
@@ -249,7 +249,7 @@ export class NewOrderComponent {
 
   getActivitiesTemplate(activitiesTemplate: ActivitiesTemplateQuery) {
     this.activities = {
-      id: this.activitiesList.length + 1,
+      id: NaN,
       name: activitiesTemplate.name,
       attention: '',
       done: true,
@@ -302,6 +302,7 @@ export class NewOrderComponent {
         zipcode: order.get('zipcode')?.value,
         email: order.get('email')?.value,
         note: order.get('note')?.value,
+        activitiesList: order.get('activitiesList')?.value
       });
     }
   }
