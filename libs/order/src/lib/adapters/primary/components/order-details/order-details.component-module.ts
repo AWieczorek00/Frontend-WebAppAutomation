@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NewOrderComponent } from './new-order.component';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {RequestInterceptor} from "../../../../../../../../src/app/request.interceptor";
+import { OrderDetailsComponent } from './order-details.component';
+import {MatTabsModule} from "@angular/material/tabs";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {MatGridListModule} from "@angular/material/grid-list";
-import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSelectModule} from "@angular/material/select";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatGridListModule} from "@angular/material/grid-list";
 import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
-
 
 @NgModule({
   imports: [
@@ -34,10 +31,9 @@ import {MatTableModule} from "@angular/material/table";
     MatNativeDateModule,
     MatCheckboxModule,
     MatTableModule,
-
   ],
-  declarations: [NewOrderComponent],
+  declarations: [OrderDetailsComponent],
   providers: [],
-  exports: [NewOrderComponent],
+  exports: [OrderDetailsComponent],
 })
-export class NewOrderComponentModule {}
+export class OrderDetailsComponentModule {}

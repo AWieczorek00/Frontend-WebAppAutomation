@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GetAllDtoPort } from '../../../application/ports/secondary/dto/get-all.dto-port';
-import { AddOrderDtoPort } from '../../../application/ports/secondary/dto/add-order.dto-port';
-import { DeleteOrderDtoPort } from '../../../application/ports/secondary/dto/delete-order.dto-port';
-import { OrderDto } from '../../../application/ports/secondary/dto/order.dto';
+import { GetAllDtoPort } from '../../../application/ports/secondary/dto/order/get-all.dto-port';
+import { AddOrderDtoPort } from '../../../application/ports/secondary/dto/order/add-order.dto-port';
+import { DeleteOrderDtoPort } from '../../../application/ports/secondary/dto/order/delete-order.dto-port';
+import { DuplicateOrderDtoPort } from '../../../application/ports/secondary/dto/order/duplicate-order.dto-port';
+import { GetOneOrderDtoPort } from '../../../application/ports/secondary/dto/order/get-one-order.dto-port';
+import { OrderDto } from '../../../application/ports/secondary/dto/order/order.dto';
 
 @Injectable()
-export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrderDtoPort {
+export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrderDtoPort, DuplicateOrderDtoPort, GetOneOrderDtoPort {
   constructor(private _httpClient: HttpClient) { }
 
   getAll(): Observable<OrderDto[]> {
@@ -48,7 +50,15 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrder
   }
 
   delete(id: number): Observable<void> {
-    return this._httpClient.delete<void>("http://localhost:8080/order/delete/"+id );
+    return this._httpClient.delete<void>("http://localhost:8080/order/delete/" + id);
+  }
+
+  duplicateOrder(id: number): Observable<void> {
+    return this._httpClient.post<void>('http://localhost:8080/order/duplicate/', id)
+  }
+
+  getOneOrder(id:number): Observable<OrderDto> {
+    return this._httpClient.get<OrderDto>('http://localhost:8080/order/one/'+id)
   }
 }
 

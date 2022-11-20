@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { LoadOrdersCommandPort } from './ports/primary/command/order/load-orders.command-port';
 import { GetsCurrentOrderListQueryPort } from './ports/primary/query/gets-current-order-list.query-port';
@@ -10,10 +10,11 @@ import { LoadActivitiesTemplateCommandPort } from './ports/primary/command/activ
 import { CreateOrderCommandPort } from './ports/primary/command/order/create-order.command-port';
 import { LoadPartsTemplateCommandPort } from './ports/primary/command/partsTemplate/load-parts-template.command-port';
 import { DeleteOrderCommandPort } from './ports/primary/command/order/delete-order.command-port';
+import { DuplicateOrderCommandPort } from './ports/primary/command/duplicate-order.command-port';
 import {
   GET_ALL_DTO_PORT,
   GetAllDtoPort,
-} from './ports/secondary/dto/get-all.dto-port';
+} from './ports/secondary/dto/order/get-all.dto-port';
 import {
   SETS_STATE_ORDER_CONTEXT_PORT,
   SetsStateOrderContextPort,
@@ -45,7 +46,7 @@ import {
 import {
   ADD_ORDER_DTO_PORT,
   AddOrderDtoPort,
-} from './ports/secondary/dto/add-order.dto-port';
+} from './ports/secondary/dto/order/add-order.dto-port';
 import {
   GET_ALL_PARTS_TEMPLATE_DTO_PORT,
   GetAllPartsTemplateDtoPort,
@@ -53,15 +54,20 @@ import {
 import {
   DELETE_ORDER_DTO_PORT,
   DeleteOrderDtoPort,
-} from './ports/secondary/dto/delete-order.dto-port';
+} from './ports/secondary/dto/order/delete-order.dto-port';
+import {
+  DUPLICATE_ORDER_DTO_PORT,
+  DuplicateOrderDtoPort,
+} from './ports/secondary/dto/order/duplicate-order.dto-port';
 import { LoadOrdersCommand } from './ports/primary/command/order/load-orders.command';
 import { OrderListQuery } from './ports/primary/query/order-list.query';
 import { NewOrderQuery } from './ports/primary/query/new-order.query';
 import { CreateOrderCommand } from './ports/primary/command/order/create-order.command';
 import { DeleteOrderCommand } from './ports/primary/command/order/delete-order.command';
+import { OrderContext } from './ports/secondary/context/order/order.context';
 import { mapFromOrderContext } from './mappers/order.mapper';
 import { mapFromNewOrderContext } from './mappers/newOrderElements.mapper';
-import { OrderContext } from './ports/secondary/context/order/order.context';
+import { OrderDto } from './ports/secondary/dto/order/order.dto';
 
 @Injectable()
 export class OrderState
@@ -74,7 +80,8 @@ export class OrderState
     LoadActivitiesTemplateCommandPort,
     CreateOrderCommandPort,
     LoadPartsTemplateCommandPort,
-    DeleteOrderCommandPort
+    DeleteOrderCommandPort,
+    DuplicateOrderCommandPort
 {
   constructor(
     @Inject(GET_ALL_DTO_PORT) private _getAllDtoPort: GetAllDtoPort,
@@ -95,7 +102,9 @@ export class OrderState
     @Inject(GET_ALL_PARTS_TEMPLATE_DTO_PORT)
     private _getAllPartsTemplateDtoPort: GetAllPartsTemplateDtoPort,
     @Inject(DELETE_ORDER_DTO_PORT)
-    private _deleteOrderDtoPort: DeleteOrderDtoPort
+    private _deleteOrderDtoPort: DeleteOrderDtoPort,
+    @Inject(DUPLICATE_ORDER_DTO_PORT)
+    private _duplicateOrderDtoPort: DuplicateOrderDtoPort
   ) {}
 
   loadOrder(command: LoadOrdersCommand): Observable<void> {
@@ -181,4 +190,39 @@ export class OrderState
       )
     );
   }
+
+  duplicateOrder(id: number): Observable<void> {
+    return this._duplicateOrderDtoPort
+      .duplicateOrder(id)
+      .pipe(
+        // switchMap(() => this._selectOrderContextPort.select().pipe(take(1))),
+        // map((orderContext) => {
+        //   return {
+        //     ...orderContext,
+        //     orderList: [...orderContext.orderList,response],
+        //   };
+        // }),
+        // switchMap((orderContext) =>
+        //   this._setsStateOrderContextPort.setState(orderContext)
+        // )
+
+        switchMap(()=>this._getAllDtoPort.getAll()),
+        switchMap((orderList)=>this._setsStateOrderContextPort.setState({orderList:orderList}))
+
+      )
+      // .pipe(take(1));
+  }
 }
+
+// switchMap(() =>
+//   this._selectOrderContextPort.select().pipe(take(1))
+// ),
+//   map((orderContext: OrderContext) => {
+//     return {
+//       ...orderContext,
+//       orderList: [...orderContext.orderList, response],
+//     };
+//   }),
+//   switchMap((orderContext) =>
+//     this._setsStateOrderContextPort(orderContext)
+//   )

@@ -2,10 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
 import {
   GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT,
   GetsNewOrderCurrencyElementsQueryPort,
@@ -21,9 +29,10 @@ import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/q
 import { ActivitiesTemplateDto } from '../../../../application/ports/secondary/dto/activitiesTemplate/activities-template.dto';
 import { ActivitiesQuery } from '../../../../application/ports/primary/query/activities.query';
 import { OrderQuery } from '../../../../application/ports/primary/query/order.query';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
 import { take } from 'rxjs/operators';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'lib-new-order',
@@ -37,7 +46,8 @@ export class NewOrderComponent {
     @Inject(GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT)
     private _getsNewOrderCurrencyElementsQueryPort: GetsNewOrderCurrencyElementsQueryPort,
     @Inject(CREATE_ORDER_COMMAND_PORT)
-    private _createOrderCommandPort: CreateOrderCommandPort
+    private _createOrderCommandPort: CreateOrderCommandPort,
+    private _fromBuilder: FormBuilder
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeQueries = employee.employeeList)
@@ -83,7 +93,9 @@ export class NewOrderComponent {
             : this.activitiesTemplateQueries.slice()
         )
       );
+
   }
+  rows: FormArray = this._fromBuilder.array([]);
 
   readonly order: FormGroup = new FormGroup({
     name: new FormControl(['', Validators.required]),
@@ -101,6 +113,7 @@ export class NewOrderComponent {
     zipcode: new FormControl(),
     email: new FormControl(),
     note: new FormControl(),
+    activitiesList: this.rows
   });
 
   readonly attention: FormGroup = new FormGroup({
@@ -110,7 +123,7 @@ export class NewOrderComponent {
   readonly elements$: Observable<NewOrderQuery> =
     this._getsNewOrderCurrencyElementsQueryPort.getNewOrderCurrencyElements();
 
-  ngOnInit() {}
+
 
   clientControl = new FormControl('');
   employeeControl = new FormControl('');
@@ -124,7 +137,6 @@ export class NewOrderComponent {
   employee: EmployeeQuery | undefined;
   activities: ActivitiesQuery | undefined;
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
-  nameRowActivities: string[] = ['name', 'attention', 'done'];
   nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName'];
   employeeList: EmployeeQuery[] = [];
   activitiesList: ActivitiesQuery[] = [];
@@ -206,10 +218,9 @@ export class NewOrderComponent {
     this._createOrderCommandPort
       .createOrder(
         new CreateOrderCommand(
-          NaN,
           client,
           this.employeeList,
-          this.activitiesList,
+          order.get('activitiesList')?.value,
           order.get('dateOfAdmission')?.value,
           order.get('dateOfExecution')?.value,
           order.get('priority')?.value,
@@ -237,64 +248,99 @@ export class NewOrderComponent {
   }
 
   getActivitiesTemplate(activitiesTemplate: ActivitiesTemplateQuery) {
-    // this.activities = {
-    //   id: this.activitiesList.length + 1,
-    //   name: activitiesTemplate.name,
-    //   attention: '',
-    //   done: true,
-    // };
-    //
-    // console.log(this.activities);
-
-    var a = {
+    this.activities = {
       id: this.activitiesList.length + 1,
       name: activitiesTemplate.name,
       attention: '',
       done: true,
     };
 
-    this.activitiesList.push(a);
-    console.log(this.activitiesList);
-    this.dataSourceActivities = new MatTableDataSource<ActivitiesQuery>(
-      this.activitiesList
-    );
+    console.log(this.activities);
+
   }
 
   addActivities() {
-    console.log(this.activitiesList);
-    if (this.activities) {
-      this.activitiesList.push(this.activities);
-      this.dataSourceActivities = new MatTableDataSource<ActivitiesQuery>(
-        this.activitiesList
-      );
-    }
-    console.log(this.activitiesList);
+
+    const row = this._fromBuilder.group({
+      name: this.activities?.name,
+      attention: '',
+      done:true
+    });
+    this.rows.push(row);
+    this.updateView();
+
+    console.log(this.order.get('activitiesList'))
+
+
+
   }
 
   changeFn($event: string) {
     console.log($event);
   }
 
-  valuechange(event: string, id: number) {
-    this.activitiesList[id - 1].attention = event;
-    console.log(this.activitiesList[id - 1]);
-  }
 
   onEnter($event: any) {
     console.log($event.source);
   }
 
-  setSelect(value: any, condition: string) {
-    if (condition === 'status') {
-      this.order.patchValue({ status: value });
-    }else if(condition === 'priority'){
-      this.order.patchValue({priority:value})
-    }else if(condition==='dateOfAdmission'){
-      this.order.patchValue({dateOfAdmission:value})
-    }else if(condition==='dateOfExecution'){
-      this.order.patchValue({dateOfExecution:value})
-    }else{
-      this.order.patchValue(({period:value}))
+  setSummary($event: MatTabChangeEvent, order: FormGroup) {
+    if ($event.index === 4) {
+      this.order.setValue({
+        name: order.get('name')?.value,
+        nip: order.get('nip')?.value,
+        phoneNumber: order.get('phoneNumber')?.value,
+        status: order.get('status')?.value,
+        priority: order.get('priority')?.value,
+        dateOfAdmission: order.get('dateOfAdmission')?.value,
+        dateOfExecution: order.get('dateOfExecution')?.value,
+        period: order.get('period')?.value,
+        street: order.get('street')?.value,
+        city: order.get('city')?.value,
+        streetNumber: order.get('streetNumber')?.value,
+        apartmentNumber: order.get('apartmentNumber')?.value,
+        zipcode: order.get('zipcode')?.value,
+        email: order.get('email')?.value,
+        note: order.get('note')?.value,
+      });
     }
+  }
+
+  // -----------------------------------------------------------------------TEST-------------------------------------------
+
+  data = [];
+  dataSource = new BehaviorSubject<AbstractControl[]>([]);
+  displayColumns = ['name', 'attention','done'];
+  // rows: FormArray = this.fb.array([]);
+  form: FormGroup = this._fromBuilder.group({
+    activities: this.rows,
+  });
+  nameRowActivities=['name', 'attention','done'];
+
+
+
+  ngOnInit() {
+    this.data.forEach(() => this.addRow());
+    this.updateView();
+  }
+
+  emptyTable() {
+    while (this.rows.length !== 0) {
+      this.rows.removeAt(0);
+    }
+  }
+
+  addRow() {
+    const row = this._fromBuilder.group({
+      name: '',
+      attention: 30,
+      done:true
+    });
+    this.rows.push(row);
+    this.updateView();
+  }
+
+  updateView() {
+    this.dataSource.next(this.rows.controls);
   }
 }

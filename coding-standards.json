@@ -12,7 +12,9 @@
       "commandPort": ["CONSTRUCTOR"],
       "queryPort": ["CONSTRUCTOR"],
       "query": ["PROPERTY"],
-      "component": ["HTML"]
+      "component": ["HTML"],
+      "router": ["CONSTRUCTOR"],
+      "activatedRoute": ["CONSTRUCTOR"]
     },
     "directive": {
       "commandPort": ["CONSTRUCTOR"],

@@ -5,5 +5,5 @@ import { DuplicateOrderCommand } from './duplicate-order.command';
 export const DUPLICATE_ORDER_COMMAND_PORT = new InjectionToken<DuplicateOrderCommandPort>('DUPLICATE_ORDER_COMMAND_PORT');
 
 export interface DuplicateOrderCommandPort {
-  duplicateOrder(command: DuplicateOrderCommand): Observable<void>;
+  duplicateOrder(id: number): Observable<void>;
 }

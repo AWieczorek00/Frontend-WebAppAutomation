@@ -6,6 +6,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {DeleteOrderDirectiveModule} from "../../directives/delete-order.directive-module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {DeleteOrderDirectiveModule} from "../../directives/delete-order.directiv
     NgbModule,
     MatIconModule,
     MatButtonModule,
-    DeleteOrderDirectiveModule
+    DeleteOrderDirectiveModule,
+    RouterModule,
   ],
   declarations: [OrderListComponent],
   providers: [],

@@ -81,7 +81,7 @@
           </button>
           <div ngbDropdownMenu aria-labelledby="dropDownOptions">
             <button ngbDropdownItem>
-              <a class="nav-link" href="/profil">Modyfikuj</a>
+              <a class="nav-link" [routerLink]="['/order/',element.id]">Modyfikuj</a>
             </button>
 
             <button ngbDropdownItem (click)="duplicateOrder(element)">

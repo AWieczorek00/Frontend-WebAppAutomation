@@ -1,6 +1,6 @@
-import {EmployeeDto} from "./employee/employee.dto";
-import {ClientDto} from "./client/client.dto";
-import {ActivitiesDto} from "./activities/activities.dto";
+import {EmployeeDto} from "../employee/employee.dto";
+import {ClientDto} from "../client/client.dto";
+import {ActivitiesDto} from "../activities/activities.dto";
 
 export interface OrderDto {
   readonly id:number
