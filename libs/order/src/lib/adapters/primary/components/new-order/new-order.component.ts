@@ -28,12 +28,12 @@ import { EmployeeQuery } from '../../../../application/ports/primary/query/emplo
 import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/query/activities-template/activities-template.query';
 import { ActivitiesTemplateDto } from '../../../../application/ports/secondary/dto/activitiesTemplate/activities-template.dto';
 import { ActivitiesQuery } from '../../../../application/ports/primary/query/activities.query';
-import { OrderQuery } from '../../../../application/ports/primary/query/order.query';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
 import { take } from 'rxjs/operators';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import {PartsTemplateQuery} from "../../../../application/ports/primary/query/parts-template/parts-template.query";
+import { PartsTemplateQuery } from '../../../../application/ports/primary/query/parts-template/parts-template.query';
+import { PartsQuery } from '../../../../application/ports/primary/query/parts/parts.query';
 
 @Component({
   selector: 'lib-new-order',
@@ -48,15 +48,20 @@ export class NewOrderComponent {
     private _getsNewOrderCurrencyElementsQueryPort: GetsNewOrderCurrencyElementsQueryPort,
     @Inject(CREATE_ORDER_COMMAND_PORT)
     private _createOrderCommandPort: CreateOrderCommandPort,
-    private _fromBuilder: FormBuilder
+    private _formBuilder: FormBuilder
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeListAutocomplete = employee.employeeList)
     );
-    this.elements$.subscribe((data) => (this.clientListAutocomplete = data.clientList));
-    this.elements$.subscribe((data) => (this.partsTemplateListAutocomplete=data.partsTemplateList));
     this.elements$.subscribe(
-      (data) => (this.activitiesTemplateListAutocomplete = data.activitiesTemplateList)
+      (data) => (this.clientListAutocomplete = data.clientList)
+    );
+    this.elements$.subscribe(
+      (data) => (this.partsTemplateListAutocomplete = data.partsTemplateList)
+    );
+    this.elements$.subscribe(
+      (data) =>
+        (this.activitiesTemplateListAutocomplete = data.activitiesTemplateList)
     );
 
     this.filteredClient = this.order.valueChanges.pipe(
@@ -96,8 +101,23 @@ export class NewOrderComponent {
         )
       );
 
+    this.filteredPartsTemplate = this.partsTemplateControl.valueChanges.pipe(
+      startWith({} as PartsTemplateQuery),
+      map((partsTemplate) =>
+        partsTemplate && typeof partsTemplate === 'object'
+          ? partsTemplate.name
+          : partsTemplate
+      ),
+      map((name: string) =>
+        name
+          ? this._filterPartsTemplate(name)
+          : this.partsTemplateListAutocomplete.slice()
+      )
+    );
   }
-  rows: FormArray = this._fromBuilder.array([]);
+
+  activitiesRows: FormArray = this._formBuilder.array([]);
+  partRows: FormArray = this._formBuilder.array([]);
 
   readonly order: FormGroup = new FormGroup({
     name: new FormControl(['', Validators.required]),
@@ -115,7 +135,8 @@ export class NewOrderComponent {
     zipcode: new FormControl(),
     email: new FormControl(),
     note: new FormControl(),
-    activitiesList: this.rows
+    activitiesList: this.activitiesRows,
+    partList: this.partRows,
   });
 
   readonly attention: FormGroup = new FormGroup({
@@ -125,25 +146,26 @@ export class NewOrderComponent {
   readonly elements$: Observable<NewOrderQuery> =
     this._getsNewOrderCurrencyElementsQueryPort.getNewOrderCurrencyElements();
 
-
-
   clientControl = new FormControl('');
   employeeControl = new FormControl('');
   activitiesTemplateControl = new FormControl('');
+  partsTemplateControl = new FormControl('');
   clientListAutocomplete: ClientQuery[] = [];
   employeeListAutocomplete: EmployeeQuery[] = [];
-  partsTemplateListAutocomplete!: PartsTemplateQuery[]
+  partsTemplateListAutocomplete!: PartsTemplateQuery[];
   activitiesTemplateListAutocomplete: ActivitiesTemplateDto[] = [];
   filteredClient: Observable<ClientQuery[]> | undefined;
   filteredEmployee: Observable<EmployeeQuery[]> | undefined;
   filteredActivitiesTemplate: Observable<ActivitiesTemplateDto[]> | undefined;
+  filteredPartsTemplate: Observable<PartsTemplateQuery[]> | undefined;
   employee: EmployeeQuery | undefined;
   activities: ActivitiesQuery | undefined;
+  part: PartsQuery | undefined;
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
   nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName'];
   employeeList: EmployeeQuery[] = [];
-  // activitiesList: ActivitiesQuery[] = [];
 
+  // activitiesList: ActivitiesQuery[] = [];
 
   getOptionClient(clientQueries: ClientQuery) {
     return clientQueries.name;
@@ -159,7 +181,13 @@ export class NewOrderComponent {
   getOptionActivitiesTemplate(
     activitiesTemplateQuery: ActivitiesTemplateQuery
   ) {
+    console.log(activitiesTemplateQuery.name);
     return activitiesTemplateQuery.name;
+  }
+
+  getOptionPartsTemplate(partsTemplateQuery: PartsTemplateQuery) {
+    console.log(partsTemplateQuery.name);
+    return partsTemplateQuery.name;
   }
 
   _filterClient(name: string): ClientQuery[] {
@@ -177,6 +205,12 @@ export class NewOrderComponent {
 
   _filterActivitiesTemplate(name: string): ActivitiesTemplateQuery[] {
     return this.activitiesTemplateListAutocomplete.filter(
+      (option) => option.name.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  _filterPartsTemplate(name: string): PartsTemplateQuery[] {
+    return this.partsTemplateListAutocomplete.filter(
       (option) => option.name.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
@@ -243,6 +277,16 @@ export class NewOrderComponent {
     }
   }
 
+  addPart() {
+    const row = this._formBuilder.group({
+      name: this.part?.name,
+      price: this.part?.price,
+      amount: 0,
+    });
+    this.activitiesRows.push(row);
+    this.updatePartsView();
+  }
+
   getEmployee(employee: EmployeeQuery) {
     this.employee = employee;
   }
@@ -254,31 +298,33 @@ export class NewOrderComponent {
       attention: '',
       done: true,
     };
+  }
 
-    console.log(this.activities);
-
+  getPartsTemplate(partsTemplate: PartsTemplateQuery) {
+    this.part = {
+      id: NaN,
+      name: partsTemplate.name,
+      price: partsTemplate.price,
+      amount: 0,
+    };
+    console.log(this.part);
   }
 
   addActivities() {
-
-    const row = this._fromBuilder.group({
+    const row = this._formBuilder.group({
       name: this.activities?.name,
       attention: '',
-      done:true
+      done: true,
     });
-    this.rows.push(row);
-    this.updateView();
+    this.activitiesRows.push(row);
+    this.updateActivitiesView();
 
-    console.log(this.order.get('activitiesList'))
-
-
-
+    console.log(this.order.get('activitiesList'));
   }
 
   changeFn($event: string) {
     console.log($event);
   }
-
 
   onEnter($event: any) {
     console.log($event.source);
@@ -302,7 +348,7 @@ export class NewOrderComponent {
         zipcode: order.get('zipcode')?.value,
         email: order.get('email')?.value,
         note: order.get('note')?.value,
-        activitiesList: order.get('activitiesList')?.value
+        activitiesList: order.get('activitiesList')?.value,
       });
     }
   }
@@ -310,38 +356,26 @@ export class NewOrderComponent {
   // -----------------------------------------------------------------------TEST-------------------------------------------
 
   data = [];
-  dataSource = new BehaviorSubject<AbstractControl[]>([]);
-  displayColumns = ['name', 'attention','done'];
-  // rows: FormArray = this.fb.array([]);
-  form: FormGroup = this._fromBuilder.group({
-    activities: this.rows,
-  });
-  nameRowActivities=['name', 'attention','done'];
-
-
-
-  ngOnInit() {
-    this.data.forEach(() => this.addRow());
-    this.updateView();
-  }
-
-  emptyTable() {
-    while (this.rows.length !== 0) {
-      this.rows.removeAt(0);
-    }
-  }
+  behaviorActivities = new BehaviorSubject<AbstractControl[]>([]);
+  behaviorParts = new BehaviorSubject<AbstractControl[]>([]);
+  nameRowActivities = ['name', 'attention', 'done'];
+  nameRowParts=['name','price','amount'];
 
   addRow() {
-    const row = this._fromBuilder.group({
+    const row = this._formBuilder.group({
       name: '',
       attention: 30,
-      done:true
+      done: true,
     });
-    this.rows.push(row);
-    this.updateView();
+    this.activitiesRows.push(row);
+    this.updateActivitiesView();
   }
 
-  updateView() {
-    this.dataSource.next(this.rows.controls);
+  updateActivitiesView() {
+    this.behaviorActivities.next(this.activitiesRows.controls);
+  }
+
+  private updatePartsView() {
+    this.behaviorParts.next(this.partRows.controls);
   }
 }

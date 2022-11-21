@@ -105550,3 +105550,704 @@
 	"level": "info",
 	"message": "[API] Response ok: angular-component/create"
 }
+[info] [API] Request for flow/create-entity: {
+	"action": "flow/create-entity",
+	"params": {},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "7npyEJIGbf",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/new-order/new-order.component.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for flow/create-entity"
+}
+[info] [CLI] Calling Query flow/create-entity: {
+	"funcParams": {},
+	"level": "info",
+	"message": "[CLI] Calling Query flow/create-entity"
+}
+[info] [CLI] Called Query flow/create-entity: {
+	"result": {
+		"context": {
+			"project": {
+				"name": "order",
+				"workspaceRoot": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis",
+				"root": "libs/order",
+				"sourceRoot": "libs/order/src",
+				"prefix": "lib",
+				"path": {
+					"publicApi": "index.ts",
+					"alias": "@order"
+				},
+				"codePathFromWorkspaceRoot": "libs/order/src/lib",
+				"absoluteCodePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+				"absoluteRootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order",
+				"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts",
+				"alias": "@order",
+				"type": "Lib"
+			}
+		},
+		"steps": [
+			{
+				"contextId": "entity",
+				"title": "What do you want to create?",
+				"type": "multi-option",
+				"options": {
+					"App": [
+						{
+							"id": "page",
+							"suffix": "Page",
+							"folder": "pages/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "App",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					],
+					"Lib": [
+						{
+							"id": "component",
+							"suffix": "Component",
+							"folder": "adapters/primary/components/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "Lib",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "dto",
+							"suffix": "Dto",
+							"folder": "application/ports/secondary/dto/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "dtoPort",
+							"suffix": "DtoPort",
+							"folder": "application/ports/secondary/dto",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "service",
+							"suffix": "Service",
+							"folder": "adapters/secondary/services",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "response",
+							"suffix": "Response",
+							"folder": "adapters/secondary/services",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "context",
+							"suffix": "Context",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "contextPort",
+							"suffix": "ContextPort",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "storage",
+							"suffix": "Storage",
+							"folder": "adapters/secondary/storages",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "event",
+							"suffix": "Event",
+							"folder": "application/ports/secondary/event",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventPort",
+							"suffix": "EventPort",
+							"folder": "application/ports/secondary/event",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventDispatcher",
+							"suffix": "EventDispatcher",
+							"folder": "adapters/secondary/event-dispatchers",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventListener",
+							"suffix": "EventListener",
+							"folder": "adapters/primary/event-listeners",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "query",
+							"suffix": "Query",
+							"folder": "application/ports/primary/query/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "queryPort",
+							"suffix": "QueryPort",
+							"folder": "application/ports/primary/query",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "command",
+							"suffix": "Command",
+							"folder": "application/ports/primary/command",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "commandPort",
+							"suffix": "CommandPort",
+							"folder": "application/ports/primary/command",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "state",
+							"suffix": "State",
+							"folder": "application",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "directive",
+							"suffix": "Directive",
+							"folder": "adapters/primary/directives",
+							"type": "ANGULAR_DIRECTIVE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "resolver",
+							"suffix": "Resolver",
+							"folder": "adapters/primary/resolvers",
+							"type": "ANGULAR_RESOLVER",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "guard",
+							"suffix": "Guard",
+							"folder": "adapters/primary/guards",
+							"type": "ANGULAR_GUARD",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					]
+				},
+				"param": "project.type",
+				"property": "id"
+			},
+			{
+				"contextId": "name",
+				"title": "What is the $entity.id$ name?",
+				"subtitle": "e.g. user",
+				"type": "text-input"
+			},
+			{
+				"conditions": [
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "DATA_STRUCTURE"
+					},
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "OBJECT"
+					}
+				],
+				"contextId": "properties",
+				"title": "What are the $entity.id$ properties?",
+				"subtitle": "Optional: Can be empty... or use csv format e.g. id:number,text:string",
+				"type": "multi-input"
+			}
+		],
+		"request": {
+			"scope": "entity.type",
+			"config": {
+				"LIBRARY": {
+					"url": "library/create",
+					"payload": {
+						"name": "name.value"
+					}
+				},
+				"OBJECT": {
+					"url": "object/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"DATA_STRUCTURE": {
+					"url": "data-structure/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_COMPONENT": {
+					"url": "angular-component/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_DIRECTIVE": {
+					"url": "angular-directive/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_GUARD": {
+					"url": "angular-guard/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_RESOLVER": {
+					"url": "angular-resolver/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_SERVICE": {
+					"url": "angular-service/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ABSTRACTION": {
+					"url": "abstraction/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				}
+			}
+		}
+	},
+	"level": "info",
+	"message": "[CLI] Called Query flow/create-entity"
+}
+[info] [API] Response ok: flow/create-entity: {
+	"result": {
+		"context": {
+			"project": {
+				"name": "order",
+				"workspaceRoot": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis",
+				"root": "libs/order",
+				"sourceRoot": "libs/order/src",
+				"prefix": "lib",
+				"path": {
+					"publicApi": "index.ts",
+					"alias": "@order"
+				},
+				"codePathFromWorkspaceRoot": "libs/order/src/lib",
+				"absoluteCodePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib",
+				"absoluteRootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order",
+				"publicApiPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/index.ts",
+				"alias": "@order",
+				"type": "Lib"
+			}
+		},
+		"steps": [
+			{
+				"contextId": "entity",
+				"title": "What do you want to create?",
+				"type": "multi-option",
+				"options": {
+					"App": [
+						{
+							"id": "page",
+							"suffix": "Page",
+							"folder": "pages/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "App",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					],
+					"Lib": [
+						{
+							"id": "component",
+							"suffix": "Component",
+							"folder": "adapters/primary/components/$name$",
+							"type": "ANGULAR_COMPONENT",
+							"insideOf": "Lib",
+							"config": {
+								"stylesExtension": "scss",
+								"viewEncapsulation": "Emulated",
+								"selector": "generated",
+								"changeDetectionStrategy": "OnPush"
+							}
+						},
+						{
+							"id": "dto",
+							"suffix": "Dto",
+							"folder": "application/ports/secondary/dto/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "dtoPort",
+							"suffix": "DtoPort",
+							"folder": "application/ports/secondary/dto",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "service",
+							"suffix": "Service",
+							"folder": "adapters/secondary/services",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "response",
+							"suffix": "Response",
+							"folder": "adapters/secondary/services",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "context",
+							"suffix": "Context",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "contextPort",
+							"suffix": "ContextPort",
+							"folder": "application/ports/secondary/context/$name$",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "storage",
+							"suffix": "Storage",
+							"folder": "adapters/secondary/storages",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "event",
+							"suffix": "Event",
+							"folder": "application/ports/secondary/event",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventPort",
+							"suffix": "EventPort",
+							"folder": "application/ports/secondary/event",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventDispatcher",
+							"suffix": "EventDispatcher",
+							"folder": "adapters/secondary/event-dispatchers",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "eventListener",
+							"suffix": "EventListener",
+							"folder": "adapters/primary/event-listeners",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "query",
+							"suffix": "Query",
+							"folder": "application/ports/primary/query/$name$",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "queryPort",
+							"suffix": "QueryPort",
+							"folder": "application/ports/primary/query",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "command",
+							"suffix": "Command",
+							"folder": "application/ports/primary/command",
+							"type": "DATA_STRUCTURE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "commandPort",
+							"suffix": "CommandPort",
+							"folder": "application/ports/primary/command",
+							"type": "ABSTRACTION",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "state",
+							"suffix": "State",
+							"folder": "application",
+							"type": "ANGULAR_SERVICE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "directive",
+							"suffix": "Directive",
+							"folder": "adapters/primary/directives",
+							"type": "ANGULAR_DIRECTIVE",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "resolver",
+							"suffix": "Resolver",
+							"folder": "adapters/primary/resolvers",
+							"type": "ANGULAR_RESOLVER",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "guard",
+							"suffix": "Guard",
+							"folder": "adapters/primary/guards",
+							"type": "ANGULAR_GUARD",
+							"insideOf": "Lib"
+						},
+						{
+							"id": "library",
+							"type": "LIBRARY"
+						}
+					]
+				},
+				"param": "project.type",
+				"property": "id"
+			},
+			{
+				"contextId": "name",
+				"title": "What is the $entity.id$ name?",
+				"subtitle": "e.g. user",
+				"type": "text-input"
+			},
+			{
+				"conditions": [
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "DATA_STRUCTURE"
+					},
+					{
+						"left": "entity.type",
+						"operator": "eq",
+						"right": "OBJECT"
+					}
+				],
+				"contextId": "properties",
+				"title": "What are the $entity.id$ properties?",
+				"subtitle": "Optional: Can be empty... or use csv format e.g. id:number,text:string",
+				"type": "multi-input"
+			}
+		],
+		"request": {
+			"scope": "entity.type",
+			"config": {
+				"LIBRARY": {
+					"url": "library/create",
+					"payload": {
+						"name": "name.value"
+					}
+				},
+				"OBJECT": {
+					"url": "object/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"DATA_STRUCTURE": {
+					"url": "data-structure/create",
+					"payload": {
+						"name": "name.value",
+						"properties": "properties",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_COMPONENT": {
+					"url": "angular-component/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_DIRECTIVE": {
+					"url": "angular-directive/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_GUARD": {
+					"url": "angular-guard/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_RESOLVER": {
+					"url": "angular-resolver/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ANGULAR_SERVICE": {
+					"url": "angular-service/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				},
+				"ABSTRACTION": {
+					"url": "abstraction/create",
+					"payload": {
+						"name": "name.value",
+						"entityId": "entity.id"
+					}
+				}
+			}
+		}
+	},
+	"level": "info",
+	"message": "[API] Response ok: flow/create-entity"
+}
+[info] [API] Request for data-structure/create: {
+	"action": "data-structure/create",
+	"params": {
+		"name": "Parts",
+		"properties": {
+			"name": "string",
+			"price": "number",
+			"ammount": "number"
+		},
+		"entityId": "query"
+	},
+	"context": {
+		"workspace": {
+			"rootPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis"
+		},
+		"userContext": {
+			"id": "kF4PDs9ghK",
+			"correlationId": "7npyEJIGbf",
+			"clickedPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/adapters/primary/components/new-order/new-order.component.ts",
+			"logEnvId": "development"
+		}
+	},
+	"level": "info",
+	"message": "[API] Request for data-structure/create"
+}
+[info] [CLI] Calling Command data-structure/create: {
+	"funcParams": {
+		"name": "Parts",
+		"properties": {
+			"name": "string",
+			"price": "number",
+			"ammount": "number"
+		},
+		"entityId": "query"
+	},
+	"level": "info",
+	"message": "[CLI] Calling Command data-structure/create"
+}
+[info] [CommandBus]: Dispatching command CREATE_DATA_STRUCTURE: {
+	"commandName": "CREATE_DATA_STRUCTURE",
+	"payload": {
+		"folderPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/parts",
+		"name": "Parts",
+		"suffix": "Query",
+		"properties": {
+			"name": "string",
+			"price": "number",
+			"ammount": "number"
+		}
+	},
+	"level": "info",
+	"message": "[CommandBus]: Dispatching command CREATE_DATA_STRUCTURE"
+}
+[info] [CommandBus]: Handled  CREATE_DATA_STRUCTURE: {
+	"commandName": "CREATE_DATA_STRUCTURE",
+	"payload": {
+		"folderPath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/parts",
+		"name": "Parts",
+		"suffix": "Query",
+		"properties": {
+			"name": "string",
+			"price": "number",
+			"ammount": "number"
+		}
+	},
+	"level": "info",
+	"message": "[CommandBus]: Handled  CREATE_DATA_STRUCTURE"
+}
+[info] [CLI] Called Command data-structure/create: {
+	"message": "[CLI] Called Command data-structure/create",
+	"level": "info"
+}
+[info] [API] Response ok: data-structure/create: {
+	"result": {
+		"filePath": "D:/Projekty/Engineering-Thesis-2022/Frontend-BSc-Thesis/libs/order/src/lib/application/ports/primary/query/parts/parts.query.ts"
+	},
+	"level": "info",
+	"message": "[API] Response ok: data-structure/create"
+}

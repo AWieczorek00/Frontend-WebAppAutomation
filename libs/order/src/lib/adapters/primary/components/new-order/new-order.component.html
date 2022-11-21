@@ -255,10 +255,10 @@
       </div>
 
       <form [formGroup]="order">
-        <table mat-table [dataSource]="dataSource" formArrayName="activitiesList" class="mat-elevation-z8">
+        <table mat-table [dataSource]="behaviorActivities" formArrayName="activitiesList" class="mat-elevation-z8">
           <!-- Row definitions -->
-          <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-          <tr mat-row *matRowDef="let row; let i = index; columns: displayColumns;"></tr>
+          <tr mat-header-row *matHeaderRowDef="nameRowActivities"></tr>
+          <tr mat-row *matRowDef="let row; let i = index; columns: nameRowActivities;"></tr>
 
           <!-- Column definitions -->
           <ng-container matColumnDef="name">
@@ -367,55 +367,65 @@
             type="text"
             aria-label="Części"
             matInput
-            [formControl]="employeeControl"
-            [matAutocomplete]="employee"
+            [formControl]="partsTemplateControl"
+            [matAutocomplete]="partsTemplate"
           />
           <mat-autocomplete
-            #employee="matAutocomplete"
-            [displayWith]="getOptionEmployee"
-            (optionSelected)="getEmployee($event.option.value)"
+            #partsTemplate="matAutocomplete"
+            [displayWith]="getOptionPartsTemplate"
+            (optionSelected)="getPartsTemplate($event.option.value)"
           >
             <mat-option
-              *ngFor="let employee of filteredEmployee | async"
-              [value]="employee"
+              *ngFor="let parts of filteredPartsTemplate | async"
+              [value]="parts"
             >
-              {{ employee.firstName }} {{ employee.lastName }}
+              {{parts.name}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
 
-        <button class="btn btn-outline-primary" (click)="addEmployee()">
+        <button class="btn btn-outline-primary" (click)="addPart()">
           Dodaj
         </button>
       </div>
 
-      <table
-        mat-table
-        [dataSource]="dataSourceEmployee"
-        class="mat-elevation-z8"
-      >
-        <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef>Imię</th>
-          <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
-        </ng-container>
+      <form [formGroup]="order">
+        <table mat-table [dataSource]="behaviorParts" formArrayName="partList" class="mat-elevation-z8">
+          <!-- Row definitions -->
+          <tr mat-header-row *matHeaderRowDef="nameRowParts"></tr>
+          <tr mat-row *matRowDef="let row; let i = index; columns: nameRowParts;"></tr>
 
-        <ng-container matColumnDef="secondName">
-          <th mat-header-cell *matHeaderCellDef>Drugie imię</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.secondName }}
-          </td>
-        </ng-container>
+          <!-- Column definitions -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nazwa części </th>
+            <td mat-cell *matCellDef="let row; let index = index"  [formGroupName]="index">
+              <mat-form-field class="disable-input">
+                <input matInput type="text" value="" formControlName="name" [readonly]="true">
+              </mat-form-field>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="lastName">
-          <th mat-header-cell *matHeaderCellDef>Nazwisko</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.lastName }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Cena  </th>
+            <td mat-cell *matCellDef="let row; let index = index"  [formGroupName]="index">
+              <mat-form-field class="disable-input">
+                <input matInput type="text" value="" formControlName="price" [readonly]="true">
+              </mat-form-field>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="nameRowEmployee"></tr>
-        <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
-      </table>
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Ilość </th>
+            <td mat-cell *matCellDef="let row; let index = index"  [formGroupName]="index">
+              <mat-form-field >
+                <input matInput type="number" value="" formControlName="amount" >
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+        </table>
+      </form>
+
     </div>
   </mat-tab>
 
@@ -637,10 +647,10 @@
         <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
       </table>
 
-      <table mat-table [dataSource]="dataSource" formArrayName="activitiesList" class="mat-elevation-z8">
+      <table mat-table [dataSource]="behaviorActivities" formArrayName="activitiesList" class="mat-elevation-z8">
         <!-- Row definitions -->
-        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-        <tr mat-row *matRowDef="let row; let i = index; columns: displayColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="nameRowActivities"></tr>
+        <tr mat-row *matRowDef="let row; let i = index; columns: nameRowActivities;"></tr>
 
         <!-- Column definitions -->
         <ng-container matColumnDef="name">

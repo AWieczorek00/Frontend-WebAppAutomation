@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import {Observable, tap} from 'rxjs';
+import { forkJoin, Observable, tap } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { LoadOrdersCommandPort } from './ports/primary/command/order/load-orders.command-port';
 import { GetsCurrentOrderListQueryPort } from './ports/primary/query/gets-current-order-list.query-port';
@@ -68,6 +68,7 @@ import { OrderContext } from './ports/secondary/context/order/order.context';
 import { mapFromOrderContext } from './mappers/order.mapper';
 import { mapFromNewOrderContext } from './mappers/newOrderElements.mapper';
 import { OrderDto } from './ports/secondary/dto/order/order.dto';
+import { OrderQuery } from './ports/primary/query/order.query';
 
 @Injectable()
 export class OrderState
@@ -192,25 +193,27 @@ export class OrderState
   }
 
   duplicateOrder(id: number): Observable<void> {
-    return this._duplicateOrderDtoPort
-      .duplicateOrder(id)
-      .pipe(
-        // switchMap(() => this._selectOrderContextPort.select().pipe(take(1))),
-        // map((orderContext) => {
-        //   return {
-        //     ...orderContext,
-        //     orderList: [...orderContext.orderList,response],
-        //   };
-        // }),
-        // switchMap((orderContext) =>
-        //   this._setsStateOrderContextPort.setState(orderContext)
-        // )
-
-        switchMap(()=>this._getAllDtoPort.getAll()),
-        switchMap((orderList)=>this._setsStateOrderContextPort.setState({orderList:orderList}))
-
+    return this._duplicateOrderDtoPort.duplicateOrder(id).pipe(
+      switchMap(() => this._getAllDtoPort.getAll()),
+      switchMap((orderList) =>
+        this._setsStateOrderContextPort.setState({ orderList: orderList })
       )
-      // .pipe(take(1));
+    );
+
+    // return forkJoin([
+    //   this._duplicateOrderDtoPort.duplicateOrder(id),
+    //   this._selectOrderContextPort.select().pipe(take(1)),
+    // ]).pipe(
+    //   map(([response, orderContext]) => {
+    //     return {
+    //       ...orderContext,
+    //       orderList: [orderContext.orderList],
+    //     };
+    //   }),
+    //   switchMap((orderContext) =>
+    //     this._setsStateOrderContextPort.setState(orderContext)
+    //   )
+    // ).pipe(take(1));
   }
 }
 

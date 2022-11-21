@@ -53,8 +53,8 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrder
     return this._httpClient.delete<void>("http://localhost:8080/order/delete/" + id);
   }
 
-  duplicateOrder(id: number): Observable<void> {
-    return this._httpClient.post<void>('http://localhost:8080/order/duplicate/', id)
+  duplicateOrder(id: number): Observable<OrderDto> {
+    return this._httpClient.post<OrderDto>('http://localhost:8080/order/duplicate/', id)
   }
 
   getOneOrder(id:number): Observable<OrderDto> {
