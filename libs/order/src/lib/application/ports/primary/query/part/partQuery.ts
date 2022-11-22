@@ -1,4 +1,4 @@
-export class PartsQuery {
+export class PartQuery {
   constructor(
     public readonly id:number,
     public readonly name: string,

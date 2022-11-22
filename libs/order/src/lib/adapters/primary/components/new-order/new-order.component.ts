@@ -1,39 +1,21 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
-import {
-  GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT,
-  GetsNewOrderCurrencyElementsQueryPort,
-} from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
-import {
-  CREATE_ORDER_COMMAND_PORT,
-  CreateOrderCommandPort,
-} from '../../../../application/ports/primary/command/order/create-order.command-port';
-import { NewOrderQuery } from '../../../../application/ports/primary/query/new-order.query';
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { filter, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
+import { Router } from '@angular/router';
+import { GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT, GetsNewOrderCurrencyElementsQueryPort } from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
+import { CREATE_ORDER_COMMAND_PORT, CreateOrderCommandPort } from '../../../../application/ports/primary/command/order/create-order.command-port';
 import { ClientQuery } from '../../../../application/ports/primary/query/client.query';
 import { EmployeeQuery } from '../../../../application/ports/primary/query/employee.query';
 import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/query/activities-template/activities-template.query';
+import { PartsTemplateQuery } from '../../../../application/ports/primary/query/parts-template/parts-template.query';
+import { NewOrderQuery } from '../../../../application/ports/primary/query/new-order.query';
 import { ActivitiesTemplateDto } from '../../../../application/ports/secondary/dto/activitiesTemplate/activities-template.dto';
 import { ActivitiesQuery } from '../../../../application/ports/primary/query/activities.query';
-import { MatTableDataSource } from '@angular/material/table';
+import { PartQuery } from '../../../../application/ports/primary/query/part/partQuery';
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
-import { take } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { PartsTemplateQuery } from '../../../../application/ports/primary/query/parts-template/parts-template.query';
-import { PartsQuery } from '../../../../application/ports/primary/query/parts/parts.query';
 
 @Component({
   selector: 'lib-new-order',
@@ -48,7 +30,7 @@ export class NewOrderComponent {
     private _getsNewOrderCurrencyElementsQueryPort: GetsNewOrderCurrencyElementsQueryPort,
     @Inject(CREATE_ORDER_COMMAND_PORT)
     private _createOrderCommandPort: CreateOrderCommandPort,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder, private _router: Router
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeListAutocomplete = employee.employeeList)
@@ -139,9 +121,9 @@ export class NewOrderComponent {
     partList: this.partRows,
   });
 
-  readonly attention: FormGroup = new FormGroup({
-    attention: new FormControl(''),
-  });
+  // readonly attention: FormGroup = new FormGroup({
+  //   attention: new FormControl(''),
+  // });
 
   readonly elements$: Observable<NewOrderQuery> =
     this._getsNewOrderCurrencyElementsQueryPort.getNewOrderCurrencyElements();
@@ -160,9 +142,13 @@ export class NewOrderComponent {
   filteredPartsTemplate: Observable<PartsTemplateQuery[]> | undefined;
   employee: EmployeeQuery | undefined;
   activities: ActivitiesQuery | undefined;
-  part: PartsQuery | undefined;
+  part: PartQuery | undefined;
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
+  behaviorActivities = new BehaviorSubject<AbstractControl[]>([]);
+  behaviorParts = new BehaviorSubject<AbstractControl[]>([]);
   nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName'];
+  nameRowActivities = ['name', 'attention', 'done'];
+  nameRowParts = ['name', 'price', 'amount'];
   employeeList: EmployeeQuery[] = [];
 
   // activitiesList: ActivitiesQuery[] = [];
@@ -181,7 +167,6 @@ export class NewOrderComponent {
   getOptionActivitiesTemplate(
     activitiesTemplateQuery: ActivitiesTemplateQuery
   ) {
-    console.log(activitiesTemplateQuery.name);
     return activitiesTemplateQuery.name;
   }
 
@@ -255,6 +240,7 @@ export class NewOrderComponent {
           client,
           this.employeeList,
           order.get('activitiesList')?.value,
+          order.get('partList')?.value,
           order.get('dateOfAdmission')?.value,
           order.get('dateOfExecution')?.value,
           order.get('priority')?.value,
@@ -264,7 +250,7 @@ export class NewOrderComponent {
         )
       )
       .pipe(take(1))
-      .subscribe(() => this.order.reset());
+      .subscribe(() => this._router.navigate(['/orders']));
   }
 
   addEmployee() {
@@ -283,7 +269,7 @@ export class NewOrderComponent {
       price: this.part?.price,
       amount: 0,
     });
-    this.activitiesRows.push(row);
+    this.partRows.push(row);
     this.updatePartsView();
   }
 
@@ -318,19 +304,12 @@ export class NewOrderComponent {
     });
     this.activitiesRows.push(row);
     this.updateActivitiesView();
-
-    console.log(this.order.get('activitiesList'));
   }
 
-  changeFn($event: string) {
-    console.log($event);
-  }
 
-  onEnter($event: any) {
-    console.log($event.source);
-  }
 
   setSummary($event: MatTabChangeEvent, order: FormGroup) {
+    console.log(order.get('activitiesList.1')?.value)
     if ($event.index === 4) {
       this.order.setValue({
         name: order.get('name')?.value,
@@ -349,29 +328,16 @@ export class NewOrderComponent {
         email: order.get('email')?.value,
         note: order.get('note')?.value,
         activitiesList: order.get('activitiesList')?.value,
+        partList: order.get('partList')?.value
       });
     }
   }
 
-  // -----------------------------------------------------------------------TEST-------------------------------------------
 
-  data = [];
-  behaviorActivities = new BehaviorSubject<AbstractControl[]>([]);
-  behaviorParts = new BehaviorSubject<AbstractControl[]>([]);
-  nameRowActivities = ['name', 'attention', 'done'];
-  nameRowParts=['name','price','amount'];
 
-  addRow() {
-    const row = this._formBuilder.group({
-      name: '',
-      attention: 30,
-      done: true,
-    });
-    this.activitiesRows.push(row);
-    this.updateActivitiesView();
-  }
 
-  updateActivitiesView() {
+
+  private updateActivitiesView() {
     this.behaviorActivities.next(this.activitiesRows.controls);
   }
 

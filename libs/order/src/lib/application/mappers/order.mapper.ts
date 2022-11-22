@@ -3,6 +3,7 @@ import { OrderListQuery } from '../ports/primary/query/order-list.query';
 import { OrderQuery } from '../ports/primary/query/order.query';
 import { EmployeeQuery } from '../ports/primary/query/employee.query';
 import { ActivitiesQuery } from '../ports/primary/query/activities.query';
+import { PartQuery } from '../ports/primary/query/part/partQuery';
 
 export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
   new OrderListQuery(
@@ -31,6 +32,17 @@ export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
                     activities.name,
                     activities.attention,
                     activities.done
+                  )
+              )
+            : [],
+          order.partList
+            ? order.partList.map(
+                (part) =>
+                  new PartQuery(
+                    part.id,
+                    part.name,
+                    part.price,
+                    part.amount
                   )
               )
             : [],

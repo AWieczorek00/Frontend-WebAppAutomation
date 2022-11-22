@@ -21,17 +21,18 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrder
           orders.map((order) => {
             return {
               id: order.id,
-              employeeList: order.employeeList
-                ? order.employeeList.map((employee) => ({
-                  individualId: employee.individualId,
-                  firstName: employee.firstName,
-                  secondName: employee.secondName,
-                  lastName: employee.lastName,
-                  pesel: employee.pesel,
-                }))
-                : [],
+              employeeList: order.employeeList,
+                // ? order.employeeList.map((employee) => ({
+                //   individualId: employee.individualId,
+                //   firstName: employee.firstName,
+                //   secondName: employee.secondName,
+                //   lastName: employee.lastName,
+                //   pesel: employee.pesel,
+                // }))
+                // : [],
               client: order.client,
               activitiesList: order.activitiesList,
+              partList:order.partList,
               dateOfAdmission: order.dateOfAdmission,
               dateOfExecution: order.dateOfExecution,
               priority: order.priority,

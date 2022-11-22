@@ -54,3 +54,8 @@ table{
   font-size: 20px;
   margin-right: 50px;
 }
+
+.disable-input ::ng-deep .mat-form-field-underline {
+  display: none;
+
+}
