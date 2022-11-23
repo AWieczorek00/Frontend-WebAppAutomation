@@ -13,6 +13,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   imports: [
@@ -31,6 +33,8 @@ import {MatTableModule} from "@angular/material/table";
     MatNativeDateModule,
     MatCheckboxModule,
     MatTableModule,
+    NgbDropdownModule,
+    MatIconModule,
   ],
   declarations: [OrderDetailsComponent],
   providers: [],

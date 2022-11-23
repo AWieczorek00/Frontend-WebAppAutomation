@@ -189,6 +189,33 @@
 					}
 				}
 			}
+		},
+		"task": {
+			"projectType": "library",
+			"root": "libs/task",
+			"sourceRoot": "libs/task/src",
+			"prefix": "lib",
+			"architect": {
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": [
+						"coverage/task"
+					],
+					"options": {
+						"jestConfig": "libs/task/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"executor": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"/libs/task/**/*.ts",
+							"/libs/task/**/*.html"
+						]
+					}
+				}
+			}
 		}
 	},
 	"defaultProject": "Frontend-BSc-Thesis"

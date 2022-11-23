@@ -90,6 +90,7 @@ export class TestComponent {
     });
     this.rows.push(row);
     this.updateView();
+    console.log(this.rows.get('attention')?.value)
   }
 
   updateView() {

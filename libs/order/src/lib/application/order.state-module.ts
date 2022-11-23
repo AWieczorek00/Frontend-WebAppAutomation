@@ -11,6 +11,7 @@ import { CREATE_ORDER_COMMAND_PORT } from './ports/primary/command/order/create-
 import { LOAD_PARTS_ACTIVITIES_COMMAND_PORT } from './ports/primary/command/partsTemplate/load-parts-template.command-port';
 import { DELETE_ORDER_COMMAND_PORT } from './ports/primary/command/order/delete-order.command-port';
 import { DUPLICATE_ORDER_COMMAND_PORT } from './ports/primary/command/duplicate-order.command-port';
+import { UPDATE_ORDER_COMMAND_PORT } from './ports/primary/command/order/update-order.command-port';
 
 @NgModule({
   imports: [],
@@ -27,7 +28,8 @@ import { DUPLICATE_ORDER_COMMAND_PORT } from './ports/primary/command/duplicate-
     { provide: CREATE_ORDER_COMMAND_PORT, useExisting: OrderState },
     { provide: LOAD_PARTS_ACTIVITIES_COMMAND_PORT, useExisting: OrderState },
     { provide: DELETE_ORDER_COMMAND_PORT, useExisting: OrderState },
-    { provide: DUPLICATE_ORDER_COMMAND_PORT, useExisting: OrderState }
+    { provide: DUPLICATE_ORDER_COMMAND_PORT, useExisting: OrderState },
+    { provide: UPDATE_ORDER_COMMAND_PORT, useExisting: OrderState }
   ],
   exports: [],
 })

@@ -7,10 +7,11 @@ import { AddOrderDtoPort } from '../../../application/ports/secondary/dto/order/
 import { DeleteOrderDtoPort } from '../../../application/ports/secondary/dto/order/delete-order.dto-port';
 import { DuplicateOrderDtoPort } from '../../../application/ports/secondary/dto/order/duplicate-order.dto-port';
 import { GetOneOrderDtoPort } from '../../../application/ports/secondary/dto/order/get-one-order.dto-port';
+import { PutOrderDtoPort } from '../../../application/ports/secondary/dto/order/put-order.dto-port';
 import { OrderDto } from '../../../application/ports/secondary/dto/order/order.dto';
 
 @Injectable()
-export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrderDtoPort, DuplicateOrderDtoPort, GetOneOrderDtoPort {
+export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrderDtoPort, DuplicateOrderDtoPort, GetOneOrderDtoPort, PutOrderDtoPort {
   constructor(private _httpClient: HttpClient) { }
 
   getAll(): Observable<OrderDto[]> {
@@ -22,17 +23,17 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrder
             return {
               id: order.id,
               employeeList: order.employeeList,
-                // ? order.employeeList.map((employee) => ({
-                //   individualId: employee.individualId,
-                //   firstName: employee.firstName,
-                //   secondName: employee.secondName,
-                //   lastName: employee.lastName,
-                //   pesel: employee.pesel,
-                // }))
-                // : [],
+              // ? order.employeeList.map((employee) => ({
+              //   individualId: employee.individualId,
+              //   firstName: employee.firstName,
+              //   secondName: employee.secondName,
+              //   lastName: employee.lastName,
+              //   pesel: employee.pesel,
+              // }))
+              // : [],
               client: order.client,
               activitiesList: order.activitiesList,
-              partList:order.partList,
+              partList: order.partList,
               dateOfAdmission: order.dateOfAdmission,
               dateOfExecution: order.dateOfExecution,
               priority: order.priority,
@@ -58,8 +59,13 @@ export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrder
     return this._httpClient.post<OrderDto>('http://localhost:8080/order/duplicate/', id)
   }
 
-  getOneOrder(id:number): Observable<OrderDto> {
-    return this._httpClient.get<OrderDto>('http://localhost:8080/order/one/'+id)
+  getOneOrder(id: number): Observable<OrderDto> {
+    return this._httpClient.get<OrderDto>('http://localhost:8080/order/one/' + id)
+  }
+
+  putOrder(order: OrderDto): Observable<void> {
+    console.log('service')
+    return this._httpClient.put<void>('http://localhost:8080/order/update',order);
   }
 }
 

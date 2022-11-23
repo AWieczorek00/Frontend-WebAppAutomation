@@ -177,7 +177,7 @@ export class NewOrderComponent {
 
   _filterClient(name: string): ClientQuery[] {
     return this.clientListAutocomplete.filter(
-      (option) => option.name.toLowerCase().indexOf(name.toLowerCase()) === 0
+      (option) => option.name.toLowerCase().indexOf(name.toString().toLowerCase()) === 0
     );
   }
 

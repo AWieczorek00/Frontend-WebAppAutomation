@@ -5,6 +5,7 @@ import { ADD_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/ord
 import { DELETE_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/order/delete-order.dto-port';
 import { DUPLICATE_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/order/duplicate-order.dto-port';
 import { GET_ONE_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/order/get-one-order.dto-port';
+import { PUT_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/order/put-order.dto-port';
 
 @NgModule({
   imports: [],
@@ -15,7 +16,8 @@ import { GET_ONE_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto
     { provide: ADD_ORDER_DTO_PORT, useExisting: OrderService },
     { provide: DELETE_ORDER_DTO_PORT, useExisting: OrderService },
     { provide: DUPLICATE_ORDER_DTO_PORT, useExisting: OrderService },
-    { provide: GET_ONE_ORDER_DTO_PORT, useExisting: OrderService }
+    { provide: GET_ONE_ORDER_DTO_PORT, useExisting: OrderService },
+    { provide: PUT_ORDER_DTO_PORT, useExisting: OrderService }
   ],
   exports: [],
 })

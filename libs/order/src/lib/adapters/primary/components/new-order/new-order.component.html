@@ -440,12 +440,26 @@
               <mat-form-field class="field-order" appearance="legacy">
                 <mat-label>Nazwa</mat-label>
                 <input
-                  [readonly]="true"
                   type="text"
                   aria-label="Nazwa"
                   matInput
+                  [formControl]="clientControl"
+                  [matAutocomplete]="client"
                   formControlName="name"
+                  [readonly]="true"
                 />
+                <mat-autocomplete
+                  #client="matAutocomplete"
+                  (optionSelected)="getClient($event.option.value)"
+                  [displayWith]="getOptionClient"
+                >
+                  <mat-option
+                    *ngFor="let client of filteredClient | async"
+                    [value]="client"
+                  >
+                    {{ client.name }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
               <br />
               <mat-form-field class="field-order" appearance="legacy">
@@ -666,7 +680,7 @@
               </ng-container>
 
               <ng-container matColumnDef="attention">
-                <th mat-header-cell *matHeaderCellDef> attention </th>
+                <th mat-header-cell *matHeaderCellDef> Uwagi </th>
                 <td mat-cell *matCellDef="let row; let index = index"  [formGroupName]="index">
                   <mat-form-field class="disable-input">
                     <input matInput type="text" value="" formControlName="attention" [readonly]="true">
@@ -677,7 +691,7 @@
               </ng-container>
 
               <ng-container matColumnDef="done">
-                <th mat-header-cell *matHeaderCellDef> done </th>
+                <th mat-header-cell *matHeaderCellDef> Wykonano </th>
                 <td mat-cell *matCellDef="let row; let index = index"  [formGroupName]="index">
                   <mat-form-field class="disable-input">
                     <input matInput type="text" value="" formControlName="done" [readonly]="true">
