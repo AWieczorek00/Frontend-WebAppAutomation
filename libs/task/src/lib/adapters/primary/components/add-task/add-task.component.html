@@ -1,0 +1,55 @@
+<form [formGroup]="task" (ngSubmit)="onTaskSubmitted(task)">
+  <mat-form-field appearance="legacy">
+    <mat-label>Zadanie</mat-label>
+    <input matInput type="text" formControlName="name" placeholder="Name" />
+  </mat-form-field>
+  <br />
+  <mat-form-field
+    class="field-option"
+    appearance="legacy"
+    style="margin-right: 50px"
+  >
+    <mat-label>Data przyjecia</mat-label>
+    <input
+      formControlName="executionTime"
+      matInput
+      [matDatepicker]="executionTime"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="executionTime"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #executionTime></mat-datepicker>
+  </mat-form-field>
+  <br />
+
+  <mat-form-field appearance="legacy" class="option-table">
+    <mat-label>Serwisant</mat-label>
+    <input
+      type="text"
+      aria-label="Serwisant"
+      matInput
+      [formControl]="employeeControl"
+      [matAutocomplete]="employee"
+    />
+    <mat-autocomplete
+      #employee="matAutocomplete"
+      [displayWith]="getOptionEmployee"
+      (optionSelected)="getEmployee($event.option.value)"
+    >
+      <mat-option
+        *ngFor="let employee of filteredEmployee | async"
+        [value]="employee"
+      >
+        {{ employee.firstName }} {{ employee.lastName }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <input type="submit" value="Submit" />
+</form>
+
+<div *ngIf="employee$ | async as employee">
+  {{ employee | json }}
+</div>

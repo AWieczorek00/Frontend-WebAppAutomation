@@ -1,10 +1,28 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { filter, take } from 'rxjs/operators';
 import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
 import { Router } from '@angular/router';
-import { GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT, GetsNewOrderCurrencyElementsQueryPort } from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
-import { CREATE_ORDER_COMMAND_PORT, CreateOrderCommandPort } from '../../../../application/ports/primary/command/order/create-order.command-port';
+import {
+  GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT,
+  GetsNewOrderCurrencyElementsQueryPort,
+} from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
+import {
+  CREATE_ORDER_COMMAND_PORT,
+  CreateOrderCommandPort,
+} from '../../../../application/ports/primary/command/order/create-order.command-port';
 import { ClientQuery } from '../../../../application/ports/primary/query/client.query';
 import { EmployeeQuery } from '../../../../application/ports/primary/query/employee.query';
 import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/query/activities-template/activities-template.query';
@@ -30,7 +48,8 @@ export class NewOrderComponent {
     private _getsNewOrderCurrencyElementsQueryPort: GetsNewOrderCurrencyElementsQueryPort,
     @Inject(CREATE_ORDER_COMMAND_PORT)
     private _createOrderCommandPort: CreateOrderCommandPort,
-    private _formBuilder: FormBuilder, private _router: Router
+    private _formBuilder: FormBuilder,
+    private _router: Router
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeListAutocomplete = employee.employeeList)
@@ -177,7 +196,8 @@ export class NewOrderComponent {
 
   _filterClient(name: string): ClientQuery[] {
     return this.clientListAutocomplete.filter(
-      (option) => option.name.toLowerCase().indexOf(name.toString().toLowerCase()) === 0
+      (option) =>
+        option.name.toLowerCase().indexOf(name.toString().toLowerCase()) === 0
     );
   }
 
@@ -254,13 +274,11 @@ export class NewOrderComponent {
   }
 
   addEmployee() {
-    if (this.employee) {
-      this.employeeList.push(this.employee);
+    this.employeeList.push(this.employeeControl.value);
 
-      this.dataSourceEmployee = new MatTableDataSource<EmployeeQuery>(
-        this.employeeList
-      );
-    }
+    this.dataSourceEmployee = new MatTableDataSource<EmployeeQuery>(
+      this.employeeList
+    );
   }
 
   addPart() {
@@ -306,10 +324,7 @@ export class NewOrderComponent {
     this.updateActivitiesView();
   }
 
-
-
   setSummary($event: MatTabChangeEvent, order: FormGroup) {
-    console.log(order.get('activitiesList.1')?.value)
     if ($event.index === 4) {
       this.order.setValue({
         name: order.get('name')?.value,
@@ -328,14 +343,10 @@ export class NewOrderComponent {
         email: order.get('email')?.value,
         note: order.get('note')?.value,
         activitiesList: order.get('activitiesList')?.value,
-        partList: order.get('partList')?.value
+        partList: order.get('partList')?.value,
       });
     }
   }
-
-
-
-
 
   private updateActivitiesView() {
     this.behaviorActivities.next(this.activitiesRows.controls);

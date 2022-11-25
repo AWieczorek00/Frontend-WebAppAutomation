@@ -28,10 +28,9 @@ import {MatTableModule} from "@angular/material/table";
     MatGridListModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatNativeDateModule,
     MatCheckboxModule,
     MatTableModule,
 

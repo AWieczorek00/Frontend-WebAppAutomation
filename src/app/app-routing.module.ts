@@ -8,11 +8,12 @@ import { AuthenticationGuard } from './authentication.guard';
 import { OrderListPageModule } from './pages/order-list/order-list.page-module';
 import { NewOrderPageModule } from './pages/new-order/new-order.page-module';
 import { OrderDetailsPageModule } from './pages/order-details/order-details.page-module';
-import {TestPageModule} from "./pages/test/test.page-module";
+import { TestPageModule } from './pages/test/test.page-module';
+import {HomePageModule} from "./pages/home/home.page-module";
+import {AddTaskPageModule} from "./pages/add-task/add-task.page-module";
 
 const routes: Routes = [
   {
-
     path: '',
     canActivate: [AuthenticationGuard],
     data: {
@@ -20,15 +21,12 @@ const routes: Routes = [
     },
     children: [
       { path: 'login', loadChildren: () => LoginPageModule },
-      {
-        path: '',
-        component: AdminPanelComponent,
-      },
+      { path: '', loadChildren: () => HomePageModule },
       { path: 'orders', loadChildren: () => OrderListPageModule },
       { path: 'new-order', loadChildren: () => NewOrderPageModule },
+      { path: 'task', loadChildren: () => AddTaskPageModule },
       { path: 'order/:id', loadChildren: () => OrderDetailsPageModule },
       { path: 'test', loadChildren: () => TestPageModule },
-
 
       { path: '**', redirectTo: '' },
     ],

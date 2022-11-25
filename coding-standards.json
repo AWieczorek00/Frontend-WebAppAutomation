@@ -130,7 +130,7 @@
     },
     "contextPort": {
       "type": "ABSTRACTION",
-      "folder": "application/ports/secondary/context/$name$",
+      "folder": "application/ports/secondary/context",
       "insideOf": "Lib"
     },
     "storage": {
