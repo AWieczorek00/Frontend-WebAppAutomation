@@ -1,7 +1,13 @@
+<div main-table>
+
+
+
 <table
+
   mat-table
   [dataSource]="dataSourceTask"
   class="mat-elevation-z8"
+
 >
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Zadanie</th>
@@ -26,3 +32,7 @@
   <tr mat-header-row *matHeaderRowDef="rowName"></tr>
   <tr mat-row *matRowDef="let row; columns: rowName"></tr>
 </table>
+
+<button class="btn btn-outline-primary"  (click)="open()">Test</button>
+
+</div>

@@ -7,6 +7,7 @@ import {CommonModule} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule
   ],
   declarations: [AddTaskComponent],
   providers: [],

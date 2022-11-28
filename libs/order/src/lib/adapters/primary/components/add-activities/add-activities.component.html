@@ -1,0 +1,18 @@
+<form
+  mat-dialog-content
+  [formGroup]="addActivities"
+  (ngSubmit)="onAddActivitiesSubmitted(addActivities)"
+>
+  <mat-form-field appearance="legacy">
+  <mat-label>Dodaj nową czyność</mat-label>
+  <input  matInput type="text" formControlName="name" placeholder="Name" />
+  </mat-form-field>
+</form>
+<form
+  mat-dialog-actions
+  [formGroup]="addActivities"
+  (ngSubmit)="onAddActivitiesSubmitted(addActivities)"
+>
+  <input class="btn btn-outline-primary" value="Zapisz" type="submit" />
+  <button class="btn btn-outline-primary" (click)="close()"> Zamknij</button>
+</form>

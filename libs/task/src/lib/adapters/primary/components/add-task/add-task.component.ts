@@ -19,6 +19,7 @@ import {
 } from '../../../../application/ports/primary/query/employee/get-currency-employee-list.query-port';
 import { AddTaskCommand } from '../../../../application/ports/primary/command/add-task.command';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'lib-add-task',
@@ -46,7 +47,9 @@ export class AddTaskComponent {
     @Inject(ADD_TASK_COMMAND_PORT)
     private _addTaskCommandPort: AddTaskCommandPort,
     @Inject(GET_CURRENCY_EMPLOYEE_LIST_QUERY_PORT)
-    private _getCurrencyEmployeeListQueryPort: GetCurrencyEmployeeListQueryPort
+    private _getCurrencyEmployeeListQueryPort: GetCurrencyEmployeeListQueryPort,
+    public dialogRef: MatDialogRef<AddTaskComponent>,
+
   ) {
 
     this.employee$.subscribe((employeeList) =>this.employeeListAutocomplete=employeeList.employeeList)
@@ -77,6 +80,7 @@ export class AddTaskComponent {
       )
     ).pipe(take(1))
       .subscribe();
+    this.dialogRef.close()
   }
 
   getEmployee(employee: EmployeeQuery) {

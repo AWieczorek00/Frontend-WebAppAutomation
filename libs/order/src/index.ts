@@ -22,3 +22,4 @@ export * from './lib/adapters/secondary/services/http-parts-template.service-mod
 export * from './lib/adapters/primary/directives/delete-order.directive-module';
 export * from './lib/adapters/primary/components/order-details/order-details.component-module';
 export * from './lib/adapters/primary/components/test/test.component-module';
+export * from './lib/adapters/primary/components/add-activities/add-activities.component-module';

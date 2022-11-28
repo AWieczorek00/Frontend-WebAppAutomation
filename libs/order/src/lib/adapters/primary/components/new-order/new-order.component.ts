@@ -34,6 +34,8 @@ import { PartQuery } from '../../../../application/ports/primary/query/part/part
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatDialog } from "@angular/material/dialog";
+import { AddActivitiesComponent } from "../add-activities/add-activities.component";
 
 @Component({
   selector: 'lib-new-order',
@@ -49,7 +51,8 @@ export class NewOrderComponent {
     @Inject(CREATE_ORDER_COMMAND_PORT)
     private _createOrderCommandPort: CreateOrderCommandPort,
     private _formBuilder: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    public dialog: MatDialog
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeListAutocomplete = employee.employeeList)
@@ -354,5 +357,11 @@ export class NewOrderComponent {
 
   private updatePartsView() {
     this.behaviorParts.next(this.partRows.controls);
+  }
+
+  openNewActivities() {
+    this.dialog.open(AddActivitiesComponent,{
+      width:'300px',
+    })
   }
 }

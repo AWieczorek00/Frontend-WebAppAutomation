@@ -15,6 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {MatTableModule} from "@angular/material/table";
     MatFormFieldModule,
     MatCheckboxModule,
     MatTableModule,
+    MatDialogModule
 
   ],
   declarations: [NewOrderComponent],
