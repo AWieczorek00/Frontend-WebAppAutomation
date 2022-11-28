@@ -8,8 +8,8 @@ import { EmployeeDto } from '../../../application/ports/secondary/dto/employee/e
 export class HttpEmployeeService implements GetAllEmployeeDtoPort {
   constructor(private _httpClient: HttpClient) {
   }
-
+  private url = 'http://localhost:8080/';
   getAll(): Observable<EmployeeDto[]> {
-    return this._httpClient.get<EmployeeDto[]>('http://localhost:8080/employee/all');
+    return this._httpClient.get<EmployeeDto[]>(this.url+'employee/all');
   }
 }

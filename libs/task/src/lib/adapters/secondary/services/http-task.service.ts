@@ -17,6 +17,6 @@ export class HttpTaskService implements GetAllTaskDtoPort, AddTaskDtoPort {
   }
 
   add(task: Omit<Partial<TaskDto>, 'id'>): Observable<void> {
-    return this._httpClient.post<void>('http://localhost:8080/task/add',task)
+    return this._httpClient.post<void>(this.url+'task/add',task)
   }
 }

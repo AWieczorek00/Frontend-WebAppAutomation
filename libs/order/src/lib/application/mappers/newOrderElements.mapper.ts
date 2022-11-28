@@ -44,7 +44,7 @@ export const mapFromNewOrderContext = (
           activitiesTemplate.name
         )
     ),
-    context.partsTemplate.map((partsTemplate)=>
+    context.partsTemplateList.map((partsTemplate)=>
     new PartsTemplateQuery(
       partsTemplate.name,
       partsTemplate.price

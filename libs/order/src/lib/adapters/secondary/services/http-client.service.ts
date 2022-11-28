@@ -8,8 +8,9 @@ import { ClientDto } from '../../../application/ports/secondary/dto/client/clien
 export class HttpClientService implements GetAllClientDtoPort {
   constructor(private _httpClient: HttpClient) {
   }
+  private url = 'http://localhost:8080/';
 
   getAll(): Observable<ClientDto[]> {
-    return this._httpClient.get<ClientDto[]>('http://localhost:8080/client/all');
+    return this._httpClient.get<ClientDto[]>(this.url+'client/all');
   }
 }

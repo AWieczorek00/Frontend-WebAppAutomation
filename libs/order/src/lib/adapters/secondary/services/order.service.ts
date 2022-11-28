@@ -11,61 +11,66 @@ import { PutOrderDtoPort } from '../../../application/ports/secondary/dto/order/
 import { OrderDto } from '../../../application/ports/secondary/dto/order/order.dto';
 
 @Injectable()
-export class OrderService implements GetAllDtoPort, AddOrderDtoPort, DeleteOrderDtoPort, DuplicateOrderDtoPort, GetOneOrderDtoPort, PutOrderDtoPort {
-  constructor(private _httpClient: HttpClient) { }
-
+export class OrderService
+  implements
+    GetAllDtoPort,
+    AddOrderDtoPort,
+    DeleteOrderDtoPort,
+    DuplicateOrderDtoPort,
+    GetOneOrderDtoPort,
+    PutOrderDtoPort
+{
+  constructor(private _httpClient: HttpClient) {}
+  private url = 'http://localhost:8080/';
   getAll(): Observable<OrderDto[]> {
-    return this._httpClient
-      .get<OrderDto[]>('http://localhost:8080/order/all')
-      .pipe(
-        map((orders) =>
-          orders.map((order) => {
-            return {
-              id: order.id,
-              employeeList: order.employeeList,
-              // ? order.employeeList.map((employee) => ({
-              //   individualId: employee.individualId,
-              //   firstName: employee.firstName,
-              //   secondName: employee.secondName,
-              //   lastName: employee.lastName,
-              //   pesel: employee.pesel,
-              // }))
-              // : [],
-              client: order.client,
-              activitiesList: order.activitiesList,
-              partList: order.partList,
-              dateOfAdmission: order.dateOfAdmission,
-              dateOfExecution: order.dateOfExecution,
-              priority: order.priority,
-              status: order.status,
-              period: order.period,
-              note: order.note,
-            };
-          })
-        )
-      );
+    return this._httpClient.get<OrderDto[]>(this.url + 'order/all').pipe(
+      map((orders) =>
+        orders.map((order) => {
+          return {
+            id: order.id,
+            employeeList: order.employeeList,
+            // ? order.employeeList.map((employee) => ({
+            //   individualId: employee.individualId,
+            //   firstName: employee.firstName,
+            //   secondName: employee.secondName,
+            //   lastName: employee.lastName,
+            //   pesel: employee.pesel,
+            // }))
+            // : [],
+            client: order.client,
+            activitiesList: order.activitiesList,
+            partList: order.partList,
+            dateOfAdmission: order.dateOfAdmission,
+            dateOfExecution: order.dateOfExecution,
+            priority: order.priority,
+            status: order.status,
+            period: order.period,
+            note: order.note,
+          };
+        })
+      )
+    );
   }
 
   //TODO  Sprawdz Emit id w state-traning
   add(orderDto: Partial<OrderDto>): Observable<void> {
-    return this._httpClient.post<void>("http://localhost:8080/order/add", orderDto)
+    return this._httpClient.post<void>(this.url + 'order/add', orderDto);
   }
 
   delete(id: number): Observable<void> {
-    return this._httpClient.delete<void>("http://localhost:8080/order/delete/" + id);
+    return this._httpClient.delete<void>(this.url + 'order/delete/' + id);
   }
 
   duplicateOrder(id: number): Observable<OrderDto> {
-    return this._httpClient.post<OrderDto>('http://localhost:8080/order/duplicate/', id)
+    return this._httpClient.post<OrderDto>(this.url + 'order/duplicate/', id);
   }
 
   getOneOrder(id: number): Observable<OrderDto> {
-    return this._httpClient.get<OrderDto>('http://localhost:8080/order/one/' + id)
+    return this._httpClient.get<OrderDto>(this.url + 'order/one/' + id);
   }
 
   putOrder(order: OrderDto): Observable<void> {
-    console.log('service')
-    return this._httpClient.put<void>('http://localhost:8080/order/update',order);
+    console.log('service');
+    return this._httpClient.put<void>(this.url + 'order/update', order);
   }
 }
-

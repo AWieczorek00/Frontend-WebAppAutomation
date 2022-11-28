@@ -7,5 +7,5 @@ export interface NewOrderContext {
   readonly clientList: ClientDto[];
   readonly employeeList: EmployeeDto[];
   readonly activitiesTemplateList: ActivitiesTemplateDto[];
-  readonly partsTemplate:PartsTemplateDto[];
+  readonly partsTemplateList:PartsTemplateDto[];
 }

@@ -1,10 +1,14 @@
 import { InjectionToken } from '@angular/core';
-import { ActivitiesDto } from "../activities/activities.dto";
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
+import { ActivitiesTemplateDto } from './activities-template.dto';
 
-export const ADD_ACTIVITIES_TEMPLATE_DTO_PORT = new InjectionToken<AddActivitiesTemplateDtoPort>('ADD_ACTIVITIES_TEMPLATE_DTO_PORT');
+export const ADD_ACTIVITIES_TEMPLATE_DTO_PORT =
+  new InjectionToken<AddActivitiesTemplateDtoPort>(
+    'ADD_ACTIVITIES_TEMPLATE_DTO_PORT'
+  );
 
 export interface AddActivitiesTemplateDtoPort {
-
-  add(activitiesTemplate:Omit<Partial<ActivitiesDto>,'id'>):Observable<void>
+  add(
+    activitiesTemplate: Omit<Partial<ActivitiesTemplateDto>, 'id'>
+  ): Observable<void>;
 }

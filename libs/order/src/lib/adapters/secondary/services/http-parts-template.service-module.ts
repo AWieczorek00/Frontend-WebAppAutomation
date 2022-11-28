@@ -6,8 +6,13 @@ import { ADD_ACTIVITIES_TEMPLATE_DTO_PORT } from '../../../application/ports/sec
 @NgModule({
   imports: [],
   declarations: [],
-  providers: [HttpPartsTemplateService, { provide: GET_ALL_PARTS_TEMPLATE_DTO_PORT, useExisting: HttpPartsTemplateService }, { provide: ADD_ACTIVITIES_TEMPLATE_DTO_PORT, useExisting: HttpPartsTemplateService }],
-  exports: []
+  providers: [
+    HttpPartsTemplateService,
+    {
+      provide: GET_ALL_PARTS_TEMPLATE_DTO_PORT,
+      useExisting: HttpPartsTemplateService,
+    },
+  ],
+  exports: [],
 })
-export class HttpPartsTemplateServiceModule {
-}
+export class HttpPartsTemplateServiceModule {}

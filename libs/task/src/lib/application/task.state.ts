@@ -75,15 +75,13 @@ export class TaskState
   }
 
   loadEmployee(): Observable<void> {
-    return this._getAllEmployeeDtoPort
-      .getAll()
-      .pipe(
-        switchMap((employeeList) =>
-          this._setStateEmployeeContextPort.setState({
-            employeeList: employeeList,
-          })
-        )
-      );
+    return this._getAllEmployeeDtoPort.getAll().pipe(
+      switchMap((employeeList) =>
+        this._setStateEmployeeContextPort.setState({
+          employeeList: employeeList,
+        })
+      )
+    );
   }
 
   getCurrencyEmployeeList(): Observable<EmployeeListQuery> {
@@ -98,9 +96,19 @@ export class TaskState
       .pipe(map((task) => mapFromTaskContext(task)));
   }
 
-
   add(command: AddTaskCommand): Observable<void> {
-    console.log(command);
-    return this._addTaskDtoPort.add(command);
+    return this._addTaskDtoPort.add(command).pipe(
+      switchMap(() => this._getAllTaskDtoPort.getAll()),
+      switchMap((taskList) =>
+        this._patchTaskContextPort.patch({ taskList: taskList })
+      )
+    );
   }
 }
+
+// return this._duplicateOrderDtoPort.duplicateOrder(id).pipe(
+//   switchMap(() => this._getAllDtoPort.getAll()),
+//   switchMap((orderList) =>
+//     this._setsStateOrderContextPort.setState({ orderList: orderList })
+//   )
+// );
