@@ -20,6 +20,7 @@
                   formControlName="name"
                 />
                 <mat-autocomplete
+
                   #client="matAutocomplete"
                   (optionSelected)="getClient($event.option.value)"
                   [displayWith]="getOptionClient"
@@ -140,14 +141,17 @@
                     panelClass="myPanelClass"
                     disableOptionCentering
                   >
-                    <mat-option style="font-size: 15px" value="Niski"
-                      >Niski
+                    <mat-option style="font-size: 15px" value="Przegląd roczny"
+                      >Przegląd roczny
                     </mat-option>
-                    <mat-option style="font-size: 15px" value="Normlany"
-                      >Normlany
+                    <mat-option style="font-size: 15px" value="Przegląd półroczny"
+                      >Przegląd półroczny
                     </mat-option>
-                    <mat-option style="font-size: 15px" value="Wysoki"
-                      >Wysoki
+                    <mat-option style="font-size: 15px" value="Przegląd kwartalny"
+                      >Przegląd kwartalny
+                    </mat-option>
+                    <mat-option style="font-size: 15px" value="Przegląd miesięczny"
+                      >Przegląd miesięczny
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -165,7 +169,7 @@
             <mat-form-field class="field-order" appearance="legacy">
               <mat-label>ulica</mat-label>
               <input
-                [readonly]="true"
+
                 formControlName="street"
                 autocomplete="off"
                 matInput
@@ -178,7 +182,7 @@
             >
               <mat-label>Numer ulicy</mat-label>
               <input
-                [readonly]="true"
+
                 formControlName="streetNumber"
                 autocomplete="off"
                 matInput
@@ -251,8 +255,9 @@
           Dodaj
         </button>
 
-        <button class="btn btn-outline-primary" (click)="openNewActivities()" >Dodaj nową czynność</button>
-
+        <button class="btn btn-outline-primary" (click)="openNewActivities()">
+          Dodaj nową czynność
+        </button>
       </div>
 
       <form [formGroup]="order">
@@ -277,20 +282,12 @@
               *matCellDef="let row; let index = index"
               [formGroupName]="index"
             >
-              <mat-form-field class="disable-input">
-                <input
-                  matInput
-                  type="text"
-                  value=""
-                  formControlName="name"
-                  [readonly]="true"
-                />
-              </mat-form-field>
+              {{this.activitiesRows.at(index).get('name')?.value}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="attention">
-            <th mat-header-cell *matHeaderCellDef>attention</th>
+            <th mat-header-cell *matHeaderCellDef>Uwagi</th>
             <td
               mat-cell
               *matCellDef="let row; let index = index"
@@ -308,21 +305,33 @@
           </ng-container>
 
           <ng-container matColumnDef="done">
-            <th mat-header-cell *matHeaderCellDef>done</th>
+            <th mat-header-cell *matHeaderCellDef>Wykonano</th>
             <td
               mat-cell
               *matCellDef="let row; let index = index"
               [formGroupName]="index"
             >
-              <mat-form-field class="disable-input">
-                <input
-                  matInput
-                  type="text"
-                  value=""
-                  formControlName="done"
-                  [readonly]="true"
-                />
-              </mat-form-field>
+              <div *ngIf="this.activitiesRows.at(index).get('done')?.value">
+                Wykonano
+              </div>
+              <div *ngIf="!this.activitiesRows.at(index).get('done')?.value">
+                Nie wykonano
+              </div>
+
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row; let index = index"
+                [formGroupName]="index">
+              <button
+                mat-mini-fab
+                color="warn"
+                aria-label="Example icon button with a delete icon"
+                (click)="deleteActivities(index)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
             </td>
           </ng-container>
         </table>
@@ -385,6 +394,20 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a delete icon"
+              (click)="deleteEmployee(element.individualId)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="nameRowEmployee"></tr>
         <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
       </table>
@@ -441,15 +464,7 @@
               *matCellDef="let row; let index = index"
               [formGroupName]="index"
             >
-              <mat-form-field class="disable-input">
-                <input
-                  matInput
-                  type="text"
-                  value=""
-                  formControlName="name"
-                  [readonly]="true"
-                />
-              </mat-form-field>
+              {{this.partRows.at(index).get('name')?.value}}
             </td>
           </ng-container>
 
@@ -460,15 +475,7 @@
               *matCellDef="let row; let index = index"
               [formGroupName]="index"
             >
-              <mat-form-field class="disable-input">
-                <input
-                  matInput
-                  type="text"
-                  value=""
-                  formControlName="price"
-                  [readonly]="true"
-                />
-              </mat-form-field>
+              {{this.partRows.at(index).get('price')?.value}}
             </td>
           </ng-container>
 
@@ -489,9 +496,112 @@
               </mat-form-field>
             </td>
           </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element; let index = index"
+                [formGroupName]="index">
+              <button
+                mat-mini-fab
+                color="warn"
+                aria-label="Example icon button with a delete icon"
+                (click)="deleteParts(index)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
         </table>
       </form>
     </div>
+  </mat-tab>
+  <mat-tab label="Robocizna">
+    <form [formGroup]="order" (ngSubmit)="onOrderSubmitted(order)">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div style="display: flex">
+              <mat-form-field class="field-manHour" appearance="legacy">
+                <mat-label>Odległość w km</mat-label>
+                <input
+                  (keyup.enter)="setDistance(order)"
+                  formControlName="distance"
+                  autocomplete="off"
+                  matInput
+                />
+              </mat-form-field>
+              <div
+                style="height: 60px; position: relative;margin-left: 100px;"
+              >
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 50px;
+                  "
+                >
+                  2 Zł
+                </div>
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 100px;
+                    margin-left: 100px;
+                  "
+                >
+                  {{ summaryDistance }} zł
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex">
+              <mat-form-field class="field-manHour" appearance="legacy">
+                <mat-label>Roboczogodzina</mat-label>
+                <input
+                  formControlName="manHour"
+                  autocomplete="off"
+                  matInput
+                  (keyup.enter)="setManHour(order)"
+                />
+              </mat-form-field>
+              <div
+                style="height: 60px; position: relative;margin-left: 100px;"
+              >
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 50px;
+
+                  "
+                >
+                  50 Zł
+                </div>
+
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 100px;
+                    margin-left: 100px;
+                  "
+                >
+                  {{ summaryManHour }} zł
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </mat-tab>
 
   <mat-tab label="Podsumowanie">
@@ -730,6 +840,11 @@
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="nameRowEmployee"></tr>
             <tr mat-row *matRowDef="let row; columns: nameRowEmployee"></tr>
           </table>
@@ -788,7 +903,6 @@
                     [readonly]="true"
                   />
                 </mat-form-field>
-                {{ order.get("activitiesList.1")?.value }}
               </td>
             </ng-container>
 
@@ -799,16 +913,19 @@
                 *matCellDef="let row; let index = index"
                 [formGroupName]="index"
               >
-                <mat-form-field class="disable-input">
-                  <input
-                    matInput
-                    type="text"
-                    value=""
-                    formControlName="done"
-                    [readonly]="true"
-                  />
-                </mat-form-field>
+                <div *ngIf="this.activitiesRows.at(index).get('attention')?.value">
+                  Wykonano
+                </div>
+                <div *ngIf="!this.activitiesRows.at(index).get('attention')?.value">
+                  Nie wykonano
+                </div>
+
               </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element"></td>
             </ng-container>
           </table>
         </div>
@@ -833,15 +950,7 @@
                 *matCellDef="let row; let index = index"
                 [formGroupName]="index"
               >
-                <mat-form-field class="disable-input">
-                  <input
-                    matInput
-                    type="text"
-                    value=""
-                    formControlName="name"
-                    [readonly]="true"
-                  />
-                </mat-form-field>
+                {{this.partRows.at(index).get('name')?.value}}
               </td>
             </ng-container>
 
@@ -852,15 +961,7 @@
                 *matCellDef="let row; let index = index"
                 [formGroupName]="index"
               >
-                <mat-form-field class="disable-input">
-                  <input
-                    matInput
-                    type="text"
-                    value=""
-                    formControlName="price"
-                    [readonly]="true"
-                  />
-                </mat-form-field>
+                {{this.partRows.at(index).get('price')?.value}}
               </td>
             </ng-container>
 
@@ -882,13 +983,20 @@
                 </mat-form-field>
               </td>
             </ng-container>
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+
+              </td>
+            </ng-container>
           </table>
         </div>
       </div>
 
       <input class="btn btn-outline-primary" type="submit" value="Zapisz" />
+
     </form>
+    <button class="btn btn-outline-primary" (click)="orderPdf(order)">Drukuj protokół</button>
   </mat-tab>
 </mat-tab-group>
 
-<pre>{{ order.value | json }}</pre>

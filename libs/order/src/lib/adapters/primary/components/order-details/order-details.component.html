@@ -1,4 +1,3 @@
-<ng-container *ngIf="order$ | async as item">{{ item | json }}</ng-container>
 
 <mat-tab-group (selectedTabChange)="setSummary($event, order)">
   <mat-tab label="Zlecenie">
@@ -138,14 +137,17 @@
                     panelClass="myPanelClass"
                     disableOptionCentering
                   >
-                    <mat-option style="font-size: 15px" value="Niski"
-                      >Niski
+                    <mat-option style="font-size: 15px" value="Przegląd roczny"
+                    >Przegląd roczny
                     </mat-option>
-                    <mat-option style="font-size: 15px" value="Normlany"
-                      >Normlany
+                    <mat-option style="font-size: 15px" value="Przegląd półroczny"
+                    >Przegląd półroczny
                     </mat-option>
-                    <mat-option style="font-size: 15px" value="Wysoki"
-                      >Wysoki
+                    <mat-option style="font-size: 15px" value="Przegląd kwartalny"
+                    >Przegląd kwartalny
+                    </mat-option>
+                    <mat-option style="font-size: 15px" value="Przegląd miesięczny"
+                    >Przegląd miesięczny
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -163,7 +165,6 @@
             <mat-form-field class="field-order" appearance="legacy">
               <mat-label>ulica</mat-label>
               <input
-                [readonly]="true"
                 formControlName="street"
                 autocomplete="off"
                 matInput
@@ -176,7 +177,6 @@
             >
               <mat-label>Numer ulicy</mat-label>
               <input
-                [readonly]="true"
                 formControlName="streetNumber"
                 autocomplete="off"
                 matInput
@@ -301,10 +301,10 @@
               *matCellDef="let row; let index = index"
               [formGroupName]="index"
             >
-              <div *ngIf="this.activitiesRows.at(index).get('attention')?.value">
+              <div *ngIf="this.activitiesRows.at(index).get('done')?.value">
                 Wykonano
               </div>
-              <div *ngIf="!this.activitiesRows.at(index).get('attention')?.value">
+              <div *ngIf="!this.activitiesRows.at(index).get('done')?.value">
                 Nie wykonano
               </div>
 
@@ -503,7 +503,95 @@
       </form>
     </div>
   </mat-tab>
+  <mat-tab label="Robocizna">
+    <form [formGroup]="order" (ngSubmit)="update(order)">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div style="display: flex">
+              <mat-form-field class="field-manHour" appearance="legacy">
+                <mat-label>Odległość w km</mat-label>
+                <input
+                  (keyup.enter)="setDistance(order)"
+                  formControlName="distance"
+                  autocomplete="off"
+                  matInput
+                />
+              </mat-form-field>
+              <div
+                style="height: 60px; position: relative;margin-left: 100px;"
+              >
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 50px;
+                  "
+                >
+                  2 Zł
+                </div>
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 100px;
+                    margin-left: 100px;
+                  "
+                >
+                  {{ summaryDistance }} zł
+                </div>
+              </div>
+            </div>
 
+            <div style="display: flex">
+              <mat-form-field class="field-manHour" appearance="legacy">
+                <mat-label>Roboczogodzina</mat-label>
+                <input
+                  formControlName="manHour"
+                  autocomplete="off"
+                  matInput
+                  (keyup.enter)="setManHour(order)"
+                />
+              </mat-form-field>
+              <div
+                style="height: 60px; position: relative;margin-left: 100px;"
+              >
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 50px;
+
+                  "
+                >
+                  50 Zł
+                </div>
+
+                <div
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    width: 100px;
+                    margin-left: 100px;
+                  "
+                >
+                  {{ summaryManHour }} zł
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-tab>
   <mat-tab label="Podsumowanie">
     <form class="example-form" [formGroup]="order" (ngSubmit)="update(order)">
       <div class="container text-center">
@@ -889,5 +977,7 @@
 
       <input class="btn btn-outline-primary" type="submit" value="Zapisz" />
     </form>
+    <button class="btn btn-outline-primary" (click)="orderPdf(order)">Drukuj protokół</button>
+
   </mat-tab>
 </mat-tab-group>

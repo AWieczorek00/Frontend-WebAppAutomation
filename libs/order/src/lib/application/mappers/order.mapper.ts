@@ -11,6 +11,7 @@ export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
       (order) =>
         new OrderQuery(
           order.id,
+          order.client,
           order.employeeList
             ? order.employeeList.map(
                 (employeeDto) =>
@@ -23,7 +24,6 @@ export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
                   )
               )
             : [],
-          order.client,
           order.activitiesList
             ? order.activitiesList.map(
                 (activities) =>
@@ -48,6 +48,8 @@ export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
             : [],
           order.dateOfAdmission,
           order.dateOfExecution,
+          order.manHour,
+          order.distance,
           order.priority,
           order.status,
           order.period,

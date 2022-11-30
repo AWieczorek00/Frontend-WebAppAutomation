@@ -8,19 +8,19 @@ import { DeleteOrderDtoPort } from '../../../application/ports/secondary/dto/ord
 import { DuplicateOrderDtoPort } from '../../../application/ports/secondary/dto/order/duplicate-order.dto-port';
 import { GetOneOrderDtoPort } from '../../../application/ports/secondary/dto/order/get-one-order.dto-port';
 import { PutOrderDtoPort } from '../../../application/ports/secondary/dto/order/put-order.dto-port';
+import { OrderPdfDtoPort } from '../../../application/ports/secondary/dto/order/order-pdf.dto-port';
 import { OrderDto } from '../../../application/ports/secondary/dto/order/order.dto';
 
 @Injectable()
 export class OrderService
   implements
-    GetAllDtoPort,
-    AddOrderDtoPort,
-    DeleteOrderDtoPort,
-    DuplicateOrderDtoPort,
-    GetOneOrderDtoPort,
-    PutOrderDtoPort
-{
-  constructor(private _httpClient: HttpClient) {}
+  GetAllDtoPort,
+  AddOrderDtoPort,
+  DeleteOrderDtoPort,
+  DuplicateOrderDtoPort,
+  GetOneOrderDtoPort,
+  PutOrderDtoPort, OrderPdfDtoPort {
+  constructor(private _httpClient: HttpClient) { }
   private url = 'http://localhost:8080/';
   getAll(): Observable<OrderDto[]> {
     return this._httpClient.get<OrderDto[]>(this.url + 'order/all').pipe(
@@ -42,6 +42,8 @@ export class OrderService
             partList: order.partList,
             dateOfAdmission: order.dateOfAdmission,
             dateOfExecution: order.dateOfExecution,
+            manHour: order.manHour,
+            distance: order.distance,
             priority: order.priority,
             status: order.status,
             period: order.period,
@@ -72,5 +74,9 @@ export class OrderService
   putOrder(order: OrderDto): Observable<void> {
     console.log('service');
     return this._httpClient.put<void>(this.url + 'order/update', order);
+  }
+
+  orderPdf(order: OrderDto): Observable<any> {
+    return this._httpClient.post(this.url+'order/protocol',order,{ responseType: 'blob' })
   }
 }

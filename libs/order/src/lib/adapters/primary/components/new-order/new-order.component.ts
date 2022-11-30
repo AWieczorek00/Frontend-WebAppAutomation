@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  LOCALE_ID,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -12,8 +13,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { filter, take } from 'rxjs/operators';
-import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
+import { saveAs } from 'file-saver';
+import {
+  BehaviorSubject,
+  Observable,
+  map,
+  startWith,
+  take,
+  throwError,
+} from 'rxjs';
 import { Router } from '@angular/router';
 import {
   GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT,
@@ -23,6 +31,10 @@ import {
   CREATE_ORDER_COMMAND_PORT,
   CreateOrderCommandPort,
 } from '../../../../application/ports/primary/command/order/create-order.command-port';
+import {
+  PDF_ORDER_COMMAND_PORT,
+  PdfOrderCommandPort,
+} from '../../../../application/ports/primary/command/order/pdf-order.command-port';
 import { ClientQuery } from '../../../../application/ports/primary/query/client.query';
 import { EmployeeQuery } from '../../../../application/ports/primary/query/employee.query';
 import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/query/activities-template/activities-template.query';
@@ -32,10 +44,18 @@ import { ActivitiesTemplateDto } from '../../../../application/ports/secondary/d
 import { ActivitiesQuery } from '../../../../application/ports/primary/query/activities.query';
 import { PartQuery } from '../../../../application/ports/primary/query/part/partQuery';
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
+import { AddActivitiesComponent } from '../add-activities/add-activities.component';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { MatDialog } from "@angular/material/dialog";
-import { AddActivitiesComponent } from "../add-activities/add-activities.component";
+import { GenerationOrderPdfCommand } from '../../../../application/ports/primary/command/order/generation-order-pdf.command';
+import {
+  ORDER_PDF_DTO_PORT,
+  OrderPdfDtoPort,
+} from '../../../../application/ports/secondary/dto/order/order-pdf.dto-port';
+import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'lib-new-order',
@@ -46,13 +66,18 @@ import { AddActivitiesComponent } from "../add-activities/add-activities.compone
 })
 export class NewOrderComponent {
   constructor(
+    private _snackBar: MatSnackBar,
+    @Inject(LOCALE_ID) private locale: string,
+    private _httpClient: HttpClient,
     @Inject(GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT)
     private _getsNewOrderCurrencyElementsQueryPort: GetsNewOrderCurrencyElementsQueryPort,
     @Inject(CREATE_ORDER_COMMAND_PORT)
     private _createOrderCommandPort: CreateOrderCommandPort,
     private _formBuilder: FormBuilder,
     private _router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    @Inject(PDF_ORDER_COMMAND_PORT)
+    private _pdfOrderCommandPort: PdfOrderCommandPort,
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeListAutocomplete = employee.employeeList)
@@ -139,13 +164,11 @@ export class NewOrderComponent {
     zipcode: new FormControl(),
     email: new FormControl(),
     note: new FormControl(),
+    distance: new FormControl(),
+    manHour: new FormControl(),
     activitiesList: this.activitiesRows,
     partList: this.partRows,
   });
-
-  // readonly attention: FormGroup = new FormGroup({
-  //   attention: new FormControl(''),
-  // });
 
   readonly elements$: Observable<NewOrderQuery> =
     this._getsNewOrderCurrencyElementsQueryPort.getNewOrderCurrencyElements();
@@ -168,12 +191,14 @@ export class NewOrderComponent {
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
   behaviorActivities = new BehaviorSubject<AbstractControl[]>([]);
   behaviorParts = new BehaviorSubject<AbstractControl[]>([]);
-  nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName'];
-  nameRowActivities = ['name', 'attention', 'done'];
-  nameRowParts = ['name', 'price', 'amount'];
+  nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName','delete'];
+  nameRowActivities = ['name', 'attention', 'done','delete'];
+  nameRowParts = ['name', 'price', 'amount','delete'];
   employeeList: EmployeeQuery[] = [];
 
   // activitiesList: ActivitiesQuery[] = [];
+  summaryDistance: any;
+  summaryManHour: any;
 
   getOptionClient(clientQueries: ClientQuery) {
     return clientQueries.name;
@@ -266,6 +291,8 @@ export class NewOrderComponent {
           order.get('partList')?.value,
           order.get('dateOfAdmission')?.value,
           order.get('dateOfExecution')?.value,
+          order.get('manHour')?.value,
+          order.get('distance')?.value,
           order.get('priority')?.value,
           order.get('status')?.value,
           order.get('period')?.value,
@@ -345,6 +372,8 @@ export class NewOrderComponent {
         zipcode: order.get('zipcode')?.value,
         email: order.get('email')?.value,
         note: order.get('note')?.value,
+        distance: order.get('distance')?.value,
+        manHour: order.get('manHour')?.value,
         activitiesList: order.get('activitiesList')?.value,
         partList: order.get('partList')?.value,
       });
@@ -360,8 +389,107 @@ export class NewOrderComponent {
   }
 
   openNewActivities() {
-    this.dialog.open(AddActivitiesComponent,{
-      width:'300px',
-    })
+    this.dialog.open(AddActivitiesComponent, {
+      width: '300px',
+    });
+  }
+
+  setDistance(order: any) {
+    this.summaryDistance = order.get('distance')?.value * 2;
+  }
+
+  setManHour(order: FormGroup) {
+    this.summaryManHour = order.get('manHour')?.value * 50;
+  }
+
+  orderPdf(order: FormGroup) {
+    var mediaType = 'application/pdf';
+
+    if (this.employeeList.length === 0) {
+      this._snackBar.open('Brakuje serwisanta', 'Zamknij', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    } else {
+      this._pdfOrderCommandPort
+        .orderPdf(
+          new GenerationOrderPdfCommand(
+            NaN,
+            this.createClient(order),
+            this.employeeList,
+            order.get('activitiesList')?.value,
+            order.get('partList')?.value,
+            order.get('dateOfAdmission')?.value,
+            order.get('dateOfExecution')?.value,
+            order.get('manHour')?.value,
+            order.get('distance')?.value,
+            order.get('priority')?.value,
+            order.get('status')?.value,
+            order.get('period')?.value,
+            order.get('note')?.value
+          )
+        )
+        .pipe(take(1))
+        .subscribe(
+          (response) => {
+            var blob = new Blob([response], { type: mediaType });
+            saveAs(
+              blob,
+              this.createClient(order).name +
+                '/' +
+                formatDate(
+                  order.get('dateOfExecution')?.value,
+                  'yyyy-MM-dd',
+                  this.locale
+                ) +
+                '.pdf'
+            );
+          },
+          (e) => {
+            throwError(e);
+          }
+        );
+    }
+  }
+
+  createClient(order: FormGroup): ClientQuery {
+    var client: ClientQuery;
+
+    if (typeof order.get('name')?.value === 'object') {
+      client = order.get('name')?.value;
+    } else {
+      client = {
+        id: NaN,
+        name: order.get('name')?.value,
+        nip: order.get('nip')?.value,
+        address: order.get('street')?.value,
+        city: order.get('city')?.value,
+        zipcode: order.get('zipcode')?.value,
+        apartmentNumber: order.get('apartmentNumber')?.value,
+        streetNumber: order.get('streetNumber')?.value,
+        phoneNumber: order.get('phoneNumber')?.value,
+        email: order.get('email')?.value,
+        type: '',
+      };
+    }
+    return client;
+  }
+
+  deleteActivities(index:number) {
+    this.activitiesRows.removeAt(index);
+    this.updateActivitiesView();
+  }
+
+
+  deleteEmployee(individualId: number) {
+    this.employeeList = this.employeeList.filter(employee => employee.individualId !== individualId)
+    this.dataSourceEmployee = new MatTableDataSource<EmployeeQuery>(
+      this.employeeList
+    );
+  }
+
+  deleteParts(index: number) {
+    this.partRows.removeAt(index);
+    this.updatePartsView()
   }
 }

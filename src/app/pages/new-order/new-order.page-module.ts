@@ -21,6 +21,7 @@ import {
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from '../../request.interceptor';
 import {NavigationComponentModule} from "@navigation";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import {NavigationComponentModule} from "@navigation";
     LoadAllActivitiesTemplateResolverModule,
     HttpActivitiesTemplateServiceModule,
     HttpPartsTemplateServiceModule,
-    LoadAllPartsTemplateResolverModule
+    LoadAllPartsTemplateResolverModule,
+    MatSnackBarModule
   ],
   declarations: [NewOrderPage],
   providers: [

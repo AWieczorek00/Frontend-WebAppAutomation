@@ -11,16 +11,11 @@ import {
   GetsCurrentOrderListQueryPort,
 } from '../../../../application/ports/primary/query/gets-current-order-list.query-port';
 import {
-  CREATE_ORDER_COMMAND_PORT,
-  CreateOrderCommandPort,
-} from '../../../../application/ports/primary/command/order/create-order.command-port';
-import {
   DUPLICATE_ORDER_COMMAND_PORT,
   DuplicateOrderCommandPort,
 } from '../../../../application/ports/primary/command/duplicate-order.command-port';
 import { OrderListQuery } from '../../../../application/ports/primary/query/order-list.query';
 import { OrderQuery } from '../../../../application/ports/primary/query/order.query';
-import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -38,8 +33,6 @@ export class OrderListComponent {
     @Inject(GETS_CURRENT_ORDER_LIST_QUERY_PORT)
     private _getsCurrentOrderListQueryPort: GetsCurrentOrderListQueryPort,
     private _router: Router,
-    @Inject(CREATE_ORDER_COMMAND_PORT)
-    private _createOrderCommandPort: CreateOrderCommandPort,
     @Inject(DUPLICATE_ORDER_COMMAND_PORT)
     private _duplicateOrderCommandPort: DuplicateOrderCommandPort
   ) {
@@ -69,7 +62,8 @@ export class OrderListComponent {
 
   duplicateOrder(order: OrderQuery) {
     console.log('test');
-    this._duplicateOrderCommandPort.duplicateOrder(order.id)
+    this._duplicateOrderCommandPort
+      .duplicateOrder(order.id)
       .pipe(take(1))
       .subscribe();
   }

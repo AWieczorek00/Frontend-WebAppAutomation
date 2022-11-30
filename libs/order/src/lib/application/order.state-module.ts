@@ -13,6 +13,7 @@ import { DELETE_ORDER_COMMAND_PORT } from './ports/primary/command/order/delete-
 import { DUPLICATE_ORDER_COMMAND_PORT } from './ports/primary/command/duplicate-order.command-port';
 import { UPDATE_ORDER_COMMAND_PORT } from './ports/primary/command/order/update-order.command-port';
 import { ADD_ACTIVITIES_TEMPLATE_COMMAND_PORT } from './ports/primary/command/partsTemplate/add-activities-template.command-port';
+import { PDF_ORDER_COMMAND_PORT } from './ports/primary/command/order/pdf-order.command-port';
 
 @NgModule({
   imports: [],
@@ -31,7 +32,8 @@ import { ADD_ACTIVITIES_TEMPLATE_COMMAND_PORT } from './ports/primary/command/pa
     { provide: DELETE_ORDER_COMMAND_PORT, useExisting: OrderState },
     { provide: DUPLICATE_ORDER_COMMAND_PORT, useExisting: OrderState },
     { provide: UPDATE_ORDER_COMMAND_PORT, useExisting: OrderState },
-    { provide: ADD_ACTIVITIES_TEMPLATE_COMMAND_PORT, useExisting: OrderState }
+    { provide: ADD_ACTIVITIES_TEMPLATE_COMMAND_PORT, useExisting: OrderState },
+    { provide: PDF_ORDER_COMMAND_PORT, useExisting: OrderState }
   ],
   exports: [],
 })

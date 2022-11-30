@@ -6,49 +6,30 @@ import { LoadTaskCommandPort } from './ports/primary/command/load-task.command-p
 import { LoadEmployeeCommandPort } from './ports/primary/command/load-employee.command-port';
 import { GetCurrencyEmployeeListQueryPort } from './ports/primary/query/employee/get-currency-employee-list.query-port';
 import { GetCurrencyTaskListQueryPort } from './ports/primary/query/task/get-currency-task-list.query-port';
-import {
-  ADD_TASK_DTO_PORT,
-  AddTaskDtoPort,
-} from './ports/secondary/dto/task/add-task.dto-port';
-import {
-  GET_ALL_TASK_DTO_PORT,
-  GetAllTaskDtoPort,
-} from './ports/secondary/dto/task/get-all-task.dto-port';
-import {
-  PATCH_TASK_CONTEXT_PORT,
-  PatchTaskContextPort,
-} from './ports/secondary/context/task/patch-task.context-port';
-import {
-  GET_ALL_EMPLOYEE_DTO_PORT,
-  GetAllEmployeeDtoPort,
-} from './ports/secondary/dto/employee/get-all-employee.dto-port';
-import {
-  SELECT_TASK_CONTEXT_CONTEXT_PORT,
-  SelectTaskContextContextPort,
-} from './ports/secondary/context/task/select-task-context.context-port';
-import {
-  SET_STATE_EMPLOYEE_CONTEXT_PORT,
-  SetStateEmployeeContextPort,
-} from './ports/secondary/context/employee/set-state-employee.context-port';
-import {
-  SELECT_EMPLOYEE_CONTEXT_PORT,
-  SelectEmployeeContextPort,
-} from './ports/secondary/context/employee/select-employee.context-port';
-import { AddTaskCommand } from './ports/primary/command/add-task.command';
+import { DoneTaskUpdateCommandPort } from './ports/primary/command/done-task-update.command-port';
+import { ADD_TASK_DTO_PORT, AddTaskDtoPort } from './ports/secondary/dto/task/add-task.dto-port';
+import { GET_ALL_TASK_DTO_PORT, GetAllTaskDtoPort } from './ports/secondary/dto/task/get-all-task.dto-port';
+import { PATCH_TASK_CONTEXT_PORT, PatchTaskContextPort } from './ports/secondary/context/task/patch-task.context-port';
+import { GET_ALL_EMPLOYEE_DTO_PORT, GetAllEmployeeDtoPort } from './ports/secondary/dto/employee/get-all-employee.dto-port';
+import { SELECT_TASK_CONTEXT_CONTEXT_PORT, SelectTaskContextContextPort } from './ports/secondary/context/task/select-task-context.context-port';
+import { SET_STATE_EMPLOYEE_CONTEXT_PORT, SetStateEmployeeContextPort } from './ports/secondary/context/employee/set-state-employee.context-port';
+import { SELECT_EMPLOYEE_CONTEXT_PORT, SelectEmployeeContextPort } from './ports/secondary/context/employee/select-employee.context-port';
+import { PUT_DONE_TASK_DTO_PORT, PutDoneTaskDtoPort } from './ports/secondary/dto/task/put-done-task.dto-port';
 import { EmployeeListQuery } from './ports/primary/query/employee/employee-list.query';
 import { TaskListQuery } from './ports/primary/query/task/task-list.query';
+import { AddTaskCommand } from './ports/primary/command/add-task.command';
+import { DoneTaskCommand } from './ports/primary/command/done-task.command';
 import { mapFromEmployeeContext } from './mappers/employee.mapper';
 import { mapFromTaskContext } from './mappers/task.mapper';
 
 @Injectable()
 export class TaskState
   implements
-    AddTaskCommandPort,
-    LoadTaskCommandPort,
-    LoadEmployeeCommandPort,
-    GetCurrencyEmployeeListQueryPort,
-    GetCurrencyTaskListQueryPort
-{
+  AddTaskCommandPort,
+  LoadTaskCommandPort,
+  LoadEmployeeCommandPort,
+  GetCurrencyEmployeeListQueryPort,
+  GetCurrencyTaskListQueryPort, DoneTaskUpdateCommandPort {
   constructor(
     @Inject(ADD_TASK_DTO_PORT) private _addTaskDtoPort: AddTaskDtoPort,
     @Inject(GET_ALL_TASK_DTO_PORT)
@@ -62,8 +43,10 @@ export class TaskState
     @Inject(SET_STATE_EMPLOYEE_CONTEXT_PORT)
     private _setStateEmployeeContextPort: SetStateEmployeeContextPort,
     @Inject(SELECT_EMPLOYEE_CONTEXT_PORT)
-    private _selectEmployeeContextPort: SelectEmployeeContextPort
-  ) {}
+    private _selectEmployeeContextPort: SelectEmployeeContextPort,
+    @Inject(PUT_DONE_TASK_DTO_PORT)
+    private _putDoneTaskDtoPort: PutDoneTaskDtoPort
+  ) { }
   loadTask(): Observable<void> {
     return this._getAllTaskDtoPort
       .getAll()
@@ -104,11 +87,14 @@ export class TaskState
       )
     );
   }
-}
 
-// return this._duplicateOrderDtoPort.duplicateOrder(id).pipe(
-//   switchMap(() => this._getAllDtoPort.getAll()),
-//   switchMap((orderList) =>
-//     this._setsStateOrderContextPort.setState({ orderList: orderList })
-//   )
-// );
+  done(command: DoneTaskCommand): Observable<void> {
+    return this._putDoneTaskDtoPort.done(command)
+      .pipe(
+        switchMap(() => this._getAllTaskDtoPort.getAll()),
+        switchMap((taskList) =>
+          this._patchTaskContextPort.patch({ taskList: taskList })
+        )
+      );
+  }
+}

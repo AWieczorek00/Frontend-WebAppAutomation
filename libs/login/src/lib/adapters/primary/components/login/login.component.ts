@@ -30,6 +30,7 @@ export class LoginComponent {
 
           localStorage.setItem('token', res['sessionId']);
           localStorage.setItem('roles', res['roles']);
+          localStorage.setItem('individualId', res['individualId']);
           if (res['roles'].find((element: string) => element === 'ADMIN'))
             this._router.navigate(['/admin-panel']);
         } else {

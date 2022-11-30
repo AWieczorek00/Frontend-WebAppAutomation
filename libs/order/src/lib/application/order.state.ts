@@ -13,62 +13,22 @@ import { DeleteOrderCommandPort } from './ports/primary/command/order/delete-ord
 import { DuplicateOrderCommandPort } from './ports/primary/command/duplicate-order.command-port';
 import { UpdateOrderCommandPort } from './ports/primary/command/order/update-order.command-port';
 import { AddActivitiesTemplateCommandPort } from './ports/primary/command/partsTemplate/add-activities-template.command-port';
-import {
-  GET_ALL_DTO_PORT,
-  GetAllDtoPort,
-} from './ports/secondary/dto/order/get-all.dto-port';
-import {
-  SETS_STATE_ORDER_CONTEXT_PORT,
-  SetsStateOrderContextPort,
-} from './ports/secondary/context/order/sets-state-order.context-port';
-import {
-  SELECT_ORDER_CONTEXT_PORT,
-  SelectOrderContextPort,
-} from './ports/secondary/context/order/select-order.context-port';
-import {
-  GET_ALL_CLIENT_DTO_PORT,
-  GetAllClientDtoPort,
-} from './ports/secondary/dto/client/get-all-client.dto-port';
-import {
-  CLIENT_CONTEXT_PORT,
-  ClientContextPort,
-} from './ports/secondary/context/client/client.context-port';
-import {
-  GET_ALL_EMPLOYEE_DTO_PORT,
-  GetAllEmployeeDtoPort,
-} from './ports/secondary/dto/employee/get-all-employee.dto-port';
-import {
-  NEW_ORDER_CONTEXT_PORT,
-  NewOrderContextPort,
-} from './ports/secondary/context/new-order/new-order.context-port';
-import {
-  GET_ALL_ACTIVITIES_TEMPLATE_DTO_PORT,
-  GetAllActivitiesTemplateDtoPort,
-} from './ports/secondary/dto/activitiesTemplate/get-all-activities-template.dto-port';
-import {
-  ADD_ORDER_DTO_PORT,
-  AddOrderDtoPort,
-} from './ports/secondary/dto/order/add-order.dto-port';
-import {
-  GET_ALL_PARTS_TEMPLATE_DTO_PORT,
-  GetAllPartsTemplateDtoPort,
-} from './ports/secondary/dto/parts-template/get-all-parts-template.dto-port';
-import {
-  DELETE_ORDER_DTO_PORT,
-  DeleteOrderDtoPort,
-} from './ports/secondary/dto/order/delete-order.dto-port';
-import {
-  DUPLICATE_ORDER_DTO_PORT,
-  DuplicateOrderDtoPort,
-} from './ports/secondary/dto/order/duplicate-order.dto-port';
-import {
-  PUT_ORDER_DTO_PORT,
-  PutOrderDtoPort,
-} from './ports/secondary/dto/order/put-order.dto-port';
-import {
-  ADD_ACTIVITIES_TEMPLATE_DTO_PORT,
-  AddActivitiesTemplateDtoPort,
-} from './ports/secondary/dto/activitiesTemplate/add-activities-template.dto-port';
+import { PdfOrderCommandPort } from './ports/primary/command/order/pdf-order.command-port';
+import { GET_ALL_DTO_PORT, GetAllDtoPort } from './ports/secondary/dto/order/get-all.dto-port';
+import { SETS_STATE_ORDER_CONTEXT_PORT, SetsStateOrderContextPort } from './ports/secondary/context/order/sets-state-order.context-port';
+import { SELECT_ORDER_CONTEXT_PORT, SelectOrderContextPort } from './ports/secondary/context/order/select-order.context-port';
+import { GET_ALL_CLIENT_DTO_PORT, GetAllClientDtoPort } from './ports/secondary/dto/client/get-all-client.dto-port';
+import { CLIENT_CONTEXT_PORT, ClientContextPort } from './ports/secondary/context/client/client.context-port';
+import { GET_ALL_EMPLOYEE_DTO_PORT, GetAllEmployeeDtoPort } from './ports/secondary/dto/employee/get-all-employee.dto-port';
+import { NEW_ORDER_CONTEXT_PORT, NewOrderContextPort } from './ports/secondary/context/new-order/new-order.context-port';
+import { GET_ALL_ACTIVITIES_TEMPLATE_DTO_PORT, GetAllActivitiesTemplateDtoPort } from './ports/secondary/dto/activitiesTemplate/get-all-activities-template.dto-port';
+import { ADD_ORDER_DTO_PORT, AddOrderDtoPort } from './ports/secondary/dto/order/add-order.dto-port';
+import { GET_ALL_PARTS_TEMPLATE_DTO_PORT, GetAllPartsTemplateDtoPort } from './ports/secondary/dto/parts-template/get-all-parts-template.dto-port';
+import { DELETE_ORDER_DTO_PORT, DeleteOrderDtoPort } from './ports/secondary/dto/order/delete-order.dto-port';
+import { DUPLICATE_ORDER_DTO_PORT, DuplicateOrderDtoPort } from './ports/secondary/dto/order/duplicate-order.dto-port';
+import { PUT_ORDER_DTO_PORT, PutOrderDtoPort } from './ports/secondary/dto/order/put-order.dto-port';
+import { ADD_ACTIVITIES_TEMPLATE_DTO_PORT, AddActivitiesTemplateDtoPort } from './ports/secondary/dto/activitiesTemplate/add-activities-template.dto-port';
+import { ORDER_PDF_DTO_PORT, OrderPdfDtoPort } from './ports/secondary/dto/order/order-pdf.dto-port';
 import { LoadOrdersCommand } from './ports/primary/command/order/load-orders.command';
 import { OrderListQuery } from './ports/primary/query/order-list.query';
 import { NewOrderQuery } from './ports/primary/query/new-order.query';
@@ -77,25 +37,25 @@ import { DeleteOrderCommand } from './ports/primary/command/order/delete-order.c
 import { OrderContext } from './ports/secondary/context/order/order.context';
 import { UpdateOrderCommand } from './ports/primary/command/order/update-order.command';
 import { AddActivitiesTemplateCommand } from './ports/primary/command/partsTemplate/add-activities-template.command';
+import { GenerationOrderPdfCommand } from './ports/primary/command/order/generation-order-pdf.command';
 import { mapFromOrderContext } from './mappers/order.mapper';
 import { mapFromNewOrderContext } from './mappers/newOrderElements.mapper';
 
 @Injectable()
 export class OrderState
   implements
-    LoadOrdersCommandPort,
-    GetsCurrentOrderListQueryPort,
-    LoadClientsCommandPort,
-    LoadEmployeesCommandPort,
-    GetsNewOrderCurrencyElementsQueryPort,
-    LoadActivitiesTemplateCommandPort,
-    CreateOrderCommandPort,
-    LoadPartsTemplateCommandPort,
-    DeleteOrderCommandPort,
-    DuplicateOrderCommandPort,
-    UpdateOrderCommandPort,
-    AddActivitiesTemplateCommandPort
-{
+  LoadOrdersCommandPort,
+  GetsCurrentOrderListQueryPort,
+  LoadClientsCommandPort,
+  LoadEmployeesCommandPort,
+  GetsNewOrderCurrencyElementsQueryPort,
+  LoadActivitiesTemplateCommandPort,
+  CreateOrderCommandPort,
+  LoadPartsTemplateCommandPort,
+  DeleteOrderCommandPort,
+  DuplicateOrderCommandPort,
+  UpdateOrderCommandPort,
+  AddActivitiesTemplateCommandPort, PdfOrderCommandPort {
   constructor(
     @Inject(GET_ALL_DTO_PORT) private _getAllDtoPort: GetAllDtoPort,
     @Inject(SETS_STATE_ORDER_CONTEXT_PORT)
@@ -120,8 +80,8 @@ export class OrderState
     private _duplicateOrderDtoPort: DuplicateOrderDtoPort,
     @Inject(PUT_ORDER_DTO_PORT) private _putOrderDtoPort: PutOrderDtoPort,
     @Inject(ADD_ACTIVITIES_TEMPLATE_DTO_PORT)
-    private _addActivitiesTemplateDtoPort: AddActivitiesTemplateDtoPort
-  ) {}
+    private _addActivitiesTemplateDtoPort: AddActivitiesTemplateDtoPort, @Inject(ORDER_PDF_DTO_PORT) private _orderPdfDtoPort: OrderPdfDtoPort
+  ) { }
 
   loadOrder(command: LoadOrdersCommand): Observable<void> {
     return this._getAllDtoPort
@@ -245,6 +205,10 @@ export class OrderState
         })
       )
     );
+  }
+
+  orderPdf(command: GenerationOrderPdfCommand): Observable<void> {
+    return this._orderPdfDtoPort.orderPdf(command);
   }
 }
 

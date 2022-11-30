@@ -76,6 +76,7 @@ export class AddTaskComponent {
       new AddTaskCommand(
         task.get('name')?.value,
         task.get('executionTime')?.value,
+        false,
         this.employeeControl?.value
       )
     ).pipe(take(1))

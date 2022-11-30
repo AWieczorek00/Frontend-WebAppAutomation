@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { HomePage } from './home.page';
 import { RouterModule } from '@angular/router';
 import {
-  HttpEmployeeServiceModule, HttpTaskServiceModule,
+  EmployeeTaskComponentModule,
+  HttpEmployeeServiceModule, HttpTaskServiceModule, InMemoryEmployeeStorageModule,
   InMemoryTaskStorageModule,
-  LoadEmployeeResolver,
   LoadEmployeeResolverModule,
   TaskStateModule,
-  TaskToEmployeeComponentModule,
 } from '@task';
 import { NavigationComponentModule } from '@navigation';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -29,16 +28,16 @@ import {
       {
         path: '',
         component: HomePage,
-        // resolve: [LoadEmployeeResolver],
       },
     ]),
     LoadEmployeeResolverModule,
     NavigationComponentModule,
-    TaskToEmployeeComponentModule,
     HttpEmployeeServiceModule,
     InMemoryTaskStorageModule,
     TaskStateModule,
-    HttpTaskServiceModule
+    HttpTaskServiceModule,
+    EmployeeTaskComponentModule,
+    InMemoryEmployeeStorageModule
 
   ],
   declarations: [HomePage],

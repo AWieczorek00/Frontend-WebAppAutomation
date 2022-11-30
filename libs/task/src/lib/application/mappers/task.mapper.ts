@@ -6,6 +6,6 @@ export const mapFromTaskContext = (context: TaskContext): TaskListQuery =>
   new TaskListQuery(
     context.taskList.map(
       (task) =>
-        new TaskQuery(task.id, task.name, task.executionTime, task.employee)
+        new TaskQuery(task.id, task.name,task.done, task.executionTime, task.employee)
     )
   );

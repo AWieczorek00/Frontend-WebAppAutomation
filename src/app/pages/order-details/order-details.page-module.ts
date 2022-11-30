@@ -24,6 +24,7 @@ import {
 import { RouterModule } from '@angular/router';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {RequestInterceptor} from "../../request.interceptor";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import {RequestInterceptor} from "../../request.interceptor";
     LoadAllActivitiesTemplateResolverModule,
     HttpActivitiesTemplateServiceModule,
     HttpPartsTemplateServiceModule,
-    LoadAllPartsTemplateResolverModule
+    LoadAllPartsTemplateResolverModule,
+    MatSnackBarModule
   ],
   declarations: [OrderDetailsPage],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },],
