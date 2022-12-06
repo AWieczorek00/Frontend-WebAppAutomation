@@ -3,7 +3,9 @@ import { HomePage } from './home.page';
 import { RouterModule } from '@angular/router';
 import {
   EmployeeTaskComponentModule,
-  HttpEmployeeServiceModule, HttpTaskServiceModule, InMemoryEmployeeStorageModule,
+  HttpEmployeeServiceModule,
+  HttpTaskServiceModule,
+  InMemoryEmployeeStorageModule,
   InMemoryTaskStorageModule,
   LoadEmployeeResolverModule,
   TaskStateModule,
@@ -11,16 +13,6 @@ import {
 import { NavigationComponentModule } from '@navigation';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from '../../request.interceptor';
-import {
-  HttpActivitiesTemplateServiceModule,
-  HttpClientServiceModule, HttpPartsTemplateServiceModule,
-  InMemoryClientStorageModule, InMemoryNewOrderStorageModule, LoadAllEmployeesResolverModule,
-  LoadOrdersResolverModule,
-  OrderListComponentModule,
-  OrderServiceModule,
-  OrderStateModule,
-  OrderStorageModule
-} from "@order";
 
 @NgModule({
   imports: [
@@ -37,8 +29,7 @@ import {
     TaskStateModule,
     HttpTaskServiceModule,
     EmployeeTaskComponentModule,
-    InMemoryEmployeeStorageModule
-
+    InMemoryEmployeeStorageModule,
   ],
   declarations: [HomePage],
   providers: [

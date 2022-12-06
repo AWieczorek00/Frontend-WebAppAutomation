@@ -70,8 +70,7 @@ export class AddTaskComponent {
   }
 
   onTaskSubmitted(task: FormGroup): void {
-    console.log(task.value)
-    console.log(this.employeeControl?.value)
+
     this._addTaskCommandPort.add(
       new AddTaskCommand(
         task.get('name')?.value,

@@ -33,6 +33,9 @@
 			],
 			"@task": [
 				"libs/task/src/index.ts"
+			],
+			"@employee": [
+				"libs/employee/src/index.ts"
 			]
 		}
 	},

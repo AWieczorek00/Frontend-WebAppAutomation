@@ -1,0 +1,63 @@
+<div class="main-table">
+  <table mat-table [dataSource]="dataSourceEmployee" class="mat-elevation-z8">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>Pierwsze imię</th>
+      <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="secondName">
+      <th mat-header-cell *matHeaderCellDef>Drugię imię</th>
+      <td mat-cell *matCellDef="let element">{{ element.secondName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Nazwisko</th>
+      <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Opcje</th>
+      <td mat-cell *matCellDef="let element">
+        <div ngbDropdown class="d-inline-block" display="dynamic">
+          <button
+            type="button"
+            class=" "
+            id="dropDownOptions"
+            ngbDropdownToggle
+            style="
+              border: none;
+              border-radius: 50%;
+              background-color: transparent;
+            "
+          >
+            <button
+              mat-icon-button
+              color="accent"
+              aria-label="Example icon button with a menu icon"
+              style="background-color: transparent"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropDownOptions">
+            <button ngbDropdownItem (click)="update(element.individualId)">
+              <a class="nav-link">Zaktualizuj</a>
+            </button>
+
+            <button ngbDropdownItem (click)="delete(element.individualId)">
+              <a class="nav-link">Usuń</a>
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="nameRows"></tr>
+    <tr mat-row *matRowDef="let row; columns: nameRows"></tr>
+  </table>
+</div>

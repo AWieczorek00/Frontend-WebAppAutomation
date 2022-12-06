@@ -20,8 +20,8 @@ import {
 } from '@order';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from '../../request.interceptor';
-import {NavigationComponentModule} from "@navigation";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {NavigationComponentModule} from "@navigation";
 
 @NgModule({
   imports: [

@@ -11,6 +11,7 @@ import { OrderDetailsPageModule } from './pages/order-details/order-details.page
 import { TestPageModule } from './pages/test/test.page-module';
 import {HomePageModule} from "./pages/home/home.page-module";
 import {AddTaskPageModule} from "./pages/add-task/add-task.page-module";
+import {EmployeePageModule} from "./pages/employee/employee.page-module";
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'new-order', loadChildren: () => NewOrderPageModule },
       { path: 'task', loadChildren: () => AddTaskPageModule },
       { path: 'order/:id', loadChildren: () => OrderDetailsPageModule },
+      { path: 'employee', loadChildren: () => EmployeePageModule },
       { path: 'test', loadChildren: () => TestPageModule },
 
       { path: '**', redirectTo: '' },
