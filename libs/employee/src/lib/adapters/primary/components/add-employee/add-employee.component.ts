@@ -25,6 +25,7 @@ export class AddEmployeeComponent {
     secondName: new FormControl(),
     lastName: new FormControl(),
     phoneNumber: new FormControl(),
+    email: new FormControl(),
   });
 
   constructor(
@@ -39,7 +40,8 @@ export class AddEmployeeComponent {
           employee.get('firstName')?.value,
           employee.get('secondName')?.value,
           employee.get('lastName')?.value,
-          employee.get('phoneNumber')?.value
+          employee.get('phoneNumber')?.value,
+          employee.get('email')?.value
         )
       )
       .pipe(take(1))

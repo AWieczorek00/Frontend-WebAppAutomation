@@ -20,7 +20,7 @@ export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
                     employeeDto.firstName,
                     employeeDto.secondName,
                     employeeDto.lastName,
-                    employeeDto.pesel
+                    employeeDto.email
                   )
               )
             : [],
@@ -42,6 +42,7 @@ export const mapFromOrderContext = (context: OrderContext): OrderListQuery =>
                     part.id,
                     part.name,
                     part.price,
+                    part.tax,
                     part.amount
                   )
               )

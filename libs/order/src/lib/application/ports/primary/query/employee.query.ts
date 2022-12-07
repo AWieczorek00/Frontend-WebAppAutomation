@@ -4,6 +4,6 @@ export class EmployeeQuery {
     public readonly firstName: string,
     public readonly secondName: string,
     public readonly lastName: string,
-    public readonly pesel: number
+    public readonly email: string
   ) {}
 }

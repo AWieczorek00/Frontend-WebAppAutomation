@@ -86,8 +86,8 @@
                   <mat-option style="font-size: 15px" value="Niski"
                     >Niski
                   </mat-option>
-                  <mat-option style="font-size: 15px" value="Normlany"
-                    >Normlany
+                  <mat-option style="font-size: 15px" value="Normalny"
+                    >Normalny
                   </mat-option>
                   <mat-option style="font-size: 15px" value="Wysoki"
                     >Wysoki
@@ -469,13 +469,37 @@
           </ng-container>
 
           <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>Cena</th>
+            <th mat-header-cell *matHeaderCellDef>Cena netto</th>
             <td
               mat-cell
               *matCellDef="let row; let index = index"
               [formGroupName]="index"
             >
               {{this.partRows.at(index).get('price')?.value}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tax">
+            <th mat-header-cell *matHeaderCellDef>Podatek</th>
+            <td
+              mat-cell
+              *matCellDef="let row; let index = index"
+              [formGroupName]="index"
+            >
+              {{this.taxToPercent(this.partRows.at(index).get('tax')?.value)}}%
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="brutto">
+            <th mat-header-cell *matHeaderCellDef>Cena brutto</th>
+            <td
+              mat-cell
+              *matCellDef="let row; let index = index"
+              [formGroupName]="index"
+            >
+              {{this.brutto(this.partRows.at(index).get('tax')?.value,this.partRows.at(index).get('price')?.value)}}
+
             </td>
           </ng-container>
 
@@ -955,13 +979,36 @@
             </ng-container>
 
             <ng-container matColumnDef="price">
-              <th mat-header-cell *matHeaderCellDef>Cena</th>
+              <th mat-header-cell *matHeaderCellDef>Cena netto</th>
               <td
                 mat-cell
                 *matCellDef="let row; let index = index"
                 [formGroupName]="index"
               >
                 {{this.partRows.at(index).get('price')?.value}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tax">
+              <th mat-header-cell *matHeaderCellDef>Podatek</th>
+              <td
+                mat-cell
+                *matCellDef="let row; let index = index"
+                [formGroupName]="index"
+              >
+                {{this.taxToPercent(this.partRows.at(index).get('tax')?.value)}}%
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="brutto">
+              <th mat-header-cell *matHeaderCellDef>Cena Brutto</th>
+              <td
+                mat-cell
+                *matCellDef="let row; let index = index"
+                [formGroupName]="index"
+              >
+                {{this.brutto(this.partRows.at(index).get('tax')?.value,this.partRows.at(index).get('price')?.value)}}
+
               </td>
             </ng-container>
 

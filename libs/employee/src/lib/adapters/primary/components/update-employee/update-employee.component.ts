@@ -39,7 +39,8 @@ export class UpdateEmployeeComponent {
         firstName: employee.firstName,
         secondName: employee.secondName,
         lastName: employee.lastName,
-        phoneNumber: employee.phoneNumber
+        phoneNumber: employee.phoneNumber,
+        email: employee.email
       }
     ))
 
@@ -51,6 +52,7 @@ export class UpdateEmployeeComponent {
     secondName: new FormControl(),
     lastName: new FormControl(),
     phoneNumber: new FormControl(),
+    email: new FormControl(),
   });
 
   onEmployeeSubmitted(employee: FormGroup) {
@@ -59,7 +61,8 @@ export class UpdateEmployeeComponent {
       employee.get('firstName')?.value,
       employee.get('secondName')?.value,
       employee.get('lastName')?.value,
-      employee.get('phoneNumber')?.value
+      employee.get('phoneNumber')?.value,
+      employee.get('email')?.value
     )).pipe(take(1)).subscribe()
   }
 }

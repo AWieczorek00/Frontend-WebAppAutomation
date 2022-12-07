@@ -13,7 +13,8 @@ export const mapFromEmployeeContext = (
           employee.individualId,
           employee.firstName,
           employee.secondName,
-          employee.lastName
+          employee.lastName,
+          employee.email
         )
     )
   );

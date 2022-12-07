@@ -4,5 +4,6 @@ export interface EmployeeDto {
   readonly secondName:string
   readonly lastName:string
   readonly phoneNumber:number
+  readonly email:string
 
 }

@@ -65,6 +65,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewOrderComponent {
+
   constructor(
     private _snackBar: MatSnackBar,
     @Inject(LOCALE_ID) private locale: string,
@@ -193,7 +194,7 @@ export class NewOrderComponent {
   behaviorParts = new BehaviorSubject<AbstractControl[]>([]);
   nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName','delete'];
   nameRowActivities = ['name', 'attention', 'done','delete'];
-  nameRowParts = ['name', 'price', 'amount','delete'];
+  nameRowParts = ['name', 'price','tax','brutto', 'amount','delete'];
   employeeList: EmployeeQuery[] = [];
 
   // activitiesList: ActivitiesQuery[] = [];
@@ -315,6 +316,7 @@ export class NewOrderComponent {
     const row = this._formBuilder.group({
       name: this.part?.name,
       price: this.part?.price,
+      tax:this.part?.tax,
       amount: 0,
     });
     this.partRows.push(row);
@@ -339,6 +341,7 @@ export class NewOrderComponent {
       id: NaN,
       name: partsTemplate.name,
       price: partsTemplate.price,
+      tax:partsTemplate.tax,
       amount: 0,
     };
     console.log(this.part);
@@ -491,5 +494,14 @@ export class NewOrderComponent {
   deleteParts(index: number) {
     this.partRows.removeAt(index);
     this.updatePartsView()
+  }
+
+  taxToPercent(tax:number):number{
+    return tax*100
+  }
+
+  brutto(tax: number, netto: number):number {
+    let sum=netto*tax*10
+    return Math.abs(Number(sum.toFixed(1)))
   }
 }

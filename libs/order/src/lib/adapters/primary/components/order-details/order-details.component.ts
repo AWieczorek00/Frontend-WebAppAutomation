@@ -193,7 +193,7 @@ export class OrderDetailsComponent {
   activitiesList: ActivitiesQuery[] = [];
   nameRowActivities: string[] = ['name', 'attention', 'done', 'delete'];
   nameRowEmployee = ['firstName', 'secondName', 'lastName', 'delete'];
-  nameRowParts = ['name', 'price', 'amount', 'delete'];
+  nameRowParts = ['name', 'price','tax','brutto', 'amount', 'delete'];
   clientControl = new FormControl('');
   employeeControl = new FormControl('');
   activitiesTemplateControl = new FormControl('');
@@ -366,6 +366,7 @@ export class OrderDetailsComponent {
       id: NaN,
       name: partsTemplate.name,
       price: partsTemplate.price,
+      tax:partsTemplate.tax,
       amount: 0,
     };
     console.log(this.part);
@@ -423,6 +424,7 @@ export class OrderDetailsComponent {
       id: part.id,
       name: part.name,
       price: part.price,
+      tax:part.tax,
       amount: part.amount,
     });
     this.partRows.push(row);
@@ -540,5 +542,14 @@ export class OrderDetailsComponent {
       };
     }
     return client;
+  }
+
+  taxToPercent(tax:number):number{
+    return tax*100
+  }
+
+  brutto(tax: number, netto: number):number {
+    let sum=netto*tax*10
+    return Math.abs(Number(sum.toFixed(1)))
   }
 }

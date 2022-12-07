@@ -16,6 +16,11 @@
   </mat-form-field>
   <br>
   <mat-form-field appearance="legacy">
+    <mat-label>E-Mail</mat-label>
+    <input matInput type="text" formControlName="email" placeholder="E-Mail" />
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="legacy">
     <mat-label>Numer telefonu</mat-label>
     <input matInput
            type="number"
@@ -27,4 +32,3 @@
   <input type="submit" value="Zapisz" />
 </form>
 
-<ng-container *ngIf="employee$ | async as item">{{ item }}</ng-container>

@@ -5,8 +5,8 @@ import {
   HttpClientServiceModule,
   HttpEmployeeServiceModule, HttpPartsTemplateServiceModule,
   InMemoryClientStorageModule,
-  InMemoryNewOrderStorageModule,
-  LoadAllEmployeesResolverModule,
+  InMemoryNewOrderStorageModule, LoadAllEmployeesResolver,
+  LoadAllEmployeesResolverModule, LoadAllPartsTemplateResolver, LoadAllPartsTemplateResolverModule,
   LoadOrdersResolver,
   LoadOrdersResolverModule,
   OrderListComponentModule,
@@ -21,6 +21,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   HttpPartsTemplateService
 } from "../../../../libs/order/src/lib/adapters/secondary/services/http-parts-template.service";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   imports: [
@@ -42,7 +43,7 @@ import {
       {
         path: '',
         component: OrderListPage,
-        resolve: [LoadOrdersResolver],
+        resolve: [LoadOrdersResolver,LoadAllEmployeesResolver],
       },
     ]),
   ],
