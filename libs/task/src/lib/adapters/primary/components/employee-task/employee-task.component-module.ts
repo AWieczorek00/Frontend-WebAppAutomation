@@ -6,6 +6,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   imports: [
@@ -15,6 +18,9 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MatButtonModule,
     FormsModule,
     MatSlideToggleModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [EmployeeTaskComponent],
   providers: [],

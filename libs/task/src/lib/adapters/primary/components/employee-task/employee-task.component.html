@@ -3,6 +3,15 @@
 
   <mat-slide-toggle  (change)="toggle($event)">Schowaj wykonane zadanie</mat-slide-toggle>
 
+  <mat-form-field appearance="legacy">
+    <mat-label>Input & change events</mat-label>
+    <input matInput [matDatepicker]="picker"
+           (dateInput)="addEvent('input', $event)">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
   <table mat-table [dataSource]="dataSourceTask" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Zadanie</th>
