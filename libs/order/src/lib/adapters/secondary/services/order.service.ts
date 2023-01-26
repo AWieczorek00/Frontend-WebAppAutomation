@@ -9,6 +9,7 @@ import { DuplicateOrderDtoPort } from '../../../application/ports/secondary/dto/
 import { GetOneOrderDtoPort } from '../../../application/ports/secondary/dto/order/get-one-order.dto-port';
 import { PutOrderDtoPort } from '../../../application/ports/secondary/dto/order/put-order.dto-port';
 import { OrderPdfDtoPort } from '../../../application/ports/secondary/dto/order/order-pdf.dto-port';
+import { InvoicePdfDtoPort } from '../../../application/ports/secondary/dto/order/invoice-pdf.dto-port';
 import { OrderDto } from '../../../application/ports/secondary/dto/order/order.dto';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class OrderService
   DeleteOrderDtoPort,
   DuplicateOrderDtoPort,
   GetOneOrderDtoPort,
-  PutOrderDtoPort, OrderPdfDtoPort {
+  PutOrderDtoPort, OrderPdfDtoPort, InvoicePdfDtoPort {
   constructor(private _httpClient: HttpClient) { }
   private url = 'http://localhost:8080/';
   getAll(): Observable<OrderDto[]> {
@@ -29,14 +30,6 @@ export class OrderService
           return {
             id: order.id,
             employeeList: order.employeeList,
-            // ? order.employeeList.map((employee) => ({
-            //   individualId: employee.individualId,
-            //   firstName: employee.firstName,
-            //   secondName: employee.secondName,
-            //   lastName: employee.lastName,
-            //   pesel: employee.pesel,
-            // }))
-            // : [],
             client: order.client,
             activitiesList: order.activitiesList,
             partList: order.partList,
@@ -72,11 +65,14 @@ export class OrderService
   }
 
   putOrder(order: OrderDto): Observable<void> {
-    console.log('service');
     return this._httpClient.put<void>(this.url + 'order/update', order);
   }
 
   orderPdf(order: OrderDto): Observable<any> {
-    return this._httpClient.post(this.url+'order/protocol',order,{ responseType: 'blob' })
+    return this._httpClient.post(this.url + 'order/protocol', order, { responseType: 'blob' })
+  }
+
+  invoice(order: OrderDto): Observable<any> {
+    return this._httpClient.post(this.url + 'order/invoice', order, { responseType: 'blob' })
   }
 }

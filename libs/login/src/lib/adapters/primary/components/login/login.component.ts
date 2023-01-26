@@ -1,11 +1,7 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../../../secondary/services/response/login.response';
-import {
-  ADDS_USER_DTO,
-  AddsUserDtoPort,
-} from '../../../../application/ports/secondary/dto/adds-user.dto-port';
 import { HttpUserService } from '../../../secondary/services/service/user/http-user.service';
 
 @Component({
@@ -40,14 +36,16 @@ export class LoginComponent {
           localStorage.setItem('token', res['sessionId']);
           localStorage.setItem('roles', res['roles']);
           localStorage.setItem('individualId', res['individualId']);
-          if (res['roles'].find((element: string) => element === 'ADMIN')){
+          if (res['roles'].find((element: string) => element === 'ADMIN')) {
             this._router.navigate(['']);
-
-          } else if (res['roles'].find((element: string) => element === 'USER')) {
-          this._router.navigate(['']);
-        } else {
-          alert('Nie udało ci sie zalogować');
+          } else if (
+            res['roles'].find((element: string) => element === 'USER')
+          ) {
+            this._router.navigate(['']);
+          } else {
+            alert('Nie udało ci sie zalogować');
+          }
         }
-      }});
+      });
   }
 }

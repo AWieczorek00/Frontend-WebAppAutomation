@@ -1,40 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  LOCALE_ID,
-  ViewEncapsulation,
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { saveAs } from 'file-saver';
-import {
-  BehaviorSubject,
-  Observable,
-  map,
-  startWith,
-  take,
-  throwError,
-} from 'rxjs';
+import { ChangeDetectionStrategy, Component, Inject, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject, Observable, map, startWith, take, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import {
-  GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT,
-  GetsNewOrderCurrencyElementsQueryPort,
-} from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
-import {
-  CREATE_ORDER_COMMAND_PORT,
-  CreateOrderCommandPort,
-} from '../../../../application/ports/primary/command/order/create-order.command-port';
-import {
-  PDF_ORDER_COMMAND_PORT,
-  PdfOrderCommandPort,
-} from '../../../../application/ports/primary/command/order/pdf-order.command-port';
+import { GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT, GetsNewOrderCurrencyElementsQueryPort } from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
+import { CREATE_ORDER_COMMAND_PORT, CreateOrderCommandPort } from '../../../../application/ports/primary/command/order/create-order.command-port';
+import { PDF_ORDER_COMMAND_PORT, PdfOrderCommandPort } from '../../../../application/ports/primary/command/order/pdf-order.command-port';
+import { INVOICE_PDF_COMMAND_PORT, InvoicePdfCommandPort } from '../../../../application/ports/primary/command/order/invoice-pdf.command-port';
 import { ClientQuery } from '../../../../application/ports/primary/query/client.query';
 import { EmployeeQuery } from '../../../../application/ports/primary/query/employee.query';
 import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/query/activities-template/activities-template.query';
@@ -45,17 +17,13 @@ import { ActivitiesQuery } from '../../../../application/ports/primary/query/act
 import { PartQuery } from '../../../../application/ports/primary/query/part/partQuery';
 import { CreateOrderCommand } from '../../../../application/ports/primary/command/order/create-order.command';
 import { AddActivitiesComponent } from '../add-activities/add-activities.component';
+import { GenerationOrderPdfCommand } from '../../../../application/ports/primary/command/order/generation-order-pdf.command';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { GenerationOrderPdfCommand } from '../../../../application/ports/primary/command/order/generation-order-pdf.command';
-import {
-  ORDER_PDF_DTO_PORT,
-  OrderPdfDtoPort,
-} from '../../../../application/ports/secondary/dto/order/order-pdf.dto-port';
-import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 import { formatDate } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'lib-new-order',
@@ -78,7 +46,7 @@ export class NewOrderComponent {
     private _router: Router,
     public dialog: MatDialog,
     @Inject(PDF_ORDER_COMMAND_PORT)
-    private _pdfOrderCommandPort: PdfOrderCommandPort,
+    private _pdfOrderCommandPort: PdfOrderCommandPort, @Inject(INVOICE_PDF_COMMAND_PORT) private _invoicePdfCommandPort: InvoicePdfCommandPort
   ) {
     this.elements$.subscribe(
       (employee) => (this.employeeListAutocomplete = employee.employeeList)
@@ -150,6 +118,7 @@ export class NewOrderComponent {
   partRows: FormArray = this._formBuilder.array([]);
 
   readonly order: FormGroup = new FormGroup({
+    id:new FormControl(),
     name: new FormControl(['', Validators.required]),
     nip: new FormControl(),
     phoneNumber: new FormControl(['']),
@@ -192,9 +161,9 @@ export class NewOrderComponent {
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
   behaviorActivities = new BehaviorSubject<AbstractControl[]>([]);
   behaviorParts = new BehaviorSubject<AbstractControl[]>([]);
-  nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName','delete'];
-  nameRowActivities = ['name', 'attention', 'done','delete'];
-  nameRowParts = ['name', 'price','tax','brutto', 'amount','delete'];
+  nameRowEmployee: string[] = ['firstName', 'secondName', 'lastName', 'delete'];
+  nameRowActivities = ['name', 'attention', 'done', 'delete'];
+  nameRowParts = ['name', 'price', 'tax', 'brutto', 'amount', 'delete'];
   employeeList: EmployeeQuery[] = [];
 
   // activitiesList: ActivitiesQuery[] = [];
@@ -251,6 +220,7 @@ export class NewOrderComponent {
 
   getClient(value: any) {
     this.order.patchValue({
+      id: value.id,
       nip: value.nip,
       phoneNumber: value.phoneNumber,
       zipcode: value.zipcode,
@@ -269,7 +239,7 @@ export class NewOrderComponent {
       client = order.get('name')?.value;
     } else {
       client = {
-        id: NaN,
+        id: order.get('id')?.value,
         name: order.get('name')?.value,
         nip: order.get('nip')?.value,
         address: order.get('street')?.value,
@@ -282,6 +252,8 @@ export class NewOrderComponent {
         type: '',
       };
     }
+
+    console.log(client)
 
     this._createOrderCommandPort
       .createOrder(
@@ -306,7 +278,6 @@ export class NewOrderComponent {
 
   addEmployee() {
     this.employeeList.push(this.employeeControl.value);
-
     this.dataSourceEmployee = new MatTableDataSource<EmployeeQuery>(
       this.employeeList
     );
@@ -316,7 +287,7 @@ export class NewOrderComponent {
     const row = this._formBuilder.group({
       name: this.part?.name,
       price: this.part?.price,
-      tax:this.part?.tax,
+      tax: this.part?.tax,
       amount: 0,
     });
     this.partRows.push(row);
@@ -341,7 +312,7 @@ export class NewOrderComponent {
       id: NaN,
       name: partsTemplate.name,
       price: partsTemplate.price,
-      tax:partsTemplate.tax,
+      tax: partsTemplate.tax,
       amount: 0,
     };
     console.log(this.part);
@@ -439,13 +410,13 @@ export class NewOrderComponent {
             saveAs(
               blob,
               this.createClient(order).name +
-                '/' +
-                formatDate(
-                  order.get('dateOfExecution')?.value,
-                  'yyyy-MM-dd',
-                  this.locale
-                ) +
-                '.pdf'
+              '/' +
+              formatDate(
+                order.get('dateOfExecution')?.value,
+                'yyyy-MM-dd',
+                this.locale
+              ) +
+              '.pdf'
             );
           },
           (e) => {
@@ -478,7 +449,7 @@ export class NewOrderComponent {
     return client;
   }
 
-  deleteActivities(index:number) {
+  deleteActivities(index: number) {
     this.activitiesRows.removeAt(index);
     this.updateActivitiesView();
   }
@@ -496,12 +467,62 @@ export class NewOrderComponent {
     this.updatePartsView()
   }
 
-  taxToPercent(tax:number):number{
-    return tax*100
+  taxToPercent(tax: number): number {
+    return tax * 100
   }
 
-  brutto(tax: number, netto: number):number {
-    let sum=netto*tax*10
+  brutto(tax: number, netto: number): number {
+    let sum = netto * tax * 10
     return Math.abs(Number(sum.toFixed(1)))
+  }
+
+  InvoicePdf(order: FormGroup) {
+    var mediaType = 'application/pdf';
+
+    if (this.employeeList.length === 0) {
+      this._snackBar.open('Brakuje serwisanta', 'Zamknij', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    } else {
+      this._invoicePdfCommandPort
+        .InvoicePdf(
+          new GenerationOrderPdfCommand(
+            NaN,
+            this.createClient(order),
+            this.employeeList,
+            order.get('activitiesList')?.value,
+            order.get('partList')?.value,
+            order.get('dateOfAdmission')?.value,
+            order.get('dateOfExecution')?.value,
+            order.get('manHour')?.value,
+            order.get('distance')?.value,
+            order.get('priority')?.value,
+            order.get('status')?.value,
+            order.get('period')?.value,
+            order.get('note')?.value
+          )
+        )
+        .pipe(take(1))
+        .subscribe(
+          (response) => {
+            var blob = new Blob([response], { type: mediaType });
+            saveAs(
+              blob,
+              this.createClient(order).name +
+              '/' +
+              formatDate(
+                order.get('dateOfExecution')?.value,
+                'yyyy-MM-dd',
+                this.locale
+              ) +
+              '.pdf'
+            );
+          },
+          (e) => {
+            throwError(e);
+          }
+        );
+    }
   }
 }

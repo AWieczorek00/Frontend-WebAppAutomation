@@ -1020,10 +1020,13 @@
           </table>
         </div>
       </div>
-
-      <input class="btn btn-outline-primary" type="submit" value="Zapisz" />
+      <div style="margin-left: 100px; padding-bottom: 20px">
+        <input class="btn btn-outline-primary" type="submit" value="Zapisz" style="margin-right: 30px"/>
+      </div>
     </form>
-    <button class="btn btn-outline-primary" (click)="orderPdf(order)">Drukuj protokół</button>
-
+    <div style="margin-left: 100px; padding-bottom: 20px">
+      <button class="btn btn-outline-primary" (click)="orderPdf(order)" style="margin-right: 30px">Drukuj protokół</button>
+      <button class="btn btn-outline-primary" (click)="InvoicePdf(order)">Drukuj fakturę</button>
+    </div>
   </mat-tab>
 </mat-tab-group>

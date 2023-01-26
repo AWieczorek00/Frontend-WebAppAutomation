@@ -41,7 +41,9 @@ export class AddEmployeeComponent {
           employee.get('secondName')?.value,
           employee.get('lastName')?.value,
           employee.get('phoneNumber')?.value,
-          employee.get('email')?.value
+          employee.get('email')?.value,
+          employee.get('login')?.value,
+          employee.get('password')?.value
         )
       )
       .pipe(take(1))

@@ -22,12 +22,8 @@ input[type="password"]:focus,
 $thirdColor : #8a307f;
 
 input[type="submit"] {
-  background-color: $thirdColor;
-  border-radius: 10px;
-  border: none;
   width: 300px;
-  height: 40px;
-  color: white;
+  height: 50px;
   font-size: x-large;
 }
 

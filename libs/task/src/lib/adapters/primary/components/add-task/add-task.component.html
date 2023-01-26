@@ -2,7 +2,7 @@
   <form [formGroup]="task" (ngSubmit)="onTaskSubmitted(task)">
     <mat-form-field appearance="legacy">
       <mat-label>Zadanie</mat-label>
-      <input matInput type="text" formControlName="name" placeholder="Name" />
+      <input matInput type="text" formControlName="name" placeholder="Zadanie" style="font-size: 20px" />
     </mat-form-field>
     <br />
     <mat-form-field
@@ -33,6 +33,7 @@
         matInput
         [formControl]="employeeControl"
         [matAutocomplete]="employee"
+        style="font-size: 20px"
       />
       <mat-autocomplete
         #employee="matAutocomplete"

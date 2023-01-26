@@ -1,15 +1,24 @@
-
 <div class="main-table">
+  <mat-slide-toggle (change)="toggle($event)"
+    >Schowaj wykonane zadanie</mat-slide-toggle
+  >
 
-  <mat-slide-toggle  (change)="toggle($event)">Schowaj wykonane zadanie</mat-slide-toggle>
-
-  <mat-form-field appearance="legacy">
-    <mat-label>Input & change events</mat-label>
-    <input matInput [matDatepicker]="picker"
-           (dateInput)="addEvent('input', $event)">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+  <mat-form-field
+    class="field-option"
+    appearance="legacy"
+    style="font-size: 20px; max-width: 200px; width: 100%; text-align: center; "
+  >
+    <input
+      matInput
+      [matDatepicker]="dateOfExecution"
+      [ngModel]="date"
+      (dateInput)="addEvent('input', $event)"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="dateOfExecution"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #dateOfExecution></mat-datepicker>
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSourceTask" class="mat-elevation-z8">
@@ -33,7 +42,6 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="update">
-
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button

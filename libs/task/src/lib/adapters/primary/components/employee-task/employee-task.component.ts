@@ -52,6 +52,7 @@ export class EmployeeTaskComponent {
     })
   );
   isChecked: boolean = false;
+  date = new Date();
 
   updateDone(task: TaskQuery) {
     this._doneTaskUpdateCommandPort

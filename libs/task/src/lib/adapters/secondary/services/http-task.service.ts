@@ -5,17 +5,17 @@ import { GetAllTaskDtoPort } from '../../../application/ports/secondary/dto/task
 import { AddTaskDtoPort } from '../../../application/ports/secondary/dto/task/add-task.dto-port';
 import { GetAllTaskByEmployeeDtoPort } from '../../../application/ports/secondary/dto/task/get-all-task-by-employee.dto-port';
 import { PutDoneTaskDtoPort } from '../../../application/ports/secondary/dto/task/put-done-task.dto-port';
+import { DeleteTaskDtoPort } from '../../../application/ports/secondary/dto/task/delete-task.dto-port';
 import { TaskDto } from '../../../application/ports/secondary/dto/task/task.dto';
 
 @Injectable()
 export class HttpTaskService
   implements
-    GetAllTaskDtoPort,
-    AddTaskDtoPort,
-    GetAllTaskByEmployeeDtoPort,
-    PutDoneTaskDtoPort
-{
-  constructor(private _httpClient: HttpClient) {}
+  GetAllTaskDtoPort,
+  AddTaskDtoPort,
+  GetAllTaskByEmployeeDtoPort,
+  PutDoneTaskDtoPort, DeleteTaskDtoPort {
+  constructor(private _httpClient: HttpClient) { }
 
   private url = 'http://localhost:8080/';
 
@@ -36,6 +36,11 @@ export class HttpTaskService
   }
 
   done(task: TaskDto): Observable<void> {
-    return this._httpClient.put<void>(this.url+'task/update/done',task)
+    return this._httpClient.put<void>(this.url + 'task/update/done', task)
+  }
+
+  delete(id: number): Observable<void> {
+    return this._httpClient.delete<void>(this.url + 'task/delete/' + id)
+
   }
 }

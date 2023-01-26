@@ -14,6 +14,7 @@ import { DUPLICATE_ORDER_COMMAND_PORT } from './ports/primary/command/duplicate-
 import { UPDATE_ORDER_COMMAND_PORT } from './ports/primary/command/order/update-order.command-port';
 import { ADD_ACTIVITIES_TEMPLATE_COMMAND_PORT } from './ports/primary/command/partsTemplate/add-activities-template.command-port';
 import { PDF_ORDER_COMMAND_PORT } from './ports/primary/command/order/pdf-order.command-port';
+import { INVOICE_PDF_COMMAND_PORT } from './ports/primary/command/order/invoice-pdf.command-port';
 
 @NgModule({
   imports: [],
@@ -33,7 +34,8 @@ import { PDF_ORDER_COMMAND_PORT } from './ports/primary/command/order/pdf-order.
     { provide: DUPLICATE_ORDER_COMMAND_PORT, useExisting: OrderState },
     { provide: UPDATE_ORDER_COMMAND_PORT, useExisting: OrderState },
     { provide: ADD_ACTIVITIES_TEMPLATE_COMMAND_PORT, useExisting: OrderState },
-    { provide: PDF_ORDER_COMMAND_PORT, useExisting: OrderState }
+    { provide: PDF_ORDER_COMMAND_PORT, useExisting: OrderState },
+    { provide: INVOICE_PDF_COMMAND_PORT, useExisting: OrderState }
   ],
   exports: [],
 })

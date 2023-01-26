@@ -51,7 +51,8 @@ export class EmployeeListComponent {
 
   update(individualId: number) {
     this._dialog.open(UpdateEmployeeComponent,{
-      height:'300px',
+      height:'450px',
+      // width:'400px',
       data:{
         individualId:individualId
       }

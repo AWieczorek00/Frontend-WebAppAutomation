@@ -7,6 +7,7 @@ import { DUPLICATE_ORDER_DTO_PORT } from '../../../application/ports/secondary/d
 import { GET_ONE_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/order/get-one-order.dto-port';
 import { PUT_ORDER_DTO_PORT } from '../../../application/ports/secondary/dto/order/put-order.dto-port';
 import { ORDER_PDF_DTO_PORT } from '../../../application/ports/secondary/dto/order/order-pdf.dto-port';
+import { INVOICE_PDF_DTO_PORT } from '../../../application/ports/secondary/dto/order/invoice-pdf.dto-port';
 
 @NgModule({
   imports: [],
@@ -19,7 +20,8 @@ import { ORDER_PDF_DTO_PORT } from '../../../application/ports/secondary/dto/ord
     { provide: DUPLICATE_ORDER_DTO_PORT, useExisting: OrderService },
     { provide: GET_ONE_ORDER_DTO_PORT, useExisting: OrderService },
     { provide: PUT_ORDER_DTO_PORT, useExisting: OrderService },
-    { provide: ORDER_PDF_DTO_PORT, useExisting: OrderService }
+    { provide: ORDER_PDF_DTO_PORT, useExisting: OrderService },
+    { provide: INVOICE_PDF_DTO_PORT, useExisting: OrderService }
   ],
   exports: [],
 })
