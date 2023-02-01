@@ -20,6 +20,7 @@ import {
 import { AddTaskCommand } from '../../../../application/ports/primary/command/add-task.command';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialogRef } from "@angular/material/dialog";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'lib-add-task',
@@ -49,8 +50,8 @@ export class AddTaskComponent {
     @Inject(GET_CURRENCY_EMPLOYEE_LIST_QUERY_PORT)
     private _getCurrencyEmployeeListQueryPort: GetCurrencyEmployeeListQueryPort,
     public dialogRef: MatDialogRef<AddTaskComponent>,
-
   ) {
+
 
     this.employee$.subscribe((employeeList) =>this.employeeListAutocomplete=employeeList.employeeList)
 
@@ -70,6 +71,7 @@ export class AddTaskComponent {
   }
 
   onTaskSubmitted(task: FormGroup): void {
+
 
     this._addTaskCommandPort.add(
       new AddTaskCommand(

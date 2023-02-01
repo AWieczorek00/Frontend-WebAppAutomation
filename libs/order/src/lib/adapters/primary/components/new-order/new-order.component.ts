@@ -1,12 +1,43 @@
-import { ChangeDetectionStrategy, Component, Inject, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  LOCALE_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, map, startWith, take, throwError } from 'rxjs';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
+import {
+  BehaviorSubject,
+  map,
+  Observable,
+  startWith,
+  take,
+  throwError,
+} from 'rxjs';
 import { Router } from '@angular/router';
-import { GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT, GetsNewOrderCurrencyElementsQueryPort } from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
-import { CREATE_ORDER_COMMAND_PORT, CreateOrderCommandPort } from '../../../../application/ports/primary/command/order/create-order.command-port';
-import { PDF_ORDER_COMMAND_PORT, PdfOrderCommandPort } from '../../../../application/ports/primary/command/order/pdf-order.command-port';
-import { INVOICE_PDF_COMMAND_PORT, InvoicePdfCommandPort } from '../../../../application/ports/primary/command/order/invoice-pdf.command-port';
+import {
+  GETS_NEW_ORDER_CURRENCY_ELEMENTS_QUERY_PORT,
+  GetsNewOrderCurrencyElementsQueryPort,
+} from '../../../../application/ports/primary/query/gets-new-order-currency-elements.query-port';
+import {
+  CREATE_ORDER_COMMAND_PORT,
+  CreateOrderCommandPort,
+} from '../../../../application/ports/primary/command/order/create-order.command-port';
+import {
+  PDF_ORDER_COMMAND_PORT,
+  PdfOrderCommandPort,
+} from '../../../../application/ports/primary/command/order/pdf-order.command-port';
+import {
+  INVOICE_PDF_COMMAND_PORT,
+  InvoicePdfCommandPort,
+} from '../../../../application/ports/primary/command/order/invoice-pdf.command-port';
 import { ClientQuery } from '../../../../application/ports/primary/query/client.query';
 import { EmployeeQuery } from '../../../../application/ports/primary/query/employee.query';
 import { ActivitiesTemplateQuery } from '../../../../application/ports/primary/query/activities-template/activities-template.query';
@@ -33,7 +64,6 @@ import { formatDate } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewOrderComponent {
-
   constructor(
     private _snackBar: MatSnackBar,
     @Inject(LOCALE_ID) private locale: string,
@@ -46,21 +76,11 @@ export class NewOrderComponent {
     private _router: Router,
     public dialog: MatDialog,
     @Inject(PDF_ORDER_COMMAND_PORT)
-    private _pdfOrderCommandPort: PdfOrderCommandPort, @Inject(INVOICE_PDF_COMMAND_PORT) private _invoicePdfCommandPort: InvoicePdfCommandPort
+    private _pdfOrderCommandPort: PdfOrderCommandPort,
+    @Inject(INVOICE_PDF_COMMAND_PORT)
+    private _invoicePdfCommandPort: InvoicePdfCommandPort
   ) {
-    this.elements$.subscribe(
-      (employee) => (this.employeeListAutocomplete = employee.employeeList)
-    );
-    this.elements$.subscribe(
-      (data) => (this.clientListAutocomplete = data.clientList)
-    );
-    this.elements$.subscribe(
-      (data) => (this.partsTemplateListAutocomplete = data.partsTemplateList)
-    );
-    this.elements$.subscribe(
-      (data) =>
-        (this.activitiesTemplateListAutocomplete = data.activitiesTemplateList)
-    );
+    this.elements$.subscribe((data) => this.loadList(data));
 
     this.filteredClient = this.order.valueChanges.pipe(
       startWith({} as ClientQuery),
@@ -118,8 +138,8 @@ export class NewOrderComponent {
   partRows: FormArray = this._formBuilder.array([]);
 
   readonly order: FormGroup = new FormGroup({
-    id:new FormControl(),
-    name: new FormControl(['', Validators.required]),
+    id: new FormControl(),
+    name: new FormControl(),
     nip: new FormControl(),
     phoneNumber: new FormControl(['']),
     status: new FormControl(),
@@ -169,9 +189,13 @@ export class NewOrderComponent {
   // activitiesList: ActivitiesQuery[] = [];
   summaryDistance: any;
   summaryManHour: any;
+  myModel: any;
 
   getOptionClient(clientQueries: ClientQuery) {
-    return clientQueries.name;
+    if(clientQueries===null){
+      return ''
+    }
+    return clientQueries['name'];
   }
 
   getOptionEmployee(employeeQueries: EmployeeQuery) {
@@ -219,7 +243,9 @@ export class NewOrderComponent {
   }
 
   getClient(value: any) {
+    this.myModel=value.name
     this.order.patchValue({
+      // name: value.name,
       id: value.id,
       nip: value.nip,
       phoneNumber: value.phoneNumber,
@@ -253,7 +279,7 @@ export class NewOrderComponent {
       };
     }
 
-    console.log(client)
+    console.log(client);
 
     this._createOrderCommandPort
       .createOrder(
@@ -410,13 +436,13 @@ export class NewOrderComponent {
             saveAs(
               blob,
               this.createClient(order).name +
-              '/' +
-              formatDate(
-                order.get('dateOfExecution')?.value,
-                'yyyy-MM-dd',
-                this.locale
-              ) +
-              '.pdf'
+                '/' +
+                formatDate(
+                  order.get('dateOfExecution')?.value,
+                  'yyyy-MM-dd',
+                  this.locale
+                ) +
+                '.pdf'
             );
           },
           (e) => {
@@ -454,9 +480,10 @@ export class NewOrderComponent {
     this.updateActivitiesView();
   }
 
-
   deleteEmployee(individualId: number) {
-    this.employeeList = this.employeeList.filter(employee => employee.individualId !== individualId)
+    this.employeeList = this.employeeList.filter(
+      (employee) => employee.individualId !== individualId
+    );
     this.dataSourceEmployee = new MatTableDataSource<EmployeeQuery>(
       this.employeeList
     );
@@ -464,16 +491,16 @@ export class NewOrderComponent {
 
   deleteParts(index: number) {
     this.partRows.removeAt(index);
-    this.updatePartsView()
+    this.updatePartsView();
   }
 
   taxToPercent(tax: number): number {
-    return tax * 100
+    return tax * 100;
   }
 
   brutto(tax: number, netto: number): number {
-    let sum = netto * tax * 10
-    return Math.abs(Number(sum.toFixed(1)))
+    let sum = netto * tax * 10;
+    return Math.abs(Number(sum.toFixed(1)));
   }
 
   InvoicePdf(order: FormGroup) {
@@ -510,13 +537,13 @@ export class NewOrderComponent {
             saveAs(
               blob,
               this.createClient(order).name +
-              '/' +
-              formatDate(
-                order.get('dateOfExecution')?.value,
-                'yyyy-MM-dd',
-                this.locale
-              ) +
-              '.pdf'
+                '/' +
+                formatDate(
+                  order.get('dateOfExecution')?.value,
+                  'yyyy-MM-dd',
+                  this.locale
+                ) +
+                '.pdf'
             );
           },
           (e) => {
@@ -524,5 +551,12 @@ export class NewOrderComponent {
           }
         );
     }
+  }
+
+  loadList(elements: NewOrderQuery) {
+    this.employeeListAutocomplete = elements.employeeList;
+    this.clientListAutocomplete = elements.clientList;
+    this.partsTemplateListAutocomplete = elements.partsTemplateList;
+    this.activitiesTemplateListAutocomplete = elements.activitiesTemplateList;
   }
 }
