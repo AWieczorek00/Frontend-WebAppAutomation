@@ -33,13 +33,13 @@ export class LoginComponent {
           this.response = res;
           console.log(res['roles']);
 
-          localStorage.setItem('token', res['sessionId']);
+          localStorage.setItem('token',res['type']+" "+ res['token']);
           localStorage.setItem('roles', res['roles']);
           localStorage.setItem('individualId', res['individualId']);
-          if (res['roles'].find((element: string) => element === 'ADMIN')) {
+          if (res['roles'].find((element: string) => element === 'ROLE_ADMIN')) {
             this._router.navigate(['']);
           } else if (
-            res['roles'].find((element: string) => element === 'USER')
+            res['roles'].find((element: string) => element === 'ROLE_USER')
           ) {
             this._router.navigate(['']);
           } else {

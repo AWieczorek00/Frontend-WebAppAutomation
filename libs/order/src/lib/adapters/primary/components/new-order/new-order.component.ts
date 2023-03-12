@@ -355,8 +355,9 @@ export class NewOrderComponent {
   }
 
   setSummary($event: MatTabChangeEvent, order: FormGroup) {
-    if ($event.index === 4) {
+    if ($event.index === 5) {
       this.order.setValue({
+        id: order.get('id')?.value,
         name: order.get('name')?.value,
         nip: order.get('nip')?.value,
         phoneNumber: order.get('phoneNumber')?.value,

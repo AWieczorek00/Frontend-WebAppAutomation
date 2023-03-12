@@ -5,9 +5,8 @@ import {RouterModule} from "@angular/router";
 import {NavigationComponentModule} from "@navigation";
 import {
   AddEmployeeComponentModule,
-  EmployeeListComponentModule,
-  EmployeeStateModule,
-  HttpEmployeeServiceModule, InMemoryEmployeeStorageModule, LoadEmployeesResolver, LoadEmployeesResolverModule,
+  EmployeeListComponentModule, EmployeeStateModule,
+  HttpEmployeeServiceModule, InMemoryEmployeeStorageModule, LoadEmployeesResolver, LoadEmployeesResolverModule
 
 } from "@employee";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -28,14 +27,17 @@ import {MatDialogModule} from "@angular/material/dialog";
     NavigationComponentModule,
     EmployeeListComponentModule,
     LoadEmployeesResolverModule,
-    EmployeeStateModule,
     HttpEmployeeServiceModule,
     InMemoryEmployeeStorageModule,
     AddEmployeeComponentModule,
-    MatFormFieldModule,MatDialogModule
+    MatFormFieldModule,
+    MatDialogModule,
+    EmployeeStateModule,
   ],
   declarations: [EmployeePage],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+  ],
   exports: [EmployeePage],
 })
 export class EmployeePageModule {}

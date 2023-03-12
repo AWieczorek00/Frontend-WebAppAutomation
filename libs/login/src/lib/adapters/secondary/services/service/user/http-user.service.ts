@@ -11,7 +11,7 @@ export class HttpUserService implements AddsUserDtoPort {
   }
 
   add(userDTO: Partial<UserDTO>): Observable<void> {
-    return this._client.post<UserDTO>('http://localhost:8080/authorization/login', userDTO).pipe(map((res:any) => {
+    return this._client.post<UserDTO>('http://localhost:8080/auth/signin', userDTO).pipe(map((res:any) => {
       return res
     }));
   }

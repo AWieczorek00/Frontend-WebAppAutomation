@@ -6,24 +6,48 @@ import { GetCurrencyEmployeeListQueryPort } from './ports/primary/query/employee
 import { AddEmployeeCommandPort } from './ports/primary/command/add-employee.command-port';
 import { DeleteEmployeeCommandPort } from './ports/primary/command/delete-employee.command-port';
 import { UpdateEmployeeCommandPort } from './ports/primary/command/update-employee.command-port';
-import { GET_ALL_EMPLOYEE_DTO_PORT, GetAllEmployeeDtoPort } from './ports/secondary/dto/employee/get-all-employee.dto-port';
-import { EMPLOYEE_CONTEXT_PORT, EmployeeContextPort } from './ports/secondary/context/employee/employee.context-port';
-import { ADD_EMPLOYEE_DTO_PORT, AddEmployeeDtoPort } from './ports/secondary/dto/employee/add-employee.dto-port';
-import { DELETE_EMPLOYEE_DTO_PORT, DeleteEmployeeDtoPort } from './ports/secondary/dto/employee/delete-employee.dto-port';
-import { UPDATE_EMPLOYEE_DTO_PORT, UpdateEmployeeDtoPort } from './ports/secondary/dto/update-employee.dto-port';
+import { RegisterUserCommandPort } from './ports/primary/command/register-user.command-port';
+import {
+  GET_ALL_EMPLOYEE_DTO_PORT,
+  GetAllEmployeeDtoPort,
+} from './ports/secondary/dto/employee/get-all-employee.dto-port';
+import {
+  EMPLOYEE_CONTEXT_PORT,
+  EmployeeContextPort,
+} from './ports/secondary/context/employee/employee.context-port';
+import {
+  ADD_EMPLOYEE_DTO_PORT,
+  AddEmployeeDtoPort,
+} from './ports/secondary/dto/employee/add-employee.dto-port';
+import {
+  DELETE_EMPLOYEE_DTO_PORT,
+  DeleteEmployeeDtoPort,
+} from './ports/secondary/dto/employee/delete-employee.dto-port';
+import {
+  UPDATE_EMPLOYEE_DTO_PORT,
+  UpdateEmployeeDtoPort,
+} from './ports/secondary/dto/employee/update-employee.dto-port';
+import {
+  CREATE_NEW_USER_DTO_PORT,
+  CreateNewUserDtoPort,
+} from './ports/secondary/dto/register/create-new-user.dto-port';
 import { EmployeeListQuery } from './ports/primary/query/employee/employee-list.query';
 import { AddEmployeeCommand } from './ports/primary/command/add-employee.command';
 import { EmployeeContext } from './ports/secondary/context/employee/employee.context';
 import { UpdateEmployeeCommand } from './ports/primary/command/update-employee.command';
+import { RegisterUserCommand } from './ports/primary/command/register-user.command';
 import { mapFromEmployeeContext } from './employee.mapper';
 
 @Injectable()
 export class EmployeeState
   implements
-  LoadEmployeesCommandPort,
-  GetCurrencyEmployeeListQueryPort,
-  AddEmployeeCommandPort,
-  DeleteEmployeeCommandPort, UpdateEmployeeCommandPort {
+    LoadEmployeesCommandPort,
+    GetCurrencyEmployeeListQueryPort,
+    AddEmployeeCommandPort,
+    DeleteEmployeeCommandPort,
+    UpdateEmployeeCommandPort,
+    RegisterUserCommandPort
+{
   constructor(
     @Inject(GET_ALL_EMPLOYEE_DTO_PORT)
     private _getAllEmployeeDtoPort: GetAllEmployeeDtoPort,
@@ -32,8 +56,12 @@ export class EmployeeState
     @Inject(ADD_EMPLOYEE_DTO_PORT)
     private _addEmployeeDtoPort: AddEmployeeDtoPort,
     @Inject(DELETE_EMPLOYEE_DTO_PORT)
-    private _deleteEmployeeDtoPort: DeleteEmployeeDtoPort, @Inject(UPDATE_EMPLOYEE_DTO_PORT) private _updateEmployeeDtoPort: UpdateEmployeeDtoPort
-  ) { }
+    private _deleteEmployeeDtoPort: DeleteEmployeeDtoPort,
+    @Inject(CREATE_NEW_USER_DTO_PORT)
+    private _createNewUserDtoPort: CreateNewUserDtoPort,
+    @Inject(UPDATE_EMPLOYEE_DTO_PORT)
+    private _updateEmployeeDtoPort: UpdateEmployeeDtoPort,
+  ) {}
 
   load(): Observable<void> {
     return this._getAllEmployeeDtoPort
@@ -85,6 +113,16 @@ export class EmployeeState
       )
     );
   }
+
+  // register(registerUser: RegisterUserCommand): Observable<void> {
+  //   return this._createNewUserDtoPort.create(registerUser).pipe(
+  //     switchMap(() => this._getAllEmployeeDtoPort.getAll()),
+  //     switchMap((employeeList) =>
+  //       this._employeeContextPort.setState({ employeeList: employeeList })
+  //     )
+  //   );
+  // }
+  register(registerUser: RegisterUserCommand): Observable<void> {
+    return this._createNewUserDtoPort.create(registerUser);
+  }
 }
-
-
