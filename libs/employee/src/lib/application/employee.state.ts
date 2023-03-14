@@ -114,15 +114,12 @@ export class EmployeeState
     );
   }
 
-  // register(registerUser: RegisterUserCommand): Observable<void> {
-  //   return this._createNewUserDtoPort.create(registerUser).pipe(
-  //     switchMap(() => this._getAllEmployeeDtoPort.getAll()),
-  //     switchMap((employeeList) =>
-  //       this._employeeContextPort.setState({ employeeList: employeeList })
-  //     )
-  //   );
-  // }
   register(registerUser: RegisterUserCommand): Observable<void> {
-    return this._createNewUserDtoPort.create(registerUser);
+    return this._createNewUserDtoPort.create(registerUser).pipe(
+      switchMap(() => this._getAllEmployeeDtoPort.getAll()),
+      switchMap((employeeList) =>
+        this._employeeContextPort.setState({ employeeList: employeeList })
+      )
+    );
   }
 }

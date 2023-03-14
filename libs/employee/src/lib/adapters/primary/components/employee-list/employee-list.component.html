@@ -45,11 +45,11 @@
             </button>
           </button>
           <div ngbDropdownMenu aria-labelledby="dropDownOptions">
-            <button ngbDropdownItem (click)="update(element.individualId)">
+            <button ngbDropdownItem (click)="openUpdateDialog(element.individualId)">
               <a class="nav-link">Zaktualizuj</a>
             </button>
 
-            <button ngbDropdownItem (click)="delete(element.individualId)">
+            <button ngbDropdownItem (click)="deleteEmployee(element.individualId)">
               <a class="nav-link">Usuń</a>
             </button>
           </div>

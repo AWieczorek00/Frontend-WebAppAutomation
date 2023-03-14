@@ -1,7 +1,9 @@
-<form [formGroup]="employee" (ngSubmit)="onEmployeeSubmitted(employee)">
+<form
+  [formGroup]="employee"
+  (ngSubmit)="createAndRegisterNewEmployee(employee)"
+>
   <mat-form-field style="width: 300px" appearance="legacy">
-
-    <br/>
+    <br />
     <mat-label>Imię</mat-label>
     <input
       matInput
@@ -10,7 +12,7 @@
       placeholder="Imię"
     />
   </mat-form-field>
-  <br/>
+  <br />
   <mat-form-field appearance="legacy">
     <mat-label>Drugię imię</mat-label>
     <input
@@ -20,7 +22,7 @@
       placeholder="Drugię imię"
     />
   </mat-form-field>
-  <br/>
+  <br />
   <mat-form-field appearance="legacy">
     <mat-label>Nazwisko</mat-label>
     <input
@@ -30,12 +32,12 @@
       placeholder="Nazwisko"
     />
   </mat-form-field>
-  <br/>
+  <br />
   <mat-form-field appearance="legacy">
     <mat-label>E-Mail</mat-label>
-    <input matInput type="text" formControlName="email" placeholder="E-Mail"/>
+    <input matInput type="text" formControlName="email" placeholder="E-Mail" />
   </mat-form-field>
-  <br>
+  <br />
   <mat-form-field appearance="legacy">
     <mat-label>Numer telefonu</mat-label>
     <input
@@ -45,7 +47,7 @@
       placeholder="Numer telefonu"
     />
   </mat-form-field>
-  <br/>
+  <br />
   <mat-form-field appearance="legacy">
     <mat-label>Login</mat-label>
     <input
@@ -55,7 +57,7 @@
       placeholder="Login"
     />
   </mat-form-field>
-  <br/>
+  <br />
   <mat-form-field appearance="legacy">
     <mat-label>Hasło</mat-label>
     <input
@@ -65,7 +67,7 @@
       placeholder="Hasło"
     />
   </mat-form-field>
-  <br>
+  <br />
 
   <input type="submit" value="Zapisz" class="btn btn-outline-primary" />
 </form>

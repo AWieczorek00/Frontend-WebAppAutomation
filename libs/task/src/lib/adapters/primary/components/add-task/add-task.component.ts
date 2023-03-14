@@ -49,12 +49,12 @@ export class AddTaskComponent {
     private _addTaskCommandPort: AddTaskCommandPort,
     @Inject(GET_CURRENCY_EMPLOYEE_LIST_QUERY_PORT)
     private _getCurrencyEmployeeListQueryPort: GetCurrencyEmployeeListQueryPort,
-    public dialogRef: MatDialogRef<AddTaskComponent>,
+    public dialogRef: MatDialogRef<AddTaskComponent>
   ) {
-
-
-    this.employee$.subscribe((employeeList) =>this.employeeListAutocomplete=employeeList.employeeList)
-
+    this.employee$.subscribe(
+      (employeeList) =>
+        (this.employeeListAutocomplete = employeeList.employeeList)
+    );
 
     this.filteredEmployee = this.employeeControl.valueChanges.pipe(
       startWith({} as EmployeeQuery),
@@ -67,22 +67,21 @@ export class AddTaskComponent {
           : this.employeeListAutocomplete.slice()
       )
     );
-
   }
 
   onTaskSubmitted(task: FormGroup): void {
-
-
-    this._addTaskCommandPort.add(
-      new AddTaskCommand(
-        task.get('name')?.value,
-        task.get('executionTime')?.value,
-        false,
-        this.employeeControl?.value
+    this._addTaskCommandPort
+      .add(
+        new AddTaskCommand(
+          task.get('name')?.value,
+          task.get('executionTime')?.value,
+          false,
+          this.employeeControl?.value
+        )
       )
-    ).pipe(take(1))
+      .pipe(take(1))
       .subscribe();
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   getEmployee(employee: EmployeeQuery) {

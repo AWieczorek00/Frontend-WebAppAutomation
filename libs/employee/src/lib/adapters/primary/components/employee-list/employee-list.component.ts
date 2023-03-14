@@ -45,14 +45,13 @@ export class EmployeeListComponent {
   dataSourceEmployee = new MatTableDataSource<EmployeeQuery>();
   nameRows = ['firstName', 'secondName', 'lastName', 'options'];
 
-  delete(individualId: number) {
+  deleteEmployee(individualId: number) {
     this._deleteEmployeeCommandPort.delete(individualId).subscribe()
   }
 
-  update(individualId: number) {
+  openUpdateDialog(individualId: number) {
     this._dialog.open(UpdateEmployeeComponent,{
       height:'450px',
-      // width:'400px',
       data:{
         individualId:individualId
       }

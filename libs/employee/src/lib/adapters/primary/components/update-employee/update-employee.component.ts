@@ -20,9 +20,10 @@ import {
   UPDATE_EMPLOYEE_COMMAND_PORT,
   UpdateEmployeeCommandPort,
 } from '../../../../application/ports/primary/command/update-employee.command-port';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { UpdateEmployeeCommand } from '../../../../application/ports/primary/command/update-employee.command';
 import { take } from 'rxjs/operators';
+import { UpdateEmployeeComponentModule } from "@employee";
 
 @Component({
   selector: 'lib-update-employee',
@@ -32,12 +33,6 @@ import { take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateEmployeeComponent {
-  // readonly employee$: Observable<EmployeeQuery> =
-  //   this._activatedRoute.params.pipe(
-  //     switchMap((params) =>
-  //       this._getOneEmployeeDtoPort.getOne(params['individualId'])
-  //     )
-  //   );
   readonly employee$: Observable<EmployeeQuery> =
     this._getOneEmployeeDtoPort.getOne(this.data.individualId);
   constructor(
@@ -48,7 +43,8 @@ export class UpdateEmployeeComponent {
     private _loadEmployeesCommandPort: LoadEmployeesCommandPort,
     private _activatedRoute: ActivatedRoute,
     @Inject(UPDATE_EMPLOYEE_COMMAND_PORT)
-    private _updateEmployeeCommandPort: UpdateEmployeeCommandPort
+    private _updateEmployeeCommandPort: UpdateEmployeeCommandPort,
+    public dialogRef: MatDialogRef<UpdateEmployeeComponent>,
   ) {
     this.employee$.subscribe((employee) =>
       this.employee.setValue({
@@ -71,7 +67,7 @@ export class UpdateEmployeeComponent {
     email: new FormControl(),
   });
 
-  onEmployeeSubmitted(employee: FormGroup) {
+  updateEmployee(employee: FormGroup) {
     this._updateEmployeeCommandPort
       .update(
         new UpdateEmployeeCommand(
@@ -84,6 +80,6 @@ export class UpdateEmployeeComponent {
         )
       )
       .pipe(take(1))
-      .subscribe();
+      .subscribe(()=> this.dialogRef.close());
   }
 }

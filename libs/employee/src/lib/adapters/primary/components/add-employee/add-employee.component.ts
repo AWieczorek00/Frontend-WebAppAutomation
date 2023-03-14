@@ -14,7 +14,6 @@ import {
   REGISTER_USER_COMMAND_PORT,
   RegisterUserCommandPort,
 } from '../../../../application/ports/primary/command/register-user.command-port';
-import { AddEmployeeCommand } from '../../../../application/ports/primary/command/add-employee.command';
 import { RegisterUserCommand } from '../../../../application/ports/primary/command/register-user.command';
 import { EmployeeQuery } from '../../../../application/ports/primary/query/employee/employee.query';
 
@@ -33,7 +32,7 @@ export class AddEmployeeComponent {
     phoneNumber: new FormControl(),
     email: new FormControl(),
     username: new FormControl(),
-    password: new FormControl()
+    password: new FormControl(),
   });
 
   constructor(
@@ -43,25 +42,8 @@ export class AddEmployeeComponent {
     private _registerUserCommandPort: RegisterUserCommandPort
   ) {}
 
-  // onEmployeeSubmitted(employee: FormGroup): void {
-  //   this._addEmployeeCommandPort
-  //     .add(
-  //       new AddEmployeeCommand(
-  //         employee.get('firstName')?.value,
-  //         employee.get('secondName')?.value,
-  //         employee.get('lastName')?.value,
-  //         employee.get('phoneNumber')?.value,
-  //         employee.get('email')?.value,
-  //         employee.get('login')?.value,
-  //         employee.get('password')?.value
-  //       )
-  //     )
-  //     .pipe(take(1))
-  //     .subscribe(()=>this.employee.reset());
-  // }
-
-  onEmployeeSubmitted(employee: FormGroup): void {
-    console.log(employee)
+  createAndRegisterNewEmployee(employee: FormGroup): void {
+    console.log(employee);
     this._registerUserCommandPort
       .register(
         new RegisterUserCommand(
@@ -69,7 +51,7 @@ export class AddEmployeeComponent {
           employee.get('email')?.value,
           employee.get('password')?.value,
           new EmployeeQuery(
-            0,
+            NaN,
             employee.get('firstName')?.value,
             employee.get('secondName')?.value,
             employee.get('lastName')?.value,
