@@ -7,6 +7,7 @@ import { GetAllTaskByEmployeeDtoPort } from '../../../application/ports/secondar
 import { PutDoneTaskDtoPort } from '../../../application/ports/secondary/dto/task/put-done-task.dto-port';
 import { DeleteTaskDtoPort } from '../../../application/ports/secondary/dto/task/delete-task.dto-port';
 import { TaskDto } from '../../../application/ports/secondary/dto/task/task.dto';
+import * as myGlobals from 'global';
 
 @Injectable()
 export class HttpTaskService
@@ -17,7 +18,7 @@ export class HttpTaskService
   PutDoneTaskDtoPort, DeleteTaskDtoPort {
   constructor(private _httpClient: HttpClient) { }
 
-  private url = 'http://localhost:8080/';
+  private url = myGlobals.apiUrl;
 
   getAll(): Observable<TaskDto[]> {
     return this._httpClient.get<TaskDto[]>(this.url + 'task/all');

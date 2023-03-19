@@ -11,6 +11,7 @@ import { PutOrderDtoPort } from '../../../application/ports/secondary/dto/order/
 import { OrderPdfDtoPort } from '../../../application/ports/secondary/dto/order/order-pdf.dto-port';
 import { InvoicePdfDtoPort } from '../../../application/ports/secondary/dto/order/invoice-pdf.dto-port';
 import { OrderDto } from '../../../application/ports/secondary/dto/order/order.dto';
+import * as myGlobals from 'global';
 
 @Injectable()
 export class OrderService
@@ -22,7 +23,7 @@ export class OrderService
   GetOneOrderDtoPort,
   PutOrderDtoPort, OrderPdfDtoPort, InvoicePdfDtoPort {
   constructor(private _httpClient: HttpClient) { }
-  private url = 'http://localhost:8080/';
+  private url = myGlobals.apiUrl;
   getAll(): Observable<OrderDto[]> {
     return this._httpClient.get<OrderDto[]>(this.url + 'order/all').pipe(
       map((orders) =>

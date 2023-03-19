@@ -9,13 +9,14 @@ import { GetOneEmployeeDtoPort } from '../../../application/ports/secondary/dto/
 import { CreateNewUserDtoPort } from '../../../application/ports/secondary/dto/register/create-new-user.dto-port';
 import { EmployeeDto } from '../../../application/ports/secondary/dto/employee/employee.dto';
 import { RegisterDto } from '../../../application/ports/secondary/dto/register/register.dto';
+import * as myGlobals from 'global';
 
 @Injectable()
 export class HttpEmployeeService implements GetAllEmployeeDtoPort, AddEmployeeDtoPort, DeleteEmployeeDtoPort, UpdateEmployeeDtoPort, GetOneEmployeeDtoPort, CreateNewUserDtoPort {
   constructor(private _httpClient: HttpClient) {
   }
 
-  private url = 'http://localhost:8080/';
+  private url = myGlobals.apiUrl;
   getAll(): Observable<EmployeeDto[]> {
     return this._httpClient.get<EmployeeDto[]>(this.url + 'employee/all');
   }

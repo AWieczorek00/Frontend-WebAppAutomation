@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { GetAllActivitiesTemplateDtoPort } from '../../../application/ports/secondary/dto/activitiesTemplate/get-all-activities-template.dto-port';
 import { AddActivitiesTemplateDtoPort } from '../../../application/ports/secondary/dto/activitiesTemplate/add-activities-template.dto-port';
 import { ActivitiesTemplateDto } from '../../../application/ports/secondary/dto/activitiesTemplate/activities-template.dto';
+import * as myGlobals from 'global';
+
 
 @Injectable()
 export class HttpActivitiesTemplateService
@@ -11,7 +13,7 @@ export class HttpActivitiesTemplateService
 {
   constructor(private _httpClient: HttpClient) {}
 
-  private url = 'http://localhost:8080/';
+  private url = myGlobals.apiUrl;
 
   getAll(): Observable<ActivitiesTemplateDto[]> {
     console.log(this.url + 'activitiesTemplate/add');
