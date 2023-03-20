@@ -1,4 +1,23 @@
-$thirdColor : #8a307f;
+$thirdColor: #8a307f;
+
+.login-container {
+  @media screen and (max-width: 800px){
+    height: 700px;
+  }
+  height: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.login-title {
+  padding-top: 70px;
+  font-size: 50px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 500;
+}
+
 form {
   padding-top: 80px;
 }
@@ -11,15 +30,20 @@ input[type="password"],
   border: none !important;
   border-bottom: 1px solid gray !important;
   border-radius: -0px !important;
-  margin-left: 38px;
+  text-align: center;
 }
+.container-form{
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 input[type="password"]:focus,
 [type="text"]:focus {
   border-bottom: 1px solid $thirdColor !important;
   box-shadow: none;
 }
-
-$thirdColor : #8a307f;
 
 input[type="submit"] {
   width: 300px;
@@ -31,20 +55,17 @@ input[type="submit"]:focus {
   box-shadow: 0 0 20px $thirdColor;
 }
 
-.login-title {
-  padding-top: 70px;
-  font-size: 50px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-weight: 500;
-}
 
-.login-conteiner {
-  position: absolute;
-  width: 400px;
-  height: 550px;
-  z-index: 15;
-  top: 32%;
-  left: 48%;
-  margin: -100px 0 0 -150px;
+//@media screen and (max-width: 700px) {
+//  background-color: red;
+//}
+
+
+.item {
   box-shadow: 0 0 40px gray;
+  border-radius: .5em;
+  padding: 20px;
+  width: 30em;
+  height: 40em;
+  text-align: center;
 }
