@@ -8,6 +8,11 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {RouterModule} from "@angular/router";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   imports: [
@@ -19,6 +24,12 @@ import {RouterModule} from "@angular/router";
     MatSidenavModule,
     MatListModule,
     RouterModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDialogModule
   ],
   declarations: [NavigationComponent],
   providers: [],

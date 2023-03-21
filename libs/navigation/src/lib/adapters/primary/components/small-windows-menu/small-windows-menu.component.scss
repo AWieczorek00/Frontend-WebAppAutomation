@@ -1,0 +1,32 @@
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal {
+  float: left;
+}
+
+li a {
+  color: black;
+  display: block;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 150%;
+
+}
+
+li a:hover {
+  color: #111111;
+}
+
+.btn-logout{
+  background-color: white;
+  border: none;
+  text-align: center;
+  height: 30px;
+  margin-left: 100%;
+}

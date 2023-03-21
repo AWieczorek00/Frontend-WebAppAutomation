@@ -1,16 +1,30 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { TaskListQuery } from '../../../../application/ports/primary/query/task/task-list.query';
 import { TaskQuery } from '../../../../application/ports/primary/query/task/task.query';
-import { GET_CURRENCY_TASK_LIST_QUERY_PORT, GetCurrencyTaskListQueryPort } from '../../../../application/ports/primary/query/task/get-currency-task-list.query-port';
-import { DONE_TASK_UPDATE_COMMAND_PORT, DoneTaskUpdateCommandPort } from '../../../../application/ports/primary/command/done-task-update.command-port';
-import { DELETE_TASK_COMMAND_PORT, DeleteTaskCommandPort } from '../../../../application/ports/primary/command/delete-task.command-port';
+import {
+  GET_CURRENCY_TASK_LIST_QUERY_PORT,
+  GetCurrencyTaskListQueryPort,
+} from '../../../../application/ports/primary/query/task/get-currency-task-list.query-port';
+import {
+  DONE_TASK_UPDATE_COMMAND_PORT,
+  DoneTaskUpdateCommandPort,
+} from '../../../../application/ports/primary/command/done-task-update.command-port';
+import {
+  DELETE_TASK_COMMAND_PORT,
+  DeleteTaskCommandPort,
+} from '../../../../application/ports/primary/command/delete-task.command-port';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { DoneTaskCommand } from '../../../../application/ports/primary/command/done-task.command';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import {DeleteCommand} from "../../../../application/ports/primary/command/delete.command";
+import { DeleteCommand } from '../../../../application/ports/primary/command/delete.command';
 
 @Component({
   selector: 'lib-task-list',
@@ -30,7 +44,9 @@ export class TaskListComponent {
     private _getCurrencyTaskListQueryPort: GetCurrencyTaskListQueryPort,
     public dialog: MatDialog,
     @Inject(DONE_TASK_UPDATE_COMMAND_PORT)
-    private _doneTaskUpdateCommandPort: DoneTaskUpdateCommandPort, @Inject(DELETE_TASK_COMMAND_PORT) private _deleteTaskCommandPort: DeleteTaskCommandPort
+    private _doneTaskUpdateCommandPort: DoneTaskUpdateCommandPort,
+    @Inject(DELETE_TASK_COMMAND_PORT)
+    private _deleteTaskCommandPort: DeleteTaskCommandPort
   ) {
     this.taskList$.subscribe(
       (taskList) => (this.dataSourceTask.data = taskList.taskList)
@@ -44,7 +60,9 @@ export class TaskListComponent {
   }
 
   delete(id: number) {
-    this._deleteTaskCommandPort.deleteTask(new DeleteCommand(id)).pipe(take(1))
+    this._deleteTaskCommandPort
+      .deleteTask(new DeleteCommand(id))
+      .pipe(take(1))
       .subscribe();
   }
 

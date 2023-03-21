@@ -1,0 +1,26 @@
+<div>
+
+<ul>
+  <li class="horizontal">
+    <h3>Menu</h3>
+  </li>
+  <li class="horizontal">
+    <button class="btn-logout">Wyloguj</button>
+  </li>
+</ul>
+
+
+<div style="padding-top: 50px">
+  <ul>
+    <li>
+      <a href="orders">Zlecenia</a>
+    </li>
+    <li *ngIf="roles === 'ROLE_ADMIN'">
+      <a href="task">Zadania</a>
+    </li>
+    <li *ngIf="roles === 'ROLE_ADMIN'">
+      <a href="employee">Pracownicy</a>
+    </li>
+  </ul>
+</div>
+</div>
