@@ -22,4 +22,9 @@ export class SmallWindowsMenuComponent {
     this.roles = localStorage.getItem('roles');
     console.log(this.roles)
   }
+
+  logout() {
+    localStorage.clear();
+    this._router.navigate(['/login']);
+  }
 }
