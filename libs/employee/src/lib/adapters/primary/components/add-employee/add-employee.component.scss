@@ -1,5 +1,8 @@
 mat-form-field {
   height: 70px !important;
+  @media screen and (max-width: 900px){
+    width: 325px !important;
+  }
   width: 400px !important;
 }
 
@@ -12,4 +15,10 @@ input[type="number"],
 
 mat-label{
   font-size: 17px;
+}
+
+input[type="submit"]{
+  @media screen and (max-width: 900px){
+    margin-bottom: 20px;
+  }
 }

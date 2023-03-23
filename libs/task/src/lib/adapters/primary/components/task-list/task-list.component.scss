@@ -1,6 +1,25 @@
-.main-table{
+.main-table {
   margin: 40px;
 }
-table{
+table {
+  @media screen and (min-width: 900px) {
+    min-width: 125em;
+  }
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  @media screen and (max-width: 900px) {
+    height: 200px;
+  }
+  height: 300px;
+}
+
+.container-date {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
