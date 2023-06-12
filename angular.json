@@ -71,6 +71,10 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
+          "options": {
+            "port": 7001,
+            "host": "localhost"
+          },
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
